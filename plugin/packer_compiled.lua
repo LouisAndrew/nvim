@@ -90,6 +90,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   }
 }
 

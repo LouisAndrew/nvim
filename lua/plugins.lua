@@ -14,4 +14,6 @@ return require('packer').startup(function(use)
       require('Comment').setup()
     end
   }
+
+  use "mg979/vim-visual-multi"
 end)
