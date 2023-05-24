@@ -83,6 +83,7 @@ local M = {
   },
 }
 
+vim.g.mapleader = " "
 for mode, t in pairs(M) do
   for key, remap in pairs(t) do
     vim.keymap.set(mode, key, remap[1], remap.opts)
