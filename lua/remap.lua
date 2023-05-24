@@ -36,6 +36,8 @@ local M = {
     ["<C-j>"] = { "<C-w>j", "window down" },
     ["˚"] = { "<cmd> :m-2 <CR>", "line up" },
     ["∆"] = { "<cmd> :m+ <CR>", "line down" },
+    ["f"] = { '<Plug>(leap-forward-till)', "leap" },
+    ["F"] = { '<Plug>(leap-backward-till)', "leap" },
 
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "save file" },
@@ -71,7 +73,9 @@ local M = {
     ["<S-l>"] = { "$", "end of line" },
     ["n"] = { "*", "next occurence" },
     ["N"] = { "#", "last occurence" },
-    ["i"] = { "s" }
+    ["i"] = { "s" },
+    ["f"] = { '<Plug>(leap-forward-till)', "leap" },
+    ["F"] = { '<Plug>(leap-backward-till)', "leap" },
   },
 
   x = {
