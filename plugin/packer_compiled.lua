@@ -80,10 +80,11 @@ _G.packer_plugins = {
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  ["leap.nvim"] = {
+  ["flash.nvim"] = {
+    config = { "\27LJ\2\n\26\0\1\3\0\1\0\4'\1\0\0\18\2\0\0&\1\2\1L\1\2\0\a\\<\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggleâ\3\1\0\b\0 \0<6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0003\4\3\0=\4\5\3=\3\a\2B\0\2\0016\0\b\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\2€2\0\0€K\0\1\0006\2\t\0009\2\n\0029\2\v\0025\4\f\0'\5\r\0003\6\14\0005\a\15\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\16\0'\5\17\0003\6\18\0005\a\19\0B\2\5\0016\2\t\0009\2\n\0029\2\v\2'\4\20\0'\5\21\0003\6\22\0005\a\23\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\24\0'\5\25\0003\6\26\0005\a\27\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\28\0'\5\29\0003\6\30\0005\a\31\0B\2\5\0012\0\0€K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\vsearch\1\0\0\tmode\1\0\0\0\nsetup\nflash\frequire\0" },
     loaded = true,
-    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/leap.nvim",
-    url = "https://github.com/ggandor/leap.nvim"
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/flash.nvim",
+    url = "https://github.com/folke/flash.nvim"
   },
   ["oil.nvim"] = {
     config = { "\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\boil\frequire\0" },
@@ -104,14 +105,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
+-- Config for: flash.nvim
+time([[Config for flash.nvim]], true)
+try_loadstring("\27LJ\2\n\26\0\1\3\0\1\0\4'\1\0\0\18\2\0\0&\1\2\1L\1\2\0\a\\<\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggleâ\3\1\0\b\0 \0<6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0003\4\3\0=\4\5\3=\3\a\2B\0\2\0016\0\b\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\2€2\0\0€K\0\1\0006\2\t\0009\2\n\0029\2\v\0025\4\f\0'\5\r\0003\6\14\0005\a\15\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\16\0'\5\17\0003\6\18\0005\a\19\0B\2\5\0016\2\t\0009\2\n\0029\2\v\2'\4\20\0'\5\21\0003\6\22\0005\a\23\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\24\0'\5\25\0003\6\26\0005\a\27\0B\2\5\0016\2\t\0009\2\n\0029\2\v\0025\4\28\0'\5\29\0003\6\30\0005\a\31\0B\2\5\0012\0\0€K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\vsearch\1\0\0\tmode\1\0\0\0\nsetup\nflash\frequire\0", "config", "flash.nvim")
+time([[Config for flash.nvim]], false)
 -- Config for: oil.nvim
 time([[Config for oil.nvim]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\boil\frequire\0", "config", "oil.nvim")
 time([[Config for oil.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
