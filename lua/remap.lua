@@ -28,21 +28,21 @@ local M = {
     [";"] = { "#", "last occurence" },
     ["<C-u>"] = { "<C-d>zz", "scroll page down" },
     ["<C-d>"] = { "<C-u>zz", "scroll page up" },
-    
+
     ["<A-k>"] = { "O", "move line up" },
 
     ["˚"] = { "<cmd> :m-2 <CR>", "line up" },
     ["∆"] = { "<cmd> :m+ <CR>", "line down" },
     ["gh"] = { "<Plug>VSCodeCommentaryLine" },
-    
+
     ["¬"] = { ":call VSCodeNotify('workbench.action.splitEditorRight') <CR>" },
     ["˙"] = { ":call VSCodeNotify('workbench.action.splitEditorLeft') <CR>" },
     ["<leader>l"] = { ":call VSCodeNotify('workbench.action.focusNextGroup') <CR>" },
     ["<leader>h"] = { ":call VSCodeNotify('workbench.action.focusPreviousGroup') <CR>" },
 
 
-    ["<C-l>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
-    
+    ["<C-l>"] = { "%" },
+    ["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "save file" },
 
@@ -73,6 +73,8 @@ local M = {
     ["N"] = { "#", "last occurence" },
     ["i"] = { "s" },
     ["gh"] = { "<Plug>VSCodeCommentary" },
+    ["<C-l>"] = { "%" },
+    ["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
   },
 
   x = {
