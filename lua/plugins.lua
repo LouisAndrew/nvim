@@ -8,23 +8,12 @@ return require('packer').startup(function(use)
     end
   }
 
-  use {
-    'stevearc/oil.nvim',
-    config = function() require('oil').setup() end
-  }
-
   use "mg979/vim-visual-multi"
 
   use {
     "folke/flash.nvim",
     config = function()
-      require('flash').setup({
-        -- search = {
-        --   mode = function(str)
-        --     return "\\<" .. str
-        --   end,
-        -- },
-      })
+      require('flash').setup({})
 
       local ok, flash = pcall(require, 'flash')
       if not ok then
@@ -36,6 +25,16 @@ return require('packer').startup(function(use)
       vim.keymap.set("o", "r", function() flash.remote() end, { desc = "Remote Flash" })
       vim.keymap.set({ "o", "x" }, "R", function() flash.treesitter_search() end, { desc = "Flash Treesitter Search" })
       vim.keymap.set({ "c" }, "<c-s>", function() flash.toggle() end, { desc = "Toggle Flash Search" })
+    end
+  }
+
+  use{
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
     end
   }
 end)

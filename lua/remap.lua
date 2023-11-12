@@ -57,7 +57,6 @@ local M = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-    ["<leader>b"] = { "<cmd> enew <CR>", "new buffer" },
   },
 
   t = { ["<C-x>"] = { termcodes "<C-\\><C-N>", "escape terminal " } },
@@ -75,6 +74,7 @@ local M = {
     ["gh"] = { "<Plug>VSCodeCommentary" },
     ["<C-l>"] = { "%" },
     ["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
+    ["<leader>"] = { "<Plug>(nvim-surround-visual)" }
   },
 
   x = {
