@@ -80,11 +80,82 @@ _G.packer_plugins = {
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["autoclose.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/autoclose.nvim",
+    url = "https://github.com/m4xshen/autoclose.nvim"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["colorbuddy.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
+    url = "https://github.com/tjdevries/colorbuddy.nvim"
+  },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["flash.nvim"] = {
     config = { "\27LJ\2\n\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggle¿\3\1\0\b\0\27\00086\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\1€2\0*€6\2\4\0009\2\5\0029\2\6\0025\4\a\0'\5\b\0003\6\t\0005\a\n\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\v\0'\5\f\0003\6\r\0005\a\14\0B\2\5\0016\2\4\0009\2\5\0029\2\6\2'\4\15\0'\5\16\0003\6\17\0005\a\18\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\19\0'\5\20\0003\6\21\0005\a\22\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\23\0'\5\24\0003\6\25\0005\a\26\0B\2\5\0012\0\0€K\0\1\0K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\nsetup\nflash\frequire\0" },
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/flash.nvim",
     url = "https://github.com/folke/flash.nvim"
+  },
+  ["guard-collection"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/guard-collection",
+    url = "https://github.com/nvimdev/guard-collection"
+  },
+  ["guard.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/guard.nvim",
+    url = "https://github.com/nvimdev/guard.nvim"
+  },
+  ["lsp-zero.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-noirbuddy"] = {
+    config = { "\27LJ\2\no\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\vcolors\1\0\1\fprimary\f#e6d1aa\1\0\1\vpreset\fminimal\nsetup\14noirbuddy\frequire\0" },
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-noirbuddy",
+    url = "https://github.com/jesseleite/nvim-noirbuddy"
   },
   ["nvim-surround"] = {
     config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0" },
@@ -92,10 +163,41 @@ _G.packer_plugins = {
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
   },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-visual-multi"] = {
     loaded = true,
@@ -105,14 +207,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: nvim-surround
 time([[Config for nvim-surround]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
 time([[Config for nvim-surround]], false)
+-- Config for: nvim-noirbuddy
+time([[Config for nvim-noirbuddy]], true)
+try_loadstring("\27LJ\2\no\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\vcolors\1\0\1\fprimary\f#e6d1aa\1\0\1\vpreset\fminimal\nsetup\14noirbuddy\frequire\0", "config", "nvim-noirbuddy")
+time([[Config for nvim-noirbuddy]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 -- Config for: flash.nvim
 time([[Config for flash.nvim]], true)
 try_loadstring("\27LJ\2\n\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggle¿\3\1\0\b\0\27\00086\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\1€2\0*€6\2\4\0009\2\5\0029\2\6\0025\4\a\0'\5\b\0003\6\t\0005\a\n\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\v\0'\5\f\0003\6\r\0005\a\14\0B\2\5\0016\2\4\0009\2\5\0029\2\6\2'\4\15\0'\5\16\0003\6\17\0005\a\18\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\19\0'\5\20\0003\6\21\0005\a\22\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\23\0'\5\24\0003\6\25\0005\a\26\0B\2\5\0012\0\0€K\0\1\0K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\nsetup\nflash\frequire\0", "config", "flash.nvim")
