@@ -23,7 +23,6 @@ local M = {
 		["<leader>w"] = { "<cmd>:q<cr>" },
 		["<leader>]"] = { "<cmd>:bnext<cr>" },
 		["<leader>["] = { "<cmd>:bprev<cr>" },
-
 		-- Customs
 		["<S-j>"] = { "}", "skip bracket" },
 		["<S-k>"] = { "{", "skip bracket up" },
@@ -45,9 +44,6 @@ local M = {
 		["<leader>l"] = { ":call VSCodeNotify('workbench.action.focusNextGroup') <CR>" },
 		["<leader>h"] = { ":call VSCodeNotify('workbench.action.focusPreviousGroup') <CR>" },
 
-		-- save
-		["<C-s>"] = { "<cmd> w <CR>", "save file" },
-
 		-- Copy all
 		["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
 
@@ -63,6 +59,8 @@ local M = {
 		["<C-l>"] = { "<C-w>l" },
 		["<C-j>"] = { "<C-w>j" },
 		["<C-k>"] = { "<C-w>k" },
+		["<C-w>"] = { "gt" },
+		["<C-b>"] = { "gT" },
 	},
 
 	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },

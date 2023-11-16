@@ -1,5 +1,9 @@
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
+  use("nvim-tree/nvim-web-devicons")
+
+  -- telescopes
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
   use({
     "nvim-telescope/telescope.nvim",
@@ -11,10 +15,13 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope-file-browser.nvim",
   })
 
+  -- Treesitter and LSP
+
   use({
     "nvim-treesitter/nvim-treesitter",
     { run = ":TSUpdate" },
   })
+  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
   use({
     "VonHeikemen/lsp-zero.nvim",
@@ -28,9 +35,19 @@ return require("packer").startup(function(use)
       { "neovim/nvim-lspconfig" },
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "L3MON4D3/LuaSnip" },
     },
+  })
+
+  use("onsails/lspkind.nvim")
+  use({
+    "nvimdev/lspsaga.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("lspsaga").setup({})
+    end,
   })
 
   use({
@@ -41,13 +58,60 @@ return require("packer").startup(function(use)
     },
   })
 
+  use("github/copilot.vim")
+
+  -- snippets
+  use("L3MON4D3/LuaSnip")
+  use("saadparwaiz1/cmp_luasnip")
+  use("rafamadriz/friendly-snippets")
+
+  -- LUALINE
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons", opt = true },
   })
 
-  use("tpope/vim-fugitive")
+  -- git
+  use({
+    "NeogitOrg/neogit",
+    requires = {
+      { "nvim-lua/plenary.nvim" },         -- required
+      { "nvim-telescope/telescope.nvim" }, -- optional
+      { "sindrets/diffview.nvim" },        -- optional
+      { "ibhagwan/fzf-lua" },              -- optional
+    },
+  })
 
+  use({
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
+    end
+  })
+
+  -- theme
+  use({
+    "jesseleite/nvim-noirbuddy",
+    requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+    config = function()
+      require("noirbuddy").setup({
+        -- preset = "minimal",
+        colors = {
+          primary = "#ebd5ae",
+        },
+      })
+    end,
+  })
+
+  use {
+    "startup-nvim/startup.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function()
+      require "startup".setup()
+    end
+  }
+
+  -- misc
   use("m4xshen/autoclose.nvim")
 
   use({
@@ -57,20 +121,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use("github/copilot.vim")
-
-  use({
-    "jesseleite/nvim-noirbuddy",
-    requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-    config = function()
-      require("noirbuddy").setup({
-        preset = "minimal",
-        colors = {
-          primary = "#e6d1aa",
-        },
-      })
-    end,
-  })
+  use("mbbill/undotree")
 
   use("mg979/vim-visual-multi")
 
