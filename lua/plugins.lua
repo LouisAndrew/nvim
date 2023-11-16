@@ -1,165 +1,172 @@
 return require("packer").startup(function(use)
-  use("wbthomason/packer.nvim")
-  use("nvim-tree/nvim-web-devicons")
+	use("wbthomason/packer.nvim")
+	use("nvim-tree/nvim-web-devicons")
 
-  -- telescopes
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	-- telescopes
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-  use({
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.4",
-    requires = { "nvim-lua/plenary.nvim" },
-  })
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
-  use({
-    "nvim-telescope/telescope-file-browser.nvim",
-  })
+	use({
+		"nvim-telescope/telescope-file-browser.nvim",
+	})
 
-  -- Treesitter and LSP
+	-- Treesitter and LSP
 
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    { run = ":TSUpdate" },
-  })
-  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		{ run = ":TSUpdate" },
+	})
 
-  use({
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
-    requires = {
-      --- Uncomment these if you want to manage LSP servers from neovim
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+		requires = "nvim-treesitter/nvim-treesitter",
+	})
 
-      -- LSP Support
-      { "neovim/nvim-lspconfig" },
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "L3MON4D3/LuaSnip" },
-    },
-  })
+	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
-  use("onsails/lspkind.nvim")
-  use({
-    "nvimdev/lspsaga.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-  })
+	use({
+		"VonHeikemen/lsp-zero.nvim",
+		branch = "v3.x",
+		requires = {
+			--- Uncomment these if you want to manage LSP servers from neovim
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 
-  use({
-    "nvimdev/guard.nvim",
-    -- Builtin configuration, optional
-    requires = {
-      "nvimdev/guard-collection",
-    },
-  })
+			-- LSP Support
+			{ "neovim/nvim-lspconfig" },
+			-- Autocompletion
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "L3MON4D3/LuaSnip" },
+		},
+	})
 
-  use("github/copilot.vim")
+	use("onsails/lspkind.nvim")
+	use({
+		"nvimdev/lspsaga.nvim",
+		after = "nvim-lspconfig",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+	})
 
-  -- snippets
-  use("L3MON4D3/LuaSnip")
-  use("saadparwaiz1/cmp_luasnip")
-  use("rafamadriz/friendly-snippets")
+	use({
+		"nvimdev/guard.nvim",
+		-- Builtin configuration, optional
+		requires = {
+			"nvimdev/guard-collection",
+		},
+	})
 
-  -- LUALINE
-  use({
-    "nvim-lualine/lualine.nvim",
-    requires = { "nvim-tree/nvim-web-devicons", opt = true },
-  })
+	use("github/copilot.vim")
 
-  -- git
-  use({
-    "NeogitOrg/neogit",
-    requires = {
-      { "nvim-lua/plenary.nvim" },         -- required
-      { "nvim-telescope/telescope.nvim" }, -- optional
-      { "sindrets/diffview.nvim" },        -- optional
-      { "ibhagwan/fzf-lua" },              -- optional
-    },
-  })
+	-- snippets
+	use("L3MON4D3/LuaSnip")
+	use("saadparwaiz1/cmp_luasnip")
+	use("rafamadriz/friendly-snippets")
 
-  use({
-    "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end
-  })
+	-- LUALINE
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+	})
 
-  -- theme
-  use({
-    "jesseleite/nvim-noirbuddy",
-    requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-    config = function()
-      require("noirbuddy").setup({
-        -- preset = "minimal",
-        colors = {
-          primary = "#ebd5ae",
-        },
-      })
-    end,
-  })
+	-- git
+	use({
+		"NeogitOrg/neogit",
+		requires = {
+			{ "nvim-lua/plenary.nvim" }, -- required
+			{ "nvim-telescope/telescope.nvim" }, -- optional
+			{ "sindrets/diffview.nvim" }, -- optional
+			{ "ibhagwan/fzf-lua" }, -- optional
+		},
+	})
 
-  use {
-    "startup-nvim/startup.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    config = function()
-      require "startup".setup()
-    end
-  }
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
 
-  -- misc
-  use("m4xshen/autoclose.nvim")
+	-- theme
+	use({
+		"jesseleite/nvim-noirbuddy",
+		requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+		config = function()
+			require("noirbuddy").setup({
+				-- preset = "minimal",
+				colors = {
+					primary = "#ebd5ae",
+				},
+			})
+		end,
+	})
 
-  use({
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
-  })
+	use({
+		"startup-nvim/startup.nvim",
+		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		config = function()
+			require("startup").setup()
+		end,
+	})
 
-  use("mbbill/undotree")
+	-- misc
+	use("m4xshen/autoclose.nvim")
 
-  use("mg979/vim-visual-multi")
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 
-  use({
-    "folke/flash.nvim",
-    config = function()
-      require("flash").setup({})
+	use("mbbill/undotree")
 
-      local ok, flash = pcall(require, "flash")
-      if not ok then
-        return
-      end
+	use("mg979/vim-visual-multi")
 
-      vim.keymap.set({ "n", "x", "o" }, "f", function()
-        flash.jump()
-      end, { desc = "Flash" })
-      vim.keymap.set({ "n", "o", "x" }, "F", function()
-        flash.treesitter()
-      end, { desc = "Flash Treesitter" })
-      vim.keymap.set("o", "r", function()
-        flash.remote()
-      end, { desc = "Remote Flash" })
-      vim.keymap.set({ "o", "x" }, "R", function()
-        flash.treesitter_search()
-      end, { desc = "Flash Treesitter Search" })
-      vim.keymap.set({ "c" }, "<c-s>", function()
-        flash.toggle()
-      end, { desc = "Toggle Flash Search" })
-    end,
-  })
+	use({
+		"folke/flash.nvim",
+		config = function()
+			require("flash").setup({})
 
-  use({
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end,
-  })
+			local ok, flash = pcall(require, "flash")
+			if not ok then
+				return
+			end
+
+			vim.keymap.set({ "n", "x", "o" }, "f", function()
+				flash.jump()
+			end, { desc = "Flash" })
+			vim.keymap.set({ "n", "o", "x" }, "F", function()
+				flash.treesitter()
+			end, { desc = "Flash Treesitter" })
+			vim.keymap.set("o", "r", function()
+				flash.remote()
+			end, { desc = "Remote Flash" })
+			vim.keymap.set({ "o", "x" }, "R", function()
+				flash.treesitter_search()
+			end, { desc = "Flash Treesitter Search" })
+			vim.keymap.set({ "c" }, "<c-s>", function()
+				flash.toggle()
+			end, { desc = "Toggle Flash Search" })
+		end,
+	})
+
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	})
 end)

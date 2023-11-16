@@ -38,6 +38,9 @@ lsp_zero.on_attach(function(_, bufnr)
 	vim.keymap.set({ "n", "i" }, "<C-s>", function()
 		vim.lsp.buf.format({ async = true })
 	end, opts)
+
+	-- make sure it works
+	vim.keymap.set("i", "<C-h>", "<Left>", opts)
 end)
 
 require("mason").setup({})
