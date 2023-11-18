@@ -114,7 +114,7 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
-
+--[[
 local rainbow_delimiters = require 'rainbow-delimiters'
 
 vim.g.rainbow_delimiters = {
@@ -135,4 +135,4 @@ vim.g.rainbow_delimiters = {
     'RainbowDelimiterGreen',
     'RainbowDelimiterRed',
   },
-}
+} ]]
