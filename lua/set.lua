@@ -1,4 +1,4 @@
-local opt = vim.opt;
+local opt = vim.opt
 opt.nu = true
 opt.relativenumber = true
 
@@ -24,4 +24,8 @@ opt.backspace = "indent,eol,start"
 opt.splitright = true
 opt.splitbelow = true
 
+opt.background = "dark" -- set this to dark or light
+
 opt.iskeyword:append("-")
+opt.cursorline = true
+opt.cursorlineopt = "number"

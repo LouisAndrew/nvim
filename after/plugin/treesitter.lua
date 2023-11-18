@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "javascript", "typescript", "vue", "lua", "vim", "vimdoc", "html", "css" },
+  ensure_installed = { "javascript", "typescript", "vue", "lua", "vim", "vimdoc", "html", "css", "graphql" },
   sync_install = false,
   auto_install = true,
   highlight = {
@@ -12,11 +12,14 @@ require("nvim-treesitter.configs").setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<C-u>",
+      init_selection = "<C-t>",
       node_incremental = "<C-n>",
       scope_incremental = false,
       node_decremental = "<C-p>",
     },
+  },
+  playground = {
+    enable = true,
   },
 
   textobjects = {
@@ -62,13 +65,13 @@ require("nvim-treesitter.configs").setup({
       enable = true,
       swap_next = {
         ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-        ["<leader>n:"] = "@property.outer", -- swap object property with next
-        ["<leader>nm"] = "@function.outer", -- swap function with next
+        ["<leader>n:"] = "@property.outer",  -- swap object property with next
+        ["<leader>nm"] = "@function.outer",  -- swap function with next
       },
       swap_previous = {
         ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-        ["<leader>p:"] = "@property.outer", -- swap object property with prev
-        ["<leader>pm"] = "@function.outer", -- swap function with previous
+        ["<leader>p:"] = "@property.outer",  -- swap object property with prev
+        ["<leader>pm"] = "@function.outer",  -- swap function with previous
       },
     },
     move = {
@@ -110,3 +113,26 @@ require("nvim-treesitter.configs").setup({
     },
   },
 })
+
+
+local rainbow_delimiters = require 'rainbow-delimiters'
+
+vim.g.rainbow_delimiters = {
+  strategy = {
+    [''] = rainbow_delimiters.strategy['global'],
+    vim = rainbow_delimiters.strategy['local'],
+  },
+  query = {
+    [''] = 'rainbow-delimiters',
+    lua = 'rainbow-blocks',
+  },
+  highlight = {
+    'RainbowDelimiterYellow',
+    'RainbowDelimiterViolet',
+    'RainbowDelimiterCyan',
+    'RainbowDelimiterOrange',
+    'RainbowDelimiterBlue',
+    'RainbowDelimiterGreen',
+    'RainbowDelimiterRed',
+  },
+}

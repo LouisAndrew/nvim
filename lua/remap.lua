@@ -21,6 +21,8 @@ local M = {
     ["<leader>pv"] = { vim.cmd.Ex },
     ["<leader>s"] = { "<cmd>:w<cr>" },
     ["<leader>w"] = { "<cmd>:q<cr>" },
+    ["<leader>tw"] = { "<cmd>:tabclose<cr>" },
+    ["<leader>q"] = { "<cmd>:wqa<cr>" },
     ["<leader>]"] = { "<cmd>:bnext<cr>" },
     ["<leader>["] = { "<cmd>:bprev<cr>" },
     -- Customs
@@ -59,7 +61,7 @@ local M = {
     ["<C-l>"] = { "<C-w>l" },
     ["<C-j>"] = { "<C-w>j" },
     ["<C-k>"] = { "<C-w>k" },
-    ["<leader>''"] = { "gt" },
+    ["<leader>'"] = { "gt" },
     ["<leader>;"] = { "gT" },
   },
 

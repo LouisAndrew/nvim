@@ -201,7 +201,6 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-noirbuddy"] = {
-    config = { "\27LJ\2\n`\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\vcolors\1\0\0\1\0\1\fprimary\f#ebd5ae\nsetup\14noirbuddy\frequire\0" },
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/nvim-noirbuddy",
     url = "https://github.com/jesseleite/nvim-noirbuddy"
@@ -241,10 +240,20 @@ _G.packer_plugins = {
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
+  playground = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
+  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["rainbow-delimiters.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
+    url = "https://github.com/HiPhish/rainbow-delimiters.nvim"
   },
   ["startup.nvim"] = {
     config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0" },
@@ -280,30 +289,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-noirbuddy
-time([[Config for nvim-noirbuddy]], true)
-try_loadstring("\27LJ\2\n`\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\vcolors\1\0\0\1\0\1\fprimary\f#ebd5ae\nsetup\14noirbuddy\frequire\0", "config", "nvim-noirbuddy")
-time([[Config for nvim-noirbuddy]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
--- Config for: startup.nvim
-time([[Config for startup.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0", "config", "startup.nvim")
-time([[Config for startup.nvim]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
+time([[Config for nvim-surround]], false)
 -- Config for: flash.nvim
 time([[Config for flash.nvim]], true)
 try_loadstring("\27LJ\2\n\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggle¿\3\1\0\b\0\27\00086\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\1€2\0*€6\2\4\0009\2\5\0029\2\6\0025\4\a\0'\5\b\0003\6\t\0005\a\n\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\v\0'\5\f\0003\6\r\0005\a\14\0B\2\5\0016\2\4\0009\2\5\0029\2\6\2'\4\15\0'\5\16\0003\6\17\0005\a\18\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\19\0'\5\20\0003\6\21\0005\a\22\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\23\0'\5\24\0003\6\25\0005\a\26\0B\2\5\0012\0\0€K\0\1\0K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\nsetup\nflash\frequire\0", "config", "flash.nvim")
 time([[Config for flash.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: startup.nvim
+time([[Config for startup.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0", "config", "startup.nvim")
+time([[Config for startup.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-treesitter ]]
