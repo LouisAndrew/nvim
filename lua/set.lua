@@ -29,3 +29,9 @@ opt.background = "dark" -- set this to dark or light
 opt.iskeyword:append("-")
 opt.cursorline = true
 opt.cursorlineopt = "number"
+
+-- " Disable swapfile and save undo {{{=====
+-- opt.noswapfile = true -- " Fuck you swapfiles
+opt.undofile = true
+vim.cmd("set noswapfile")
+-- vim.cmd("hi Normal guibg=NONE ctermbg=NONE")

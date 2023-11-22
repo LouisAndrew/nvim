@@ -8,10 +8,10 @@ local minimal_fedu = {
   background = "#131313",
   bg_accent = "#1f2425",
   misc = {
-    bool = "#daedfa",
+    bool = "#eeb684",
     number = "#ffd6b3",
     add_fg = "#81ffbb",
-    remove_fg = "#ff676d",
+    remove_fg = "#ff8185",
     change = "#2f4557",
     add = "#1d3629",
     remove = "#431d1f",
@@ -50,6 +50,7 @@ Color.new("mfed_bool", minimal_fedu.misc.bool)
 Color.new("mfed_num", minimal_fedu.misc.number)
 Color.new("debug", minimal_fedu.debug)
 Color.new("mfed_bg_accent", minimal_fedu.bg_accent)
+Color.new("dimmed_red", "#ff8185")
 
 Color.new("add", minimal_fedu.misc.add)
 Color.new("remove", minimal_fedu.misc.remove)
@@ -67,13 +68,20 @@ Group.new("@type.builtin", colors.mfed_dim)
 Group.new("@boolean", colors.mfed_bool)
 Group.new("@number", colors.mfed_num)
 
+Group.new("@function.macro", colors.mfed_cyan)
+Group.new("@macro", colors.mfed_cyan)
+Group.new("@constant.macro", colors.mfed_cyan)
+Group.new("@conditional", colors.mfed_cyan)
+
+Group.new("@lsp.type.macro", colors.mfed_cyan)
+
 -- Editor stuff
-Group.new("CursorLineNr", colors.mfed_dim, colors.background)
-Group.new("TabLine", colors.dimmed_white, colors.mfed_bg_accent)
-Group.new("TabLineFill", nil, colors.mfed_bg_accent)
-Group.new("VertSplit", colors.noir_8, colors.background)
+Group.new("CursorLineNr", colors.mfed_dim, nil)
+Group.new("TabLine", colors.dimmed_white, nil)
+Group.new("TabLineFill", nil, nil)
+Group.new("VertSplit", colors.noir_8, nil)
 Group.new("EndOfBuffer", colors.background, nil)
-Group.new("ErrorMsg", colors.diagnostic_error)
+Group.new("ErrorMsg", colors.dimmed_red)
 
 -- Telescope
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
