@@ -18,7 +18,14 @@ local M = {
 
   n = {
     ["<ESC>"] = { "<cmd> noh <CR>", "no highlight" },
-
+    ["<leader>pv"] = { vim.cmd.Ex },
+    ["<leader>s"] = { "<cmd>:w<cr>" },
+    ["<leader>w"] = { "<cmd>:bd<cr>" },
+    ["<leader>tw"] = { "<cmd>:tabclose<cr>" },
+    ["<leader>q"] = { "<cmd>:wqa<cr>" },
+    ["<leader>]"] = { "<cmd>:bnext<cr>" },
+    ["<leader>["] = { "<cmd>:bprev<cr>" },
+    ["<leader>bw"] = { "<cmd>:%bd|e#|bd#<cr>" },
     -- Customs
     ["<S-j>"] = { "}", "skip bracket" },
     ["<S-k>"] = { "{", "skip bracket up" },
@@ -26,25 +33,19 @@ local M = {
     ["<S-l>"] = { "$", "end of line" },
     ["'"] = { "*", "next occurence" },
     [";"] = { "#", "last occurence" },
-    ["<C-u>"] = { "<C-d>zz", "scroll page down" },
-    ["<C-d>"] = { "<C-u>zz", "scroll page up" },
+    ["<C-u>"] = { "<C-u>zz", "scroll page down" },
+    ["<C-d>"] = { "<C-d>zz", "scroll page up" },
 
     ["<A-k>"] = { "O", "move line up" },
 
-    ["˚"] = { "<cmd> :m-2 <CR>", "line up" },
-    ["∆"] = { "<cmd> :m+ <CR>", "line down" },
-    ["gh"] = { "<Plug>VSCodeCommentaryLine" },
+    ["<leader>mk"] = { "<cmd> :m-2 <CR>", "line up" },
+    ["<leader>mj"] = { "<cmd> :m+ <CR>", "line down" },
+    -- ["gh"] = { "<Plug>VSCodeCommentaryLine" },
 
     ["¬"] = { ":call VSCodeNotify('workbench.action.splitEditorRight') <CR>" },
     ["˙"] = { ":call VSCodeNotify('workbench.action.splitEditorLeft') <CR>" },
     ["<leader>l"] = { ":call VSCodeNotify('workbench.action.focusNextGroup') <CR>" },
     ["<leader>h"] = { ":call VSCodeNotify('workbench.action.focusPreviousGroup') <CR>" },
-
-
-    ["<C-l>"] = { "%" },
-    ["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
-    -- save
-    ["<C-s>"] = { "<cmd> w <CR>", "save file" },
 
     -- Copy all
     ["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
@@ -57,9 +58,23 @@ local M = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ["<C-h>"] = { "<C-w>h" },
+    ["<C-l>"] = { "<C-w>l" },
+    ["<C-j>"] = { "<C-w>j" },
+    ["<C-k>"] = { "<C-w>k" },
+    ["<C-b>"] = { "zh" },
+    ["<C-f>"] = { "zl" },
+    ["<M-h>"] = { "<C-w><" },
+    ["<M-l>"] = { "<C-w>>" },
+    ["<M-k>"] = { "<C-w>-" },
+    ["<M-j>"] = { "<C-w>+" },
+    -- ["<C-f>"] = { "<C-w>>" },
+    ["<leader>'"] = { "gt" },
+    ["<leader>;"] = { "gT" },
+    ["."] = { "/" },
   },
 
-  t = { ["<C-x>"] = { termcodes "<C-\\><C-N>", "escape terminal " } },
+  t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },
 
   v = {
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
@@ -70,11 +85,9 @@ local M = {
     ["<S-l>"] = { "$", "end of line" },
     ["n"] = { "*", "next occurence" },
     ["N"] = { "#", "last occurence" },
-    ["i"] = { "s" },
-    ["gh"] = { "<Plug>VSCodeCommentary" },
     ["<C-l>"] = { "%" },
     ["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
-    ["<leader>"] = { "<Plug>(nvim-surround-visual)" }
+    ["<leader>"] = { "<Plug>(nvim-surround-visual)" },
   },
 
   x = {
