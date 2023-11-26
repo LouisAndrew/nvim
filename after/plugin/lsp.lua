@@ -1,9 +1,9 @@
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local lsp_zero = require("lsp-zero")
-local ft = require("guard.filetype")
-local lspkind = require("lspkind")
+-- local ft = require("guard.filetype")
 local saga = require("lspsaga")
 
-lsp_zero.on_attach(function(s, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "<leader>iO", function()
@@ -42,11 +42,25 @@ lsp_zero.on_attach(function(s, bufnr)
 
 	-- make sure it works
 	vim.keymap.set("i", "<C-h>", "<Left>", opts)
+
+	-- Format on save
+	if client.supports_method("textDocument/formatting") then
+		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function()
+				-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+				-- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+				vim.lsp.buf.format({ async = false })
+			end,
+		})
+	end
 end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "rust_analyzer", "eslint", "volar", "tailwindcss", "cssls", "html" },
+	ensure_installed = { "tsserver", "rust_analyzer", "volar", "tailwindcss", "cssls", "html", "lua_ls" },
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()
@@ -70,6 +84,23 @@ require("mason-lspconfig").setup({
 
 require("lspconfig").graphql.setup({
 	filetypes = { "graphql", "javascript", "typescript", "typescriptreact" },
+})
+
+require("lspconfig").grammarly.setup({
+	filetypes = { "markdown", "md" },
+})
+
+require("lspconfig").lua_ls.setup({
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
 })
 
 local saga_keys = {
@@ -102,57 +133,40 @@ saga.setup({
 	},
 })
 
-local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local null_ls = require("null-ls")
 
-require("luasnip.loaders.from_vscode").load({
-	path = "~/.config/nvim/snippets",
-})
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
+-- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#formatting
+null_ls.setup({
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lua" },
-		{ name = "path" },
-		{ name = "luasnip" },
-	},
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol", -- show only symbol annotations
-			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+		-- ESLINT
+		null_ls.builtins.diagnostics.eslint_d,
+		null_ls.builtins.formatting.eslint_d,
+		null_ls.builtins.code_actions.eslint_d,
 
-			-- The function below will be called before any actual modifications from lspkind
-			-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-			before = function(entry, vim_item)
-				return vim_item
-			end,
+		-- RUST
+		null_ls.builtins.formatting.rustfmt,
+
+		-- LUA
+		null_ls.builtins.diagnostics.luacheck,
+		null_ls.builtins.formatting.stylua,
+
+		-- MARKDOWN
+		null_ls.builtins.diagnostics.markdownlint,
+
+		-- JSON
+		null_ls.builtins.diagnostics.spectral,
+		null_ls.builtins.formatting.deno_fmt.with({
+			filetypes = { "markdown", "json" }, -- only runs `deno fmt` for markdown
 		}),
+
+		-- GO
+		null_ls.builtins.formatting.gofmt,
+		null_ls.builtins.diagnostics.staticcheck,
+
+		--[[ null_ls.builtins.formatting.prettier.with({
+			filetypes = { "json" },
+		}), ]]
 	},
-	-- formatting = lsp_zero.cmp_format(),
-	mapping = cmp.mapping.preset.insert({
-		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-		["<cr>"] = cmp.mapping.confirm({ select = true }),
-		["<C-e>"] = cmp.mapping.complete(),
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
-	}),
-})
-
-ft("typescript,javascript,typescriptreact"):fmt("eslint_d")
-ft("vue"):fmt("eslint_d")
-ft("lua"):fmt("lsp"):append("stylua")
-ft("rust"):fmt("rustfmt")
-
-require("guard").setup({
-	fmt_on_save = true,
-	lsp_as_default_formatter = true,
 })
 
 vim.keymap.set({ "n", "t" }, "<M-p>", "<cmd>Lspsaga term_toggle<cr>")
