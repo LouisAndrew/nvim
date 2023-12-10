@@ -35,6 +35,7 @@ telescope.setup({
 			},
 		},
 		vimgrep_arguments = vimgrep_arguments,
+		mappings = default_maps,
 	},
 	pickers = {
 		find_files = {
@@ -58,6 +59,7 @@ telescope.setup({
 		},
 		file_browser = {
 			hijack_netrw = true,
+			respect_gitignore = true,
 			mappings = {
 				["i"] = {
 					["<C-l>"] = actions.file_vsplit,
@@ -67,7 +69,10 @@ telescope.setup({
 					["<C-r>"] = fb_actions.rename,
 					["<C-d>"] = fb_actions.remove,
 					["<C-t>"] = actions.file_tab,
-					["<C-x>"] = fb_actions.toggle_hidden,
+					["<C-x>"] = function(prompt_bufnr)
+						fb_actions.toggle_hidden(prompt_bufnr)
+						fb_actions.toggle_respect_gitignore(prompt_bufnr)
+					end,
 				},
 			},
 		},

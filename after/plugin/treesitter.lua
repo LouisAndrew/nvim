@@ -1,3 +1,5 @@
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = { "javascript", "typescript", "vue", "lua", "vim", "vimdoc", "html", "css", "graphql" },
 	sync_install = false,
@@ -108,3 +110,6 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
+
+vim.keymap.set({ "n", "x", "o" }, "<leader>tn", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, "<leader>tp", ts_repeat_move.repeat_last_move_previous)
