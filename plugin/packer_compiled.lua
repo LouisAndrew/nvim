@@ -121,6 +121,11 @@ _G.packer_plugins = {
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
     url = "https://github.com/tjdevries/colorbuddy.nvim"
   },
+  ["conform.nvim"] = {
+    loaded = true,
+    path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/conform.nvim",
+    url = "https://github.com/stevearc/conform.nvim"
+  },
   ["copilot.vim"] = {
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/copilot.vim",
@@ -340,7 +345,7 @@ _G.packer_plugins = {
     url = "https://github.com/mg979/vim-visual-multi"
   },
   ["wilder.nvim"] = {
-    config = { "\27LJ\2\nú\1\0\0\t\0\v\0\0176\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0009\4\4\0009\6\5\0005\b\6\0B\6\2\0A\4\0\0A\1\1\0019\1\a\0005\3\t\0005\4\b\0=\4\n\3B\1\2\1K\0\1\0\nmodes\1\0\0\1\2\0\0\6:\nsetup\1\0\5\freverse\3\0\20prompt_position\btop\15min_height\3\0\15max_height\b75%\vborder\frounded\28popupmenu_palette_theme\23popupmenu_renderer\rrenderer\15set_option\vwilder\frequire\0" },
+    config = { "\27LJ\2\nú\1\0\0\t\0\v\0\0176\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0009\4\4\0009\6\5\0005\b\6\0B\6\2\0A\4\0\0A\1\1\0019\1\a\0005\3\t\0005\4\b\0=\4\n\3B\1\2\1K\0\1\0\nmodes\1\0\0\1\2\0\0\6:\nsetup\1\0\5\freverse\3\0\15max_height\b75%\vborder\frounded\20prompt_position\btop\15min_height\3\0\28popupmenu_palette_theme\23popupmenu_renderer\rrenderer\15set_option\vwilder\frequire\0" },
     loaded = true,
     path = "/Users/louis.andrew/.local/share/nvim/site/pack/packer/start/wilder.nvim",
     url = "https://github.com/gelguy/wilder.nvim"
@@ -348,42 +353,42 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
--- Config for: wilder.nvim
-time([[Config for wilder.nvim]], true)
-try_loadstring("\27LJ\2\nú\1\0\0\t\0\v\0\0176\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0009\4\4\0009\6\5\0005\b\6\0B\6\2\0A\4\0\0A\1\1\0019\1\a\0005\3\t\0005\4\b\0=\4\n\3B\1\2\1K\0\1\0\nmodes\1\0\0\1\2\0\0\6:\nsetup\1\0\5\freverse\3\0\20prompt_position\btop\15min_height\3\0\15max_height\b75%\vborder\frounded\28popupmenu_palette_theme\23popupmenu_renderer\rrenderer\15set_option\vwilder\frequire\0", "config", "wilder.nvim")
-time([[Config for wilder.nvim]], false)
--- Config for: nvim-neoclip.lua
-time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
-time([[Config for nvim-neoclip.lua]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\nJ\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\17auto_preview\1\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
+time([[Config for nvim-surround]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\nJ\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\17auto_preview\1\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: nvim-neoclip.lua
+time([[Config for nvim-neoclip.lua]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
+time([[Config for nvim-neoclip.lua]], false)
 -- Config for: nvim-nonicons
 time([[Config for nvim-nonicons]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-nonicons\frequire\0", "config", "nvim-nonicons")
 time([[Config for nvim-nonicons]], false)
--- Config for: flash.nvim
-time([[Config for flash.nvim]], true)
-try_loadstring("\27LJ\2\n\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggle¿\3\1\0\b\0\27\00086\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\1€2\0*€6\2\4\0009\2\5\0029\2\6\0025\4\a\0'\5\b\0003\6\t\0005\a\n\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\v\0'\5\f\0003\6\r\0005\a\14\0B\2\5\0016\2\4\0009\2\5\0029\2\6\2'\4\15\0'\5\16\0003\6\17\0005\a\18\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\19\0'\5\20\0003\6\21\0005\a\22\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\23\0'\5\24\0003\6\25\0005\a\26\0B\2\5\0012\0\0€K\0\1\0K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\nsetup\nflash\frequire\0", "config", "flash.nvim")
-time([[Config for flash.nvim]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
 time([[Config for bufferline.nvim]], false)
+-- Config for: wilder.nvim
+time([[Config for wilder.nvim]], true)
+try_loadstring("\27LJ\2\nú\1\0\0\t\0\v\0\0176\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0009\4\4\0009\6\5\0005\b\6\0B\6\2\0A\4\0\0A\1\1\0019\1\a\0005\3\t\0005\4\b\0=\4\n\3B\1\2\1K\0\1\0\nmodes\1\0\0\1\2\0\0\6:\nsetup\1\0\5\freverse\3\0\15max_height\b75%\vborder\frounded\20prompt_position\btop\15min_height\3\0\28popupmenu_palette_theme\23popupmenu_renderer\rrenderer\15set_option\vwilder\frequire\0", "config", "wilder.nvim")
+time([[Config for wilder.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: flash.nvim
+time([[Config for flash.nvim]], true)
+try_loadstring("\27LJ\2\n\30\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\tjump$\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\15treesitter \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vremote+\0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\22treesitter_search \0\0\2\1\1\0\4-\0\0\0009\0\0\0B\0\1\1K\0\1\0\1À\vtoggle¿\3\1\0\b\0\27\00086\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0006\2\0\0'\3\1\0B\0\3\3\14\0\0\0X\2\1€2\0*€6\2\4\0009\2\5\0029\2\6\0025\4\a\0'\5\b\0003\6\t\0005\a\n\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\v\0'\5\f\0003\6\r\0005\a\14\0B\2\5\0016\2\4\0009\2\5\0029\2\6\2'\4\15\0'\5\16\0003\6\17\0005\a\18\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\19\0'\5\20\0003\6\21\0005\a\22\0B\2\5\0016\2\4\0009\2\5\0029\2\6\0025\4\23\0'\5\24\0003\6\25\0005\a\26\0B\2\5\0012\0\0€K\0\1\0K\0\1\0\1\0\1\tdesc\24Toggle Flash Search\0\n<c-s>\1\2\0\0\6c\1\0\1\tdesc\28Flash Treesitter Search\0\6R\1\3\0\0\6o\6x\1\0\1\tdesc\17Remote Flash\0\6r\6o\1\0\1\tdesc\21Flash Treesitter\0\6F\1\4\0\0\6n\6o\6x\1\0\1\tdesc\nFlash\0\6f\1\4\0\0\6n\6x\6o\bset\vkeymap\bvim\npcall\nsetup\nflash\frequire\0", "config", "flash.nvim")
+time([[Config for flash.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-treesitter ]]
