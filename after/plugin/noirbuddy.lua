@@ -1,30 +1,12 @@
-local minimal_fedu = {
-	cyan = "#97CCF1",
-	white = "#ffffff",
-	dimmed_white = "#9a9a9a",
-	debug = "#ff0000",
-	navy = "#678CB1",
-	foreground = "#ffbb80",
-	background = "#131313",
-	bg_accent = "#1f2425",
-	misc = {
-		bool = "#eeb684",
-		number = "#ffd6b3",
-		add_fg = "#81ffbb",
-		remove_fg = "#ff8185",
-		change = "#2f4557",
-		add = "#1d3629",
-		remove = "#431d1f",
-	},
-}
+local minimal_fedu = require("colors")
 
 require("noirbuddy").setup({
 	preset = "crt-green",
 	colors = {
 		background = minimal_fedu.background,
 		primary = minimal_fedu.foreground,
-		diagnostic_error = "#f05c51",
-		diagnostic_warning = "#ffad67",
+		diagnostic_error = minimal_fedu.misc.remove_fg,
+		diagnostic_warning = minimal_fedu.palette.yellow_fg,
 		diagnostic_info = "#81c5ff",
 		diagnostic_hint = minimal_fedu.dimmed_white,
 
@@ -59,6 +41,9 @@ Color.new("change", minimal_fedu.misc.change)
 Color.new("remove_fg", minimal_fedu.misc.remove_fg)
 Color.new("add_fg", minimal_fedu.misc.add_fg)
 
+Color.new("yellow_fg", minimal_fedu.palette.yellow_fg)
+Color.new("yellow", minimal_fedu.palette.yellow)
+
 -- LSP stuff
 Group.new("Identifier", colors.noir_0)
 Group.new("@keyword.return", colors.mfed_cyan)
@@ -86,11 +71,6 @@ Group.new("ErrorMsg", colors.dimmed_red)
 Group.new("Pmenu", colors.noir_2, colors.mfed_bg_accent)
 Group.new("PmenuSel", colors.white, colors.change)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-
-Group.new("ObsidianRefText", colors.mfed_cyan)
-Group.new("ObsidianHighlightText", colors.debug)
-Group.new("ObsidianTag", colors.primary)
-Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
 
 -- Telescope
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
@@ -125,3 +105,18 @@ Group.new("CmpItemKindProperty", colors.mfed_cyan)
 Group.new("CmpItemKindUnit", colors.mfed_cyan)
 
 Group.new("BufferInactive", nil, colors.bg_accent)
+
+Group.new("ObsidianRefText", colors.mfed_cyan)
+Group.new("ObsidianHighlightText", colors.debug)
+Group.new("ObsidianTag", colors.primary)
+Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
+
+Group.new("DiagnosticError", colors.diagnostic_error, nil)
+Group.new("DiagnosticWarn", colors.yellow_fg, nil)
+
+Group.new("LuaLineDiffChange", colors.yellow_fg, nil)
+Group.new("LuaLineDiffAdd", colors.add_fg, nil)
+Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
+
+-- Group.new("DiagnosticInfo", colors.diagnostic_info, nil, sumStyles({ s.bold, s.italic, s.undercurl }))
+-- Group.new("DiagnosticHint", colors.diagnostic_hint, nil, sumStyles({ s.bold, s.italic, s.undercurl }))

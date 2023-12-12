@@ -1,7 +1,8 @@
+local minimal_fedu = require("colors")
 local lualine = require("lualine")
 
 local colors = {
-	bg = "#1f2425",
+	bg = minimal_fedu.background,
 	fg = "#ffbb80",
 	yellow = "#ffad67",
 	cyan = "#008080",
@@ -14,7 +15,7 @@ local colors = {
 	red = "#ff8185",
 }
 
-local conditions = {
+--[[ local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 	end,
@@ -26,7 +27,7 @@ local conditions = {
 		local gitdir = vim.fn.finddir(".git", filepath .. ";")
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 	end,
-}
+} ]]
 
 local config = {
 	options = {
@@ -39,6 +40,18 @@ local config = {
 			-- are just setting default looks o statusline
 			normal = { c = { fg = colors.fg, bg = colors.bg } },
 			inactive = { c = { fg = colors.fg, bg = colors.bg } },
+		},
+	},
+	disabled_filetypes = {
+		statusline = {
+			"packer",
+			"NvimTree",
+			"NeoGit",
+		},
+		winbar = {
+			"packer",
+			"NvimTree",
+			"NeoGit",
 		},
 	},
 	sections = {
@@ -60,6 +73,64 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
+	winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {
+			{
+				"filename",
+				file_status = true, -- Displays file status (readonly status, modified status)
+				newfile_status = false, -- Display new file status (new file means no write after created)
+				path = 4, -- 0: Just the filename
+				color = { fg = minimal_fedu.palette.blue_fg, bg = minimal_fedu.palette.blue },
+				-- 1: Relative path
+				-- 2: Absolute path
+				-- 3: Absolute path, with tilde as the home directory
+				-- 4: Filename and parent dir, with tilde as the home directory
+
+				shorting_target = 60, -- Shortens path to leave 40 spaces in the window
+				-- for other components. (terrible name, any suggestions?)
+				symbols = {
+					modified = "[+]", -- Text to show when the file is modified.
+					readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+					unnamed = "[No Name]", -- Text to show for unnamed buffers.
+					newfile = "[New]", -- Text to show for newly created file before first write
+				},
+			},
+		},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	inactive_winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_z = {},
+		lualine_y = {},
+		lualine_x = {
+			{
+				"filename",
+				file_status = true, -- Displays file status (readonly status, modified status)
+				newfile_status = false, -- Display new file status (new file means no write after created)
+				path = 4, -- 0: Just the filename
+				color = { fg = minimal_fedu.palette.blue_fg, gui = "" },
+				-- 1: Relative path
+				-- 2: Absolute path
+				-- 3: Absolute path, with tilde as the home directory
+				-- 4: Filename and parent dir, with tilde as the home directory
+
+				shorting_target = 60, -- Shortens path to leave 40 spaces in the window
+				-- for other components. (terrible name, any suggestions?)
+				symbols = {
+					modified = "[+]", -- Text to show when the file is modified.
+					readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+					unnamed = "[No Name]", -- Text to show for unnamed buffers.
+					newfile = "[New]", -- Text to show for newly created file before first write
+				},
+			},
+		},
+	},
 }
 
 -- Inserts a component in lualine_c at left section
@@ -71,14 +142,6 @@ end
 local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
-
-ins_left({
-	function()
-		return "▊"
-	end,
-	color = { fg = colors.bg }, -- Sets highlighting of component
-	padding = { left = 0, right = 1 }, -- We don't need space before this
-})
 
 ins_left({
 	-- mode component
@@ -97,12 +160,12 @@ ins_left({
 	color = function()
 		-- auto change color according to neovims mode
 		local mode_color = {
-			n = colors.red,
-			i = colors.green,
-			v = colors.blue,
-			[""] = colors.blue,
-			V = colors.blue,
-			c = colors.magenta,
+			n = minimal_fedu.misc.remove_fg,
+			i = minimal_fedu.misc.add_fg,
+			v = minimal_fedu.palette.blue_fg,
+			[""] = minimal_fedu.palette.blue_fg,
+			V = minimal_fedu.palette.blue_fg,
+			c = minimal_fedu.palette.yellow_fg,
 			no = colors.red,
 			s = colors.orange,
 			S = colors.orange,
@@ -118,46 +181,68 @@ ins_left({
 			["!"] = colors.red,
 			t = colors.red,
 		}
-		return { fg = mode_color[vim.fn.mode()] }
+
+		local mode_color_bg = {
+			n = minimal_fedu.misc.remove,
+			i = minimal_fedu.misc.add,
+			v = minimal_fedu.misc.change,
+			[""] = minimal_fedu.misc.change,
+			c = minimal_fedu.palette.yellow,
+		}
+
+		local bg = mode_color_bg[vim.fn.mode()]
+
+		return { fg = mode_color[vim.fn.mode()], bg = bg }
 	end,
-	padding = { right = 1 },
+	padding = { right = 1, left = 1 },
 })
 
 ins_left({
 	"branch",
-	icon = "",
-	color = { fg = colors.violet },
+	icon = "",
+	color = { fg = minimal_fedu.palette.indigo_fg, bg = minimal_fedu.palette.indigo },
+	padding = { right = 1, left = 1 },
 })
 
 ins_left({
-	"filename",
-	cond = conditions.buffer_not_empty,
-	color = { fg = colors.fg, gui = "bold" },
+	"diff",
+	colored = true, -- Displays a colored diff status if set to true
+	diff_color = {
+		-- Same color values as the general color option can be used here.
+		added = "LuaLineDiffAdd", -- Changes the diff's added color
+		modified = "LuaLineDiffChange", -- Changes the diff's modified color
+		removed = "LuaLineDiffDelete", -- Changes the diff's removed color you
+	},
+	symbols = { added = "+", modified = "~", removed = "-" },
 })
-
-ins_left({ "location" })
 
 ins_left({
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
-	symbols = { error = " ", warn = " ", info = " " },
+	symbols = { error = " ", warn = " ", info = " ", hint = " " },
 	diagnostics_color = {
-		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
-		color_info = { fg = colors.cyan },
+		color_error = { fg = minimal_fedu.misc.remove_fg },
+		color_warn = { fg = "#ffad67" },
+		color_info = { fg = minimal_fedu.misc.add_fg },
 	},
+	padding = { left = 1 },
 })
+
+ins_right({ "location", color = { fg = minimal_fedu.misc.add_fg } })
 
 ins_right({
 	-- Lsp server name .
 	function()
-		local msg = "No Active Lsp"
+		local msg = "  "
 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 		local clients = vim.lsp.get_active_clients()
+
 		if next(clients) == nil then
 			return msg
 		end
+
 		local client_names = {}
+
 		for _, client in ipairs(clients) do
 			local filetypes = client.config.filetypes
 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
@@ -166,12 +251,13 @@ ins_right({
 		end
 
 		if #client_names > 0 then
-			return table.concat(client_names, ", ")
+			return "  " .. table.concat(client_names, ", ")
 		else
 			return msg
 		end
 	end,
-	color = { fg = "#9a9a9a" },
+	color = { fg = minimal_fedu.misc.add_fg, bg = minimal_fedu.misc.add },
+	padding = { left = 1, right = 1 },
 })
 
 lualine.setup(config)

@@ -1,9 +1,17 @@
+local colors = require("colors")
+
 require("obsidian").setup({
 	ui = {
 		reference_text = { hl_group = "ObsidianRefText" },
 		highlight_text = { hl_group = "ObsidianHighlightText" },
 		tags = { hl_group = "ObsidianTag" },
 		external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+		hl_groups = {
+			ObsidianRefText = { fg = colors.cyan },
+			ObsidianHighlightText = { fg = colors.debug },
+			ObsidianTag = { fg = colors.foreground },
+			ObsidianExtLinkIcon = { fg = colors.navy },
+		},
 	},
 	workspaces = {
 		{

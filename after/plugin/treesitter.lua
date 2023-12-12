@@ -11,7 +11,6 @@ require("nvim-treesitter.configs").setup({
 	autotag = {
 		enable = true,
 	},
-	tree_docs = { enable = true },
 	incremental_selection = {
 		enable = true,
 		keymaps = {
@@ -74,7 +73,7 @@ require("nvim-treesitter.configs").setup({
 			set_jumps = true, -- whether to set jumps in the jumplist
 			goto_next_start = {
 				["]f"] = { query = "@call.outer", desc = "Next function call start" },
-				["]m"] = { query = "@function.outer", desc = "Next method/function def start" },
+				["]q"] = { query = "@function.outer", desc = "Next method/function def start" },
 				["]c"] = { query = "@class.outer", desc = "Next class start" },
 				["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
 				["]l"] = { query = "@loop.outer", desc = "Next loop start" },
@@ -83,26 +82,29 @@ require("nvim-treesitter.configs").setup({
 				-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
 				["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
 				["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+				["]a"] = { query = "@paramater", query_group = "folds", desc = "Next parameter" },
 			},
 			goto_next_end = {
 				["]F"] = { query = "@call.outer", desc = "Next function call end" },
-				["]M"] = { query = "@function.outer", desc = "Next method/function def end" },
+				["]Q"] = { query = "@function.outer", desc = "Next method/function def end" },
 				["]C"] = { query = "@class.outer", desc = "Next class end" },
 				["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
 				["]L"] = { query = "@loop.outer", desc = "Next loop end" },
 			},
 			goto_previous_start = {
 				["[f"] = { query = "@call.outer", desc = "Prev function call start" },
-				["[m"] = { query = "@function.outer", desc = "Prev method/function def start" },
+				["[q"] = { query = "@function.outer", desc = "Prev method/function def start" },
 				["[c"] = { query = "@class.outer", desc = "Prev class start" },
 				["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
-				["[z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
 
 				["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+				["[s"] = { query = "@scope", query_group = "locals", desc = "Prev scope" },
+				["[z"] = { query = "@fold", query_group = "folds", desc = "Prev fold" },
+				["[a"] = { query = "@paramater", query_group = "folds", desc = "Prev parameter" },
 			},
 			goto_previous_end = {
 				["[F"] = { query = "@call.outer", desc = "Prev function call end" },
-				["[M"] = { query = "@function.outer", desc = "Prev method/function def end" },
+				["[Q"] = { query = "@function.outer", desc = "Prev method/function def end" },
 				["[C"] = { query = "@class.outer", desc = "Prev class end" },
 				["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
 				["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
@@ -111,5 +113,9 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-vim.keymap.set({ "n", "x", "o" }, "<leader>tn", ts_repeat_move.repeat_last_move_next)
-vim.keymap.set({ "n", "x", "o" }, "<leader>tp", ts_repeat_move.repeat_last_move_previous)
+vim.keymap.set({ "n", "x", "o" }, "<C-s>", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previous)
+
+require("neogen").setup()
+
+vim.keymap.set("n", "<leader>tc", require("neogen").generate)

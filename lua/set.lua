@@ -9,6 +9,7 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 opt.wrap = false
+opt.laststatus = 3
 
 --[[ vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = { "*.md" },
