@@ -1,12 +1,13 @@
 local Group = require("colorbuddy").Group
 local colors = require("colorbuddy").colors
+local styles = require("colorbuddy").styles
 
 Group.new("Normal", colors.noir_4, colors.nb_background)
 Group.new("Search", colors.noir_9, colors.noir_0)
 Group.new("IncSearch", colors.noir_9, colors.noir_0)
 Group.new("Visual", nil, colors.noir_8)
 Group.new("SignColumn", nil, colors.nb_background)
-Group.new("LineNr", colors.noir_8, colors.nb_background)
+Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
 
 Group.new("Comment", colors.noir_7)
@@ -32,15 +33,12 @@ Group.new("DiffChange", colors.noir_0, colors.noir_8)
 Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
-Group.new("VertSplit", colors.noir_8, colors.noir_9)
 
 Group.new("Folded", colors.noir_5, colors.noir_8)
 Group.new("FoldColumn", colors.noir_5, colors.noir_8)
 Group.new("MatchParen", nil, colors.noir_7)
 Group.new("MoreMsg", nil, colors.noir_6)
 Group.new("NonText", colors.noir_8, nil)
-Group.new("Pmenu", colors.noir_2, colors.noir_8)
-Group.new("PmenuSel", colors.noir_6, colors.noir_8)
 Group.new("PmenuSbar", colors.primary, colors.noir_8)
 Group.new("PmenuThumb", colors.primary, colors.noir_7)
 Group.new("Question", colors.noir_1, colors.noir_8)
@@ -58,7 +56,6 @@ Group.new("VisualNOS", colors.primary, colors.noir_8)
 Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.noir_5, colors.noir_8)
 
-Group.new("FloatBorder", colors.noir_0)
 Group.new("FloatTitle", colors.noir_0)
 Group.new("NormalFloat", colors.noir_4)
 
@@ -158,15 +155,16 @@ Group.new("@conditional", colors.mfed_cyan)
 Group.new("@lsp.type.macro", colors.mfed_cyan)
 
 -- Editor stuff
-Group.new("CursorLineNr", colors.mfed_dim, nil)
+Group.new("CursorLineNr", colors.white, nil)
 Group.new("TabLine", colors.dimmed_white, nil)
 Group.new("TabLineFill", nil, nil)
 Group.new("VertSplit", colors.mfed_dim, nil)
 Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
-Group.new("Pmenu", colors.noir_2, colors.mfed_bg_accent)
-Group.new("PmenuSel", colors.white, colors.change)
+Group.new("Pmenu", colors.noir_2, colors.bg_shade)
+Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
+Group.new("FloatBorder", colors.mfed_bg_accent)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)
@@ -244,7 +242,6 @@ Group.new("SagaBeacon", colors.primary)
 -- Obsidian
 Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
-Group.new("ObsidianTag", colors.primary)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
 
 -- CMP
@@ -283,3 +280,11 @@ Group.new("NvimTreeFolderIcon", colors.primary)
 Group.new("NvimTreeIndentMarker", colors.noir_6)
 Group.new("NvimTreeExecFile", colors.noir_6)
 Group.new("NvimTreeSpecialFile", colors.noir_2, nil)
+
+Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
+Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
+
+Group.new("sagaborder", colors.mfed_bg_accent)
+Group.new("telescopeborder", colors.mfed_bg_accent)
+Group.new("cmpmenu", nil, nil)
+Group.new("cmpborder", colors.mfed_bg_accent)

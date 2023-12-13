@@ -12,6 +12,7 @@ return {
 				show_buffer_close_icons = false,
 				show_close_icon = false,
 				diagnostics = "nvim_lsp",
+				modified_icon = "",
 			},
 			highlights = {
 				fill = {

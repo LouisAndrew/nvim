@@ -34,12 +34,15 @@ require("luasnip.loaders.from_vscode").load()
 cmp.setup({
 	window = {
 		completion = {
-			col_offset = 0,
+			col_offset = 1,
 			side_padding = 1,
+			border = "rounded",
+			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 		documentation = { -- no border; native-style scrollbar
 			border = "rounded",
 			side_padding = 1,
+			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 	},
 	sources = {

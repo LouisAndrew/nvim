@@ -44,7 +44,19 @@ end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer", "volar", "tailwindcss", "cssls", "html", "lua_ls" },
+	ensure_installed = {
+		-- RUST
+		"rust_analyzer",
+
+		-- LUA
+		"lua_ls",
+
+		-- WEBDEV
+		"tailwindcss",
+		"cssls",
+		"html",
+		"volar",
+	},
 	handlers = {
 		lsp_zero.default_setup,
 		rust_analyzer = function()
@@ -131,7 +143,7 @@ lspconfig.volar.setup({
 })
 
 lspconfig.tsserver.setup({
-	filetypes = { "typescript", "vue", "typescriptreact" },
+	filetypes = { "typescript", "vue", "typescriptreact", "javascript" },
 	on_attach = function(ts_client)
 		-- Set volar as prio when vue files exists
 		local active_clients = vim.lsp.get_active_clients()
@@ -148,7 +160,7 @@ local saga_keys = {
 	edit = "<cr>",
 	vsplit = "<C-l>",
 	split = "<C-j>",
-	quit = "<leader>ww",
+	quit = "<leader>w",
 	tabe = "<C-t>",
 }
 
@@ -162,15 +174,12 @@ saga.setup({
 	},
 	code_action = {
 		keys = {
-			quit = "<leader>ww",
+			quit = "<leader>w",
 		},
 	},
 	ui = {
 		border = "rounded",
 		code_action = " ",
-		--[[ colors = {
-			normal_bg = "#022746",
-		}, ]]
 	},
 	symbol_in_winbar = {
 		enable = false,

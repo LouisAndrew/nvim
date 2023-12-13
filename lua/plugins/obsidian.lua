@@ -7,12 +7,31 @@ return {
 		{ "<leader>ls", "<cmd>:ObsidianSearch<cr>" },
 		{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 		{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
+		-- { "<leader>ln", ":e ~/dev/documents/notes/" },
 		{ "<leader>ln", ":ObsidianNew " },
 	},
-	requires = {
+	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"godlygeek/tabular",
-		"ekickx/clipboard-image.nvim",
+		"dfendr/clipboard-image.nvim",
+		{
+			"ellisonleao/glow.nvim",
+			cmd = "Glow",
+			config = function()
+				require("glow").setup({
+					path = "/opt/homebrew/bin/glow",
+					border = "rounded", -- floating window border config
+					style = "dark", -- filled automatically with your current editor background, you can override using glow json style
+					pager = false,
+					width = 150,
+					height = 300,
+					width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+					height_ratio = 0.7,
+				})
+
+				vim.keymap.set("n", "<leader>lg", "<cmd>:Glow<cr>", { noremap = true, silent = true })
+			end,
+		},
 		-- "preservim/vim-markdown"
 	},
 	config = function()
@@ -27,7 +46,7 @@ return {
 				hl_groups = {
 					ObsidianRefText = { fg = colors.cyan },
 					ObsidianHighlightText = { fg = colors.debug },
-					ObsidianTag = { fg = colors.foreground },
+					ObsidianTag = { fg = colors.palette.blue_fg, bg = colors.palette.blue },
 					ObsidianExtLinkIcon = { fg = colors.navy },
 				},
 			},
@@ -57,7 +76,27 @@ return {
 					return string.format("![%s](%s)", display_name, link_path)
 				end,
 			},
-			sort_by = "path",
+			sort_by = "modified",
+			sort_reversed = true,
+			note_frontmatter_func = function(note)
+				-- This is equivalent to the default frontmatter function.
+				local now = os.date("%d.%m.%Y")
+				local out = { id = note.id, aliases = note.aliases, tags = note.tags, created = now, modified = now }
+				-- `note.metadata` contains any manually added fields in the frontmatter.
+				-- So here we just make sure those fields are kept in the frontmatter.
+				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+					for k, v in pairs(note.metadata) do
+						out[k] = v
+
+						if k == "modified" then
+							out[k] = now
+						end
+					end
+				end
+				return out
+			end,
+			notes_subdir = "notes",
+			new_notes_location = "notes_subdir",
 		})
 	end,
 }

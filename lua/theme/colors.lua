@@ -1,4 +1,4 @@
-local Color, colors, Group = require("colorbuddy").setup()
+local Color = require("colorbuddy").setup()
 local minimal_fedu = require("colors")
 
 Color.new("nb_background", minimal_fedu.background)
@@ -42,6 +42,7 @@ Color.new("debug", minimal_fedu.debug)
 Color.new("mfed_bg_accent", minimal_fedu.bg_accent)
 Color.new("dimmed_red", "#ff8185")
 Color.new("dimmed_white", minimal_fedu.dimmed_white)
+Color.new("bg_shade", minimal_fedu.bg_shade)
 
 Color.new("add", minimal_fedu.misc.add)
 Color.new("remove", minimal_fedu.misc.remove)

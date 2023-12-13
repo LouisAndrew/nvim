@@ -44,8 +44,6 @@ local M = {
 
 		["¬"] = { ":call VSCodeNotify('workbench.action.splitEditorRight') <CR>" },
 		["˙"] = { ":call VSCodeNotify('workbench.action.splitEditorLeft') <CR>" },
-		["<leader>l"] = { ":call VSCodeNotify('workbench.action.focusNextGroup') <CR>" },
-		["<leader>h"] = { ":call VSCodeNotify('workbench.action.focusPreviousGroup') <CR>" },
 
 		-- Copy all
 		["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
@@ -64,8 +62,8 @@ local M = {
 		["<C-k>"] = { "<C-w>k" },
 		["<C-b>"] = { "zh" },
 		["<C-f>"] = { "zl" },
-		["<M-h>"] = { "<C-w>>" },
-		["<M-l>"] = { "<C-w><" },
+		["<M-h>"] = { "<C-w><" },
+		["<M-l>"] = { "<C-w>>" },
 		["<M-k>"] = { "<C-w>+" },
 		["<M-j>"] = { "<C-w>-" },
 		-- ["<C-f>"] = { "<C-w>>" },
@@ -74,10 +72,10 @@ local M = {
 		["."] = { "/" },
 
 		-- Window management
-		["<leader>ww"] = { "<cmd>:q<cr>" },
-		["<leader>wq"] = { "<cmd>:bd<cr>" },
-		["<leader>wj"] = { "<cmd>:sp<cr>" },
-		["<leader>wl"] = { "<cmd>:vsp<cr>" },
+		["<leader>w"] = { "<cmd>:q<cr>" },
+		["<leader>W"] = { "<cmd>:bd<cr>" },
+		["<leader>tj"] = { "<cmd>:sp<cr>" },
+		["<leader>tl"] = { "<cmd>:vsp<cr>" },
 	},
 
 	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },

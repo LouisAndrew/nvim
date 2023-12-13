@@ -54,6 +54,39 @@ return {
 				},
 				vimgrep_arguments = vimgrep_arguments,
 				mappings = default_maps,
+				color_devicons = false,
+
+				preview = {
+					mime_hook = function(filepath, bufnr, opts)
+						local is_image = function(filepath)
+							local image_extensions = { "png", "jpg" } -- Supported image formats
+							local split_path = vim.split(filepath:lower(), ".", { plain = true })
+							local extension = split_path[#split_path]
+							return vim.tbl_contains(image_extensions, extension)
+						end
+
+						if is_image(filepath) then
+							local term = vim.api.nvim_open_term(bufnr, {})
+							local function send_output(_, data, _)
+								for _, d in ipairs(data) do
+									vim.api.nvim_chan_send(term, d .. "\r\n")
+								end
+							end
+
+							-- still not working :((
+							vim.fn.jobstart({
+								"viu",
+								filepath, -- Terminal image viewer command
+							}, { on_stdout = send_output, stdout_buffered = true, pty = true })
+						else
+							require("telescope.previewers.utils").set_preview_message(
+								bufnr,
+								opts.winid,
+								"Binary cannot be previewed"
+							)
+						end
+					end,
+				},
 			},
 			pickers = {
 				find_files = {
@@ -80,12 +113,14 @@ return {
 					respect_gitignore = true,
 					mappings = {
 						["i"] = {
+							["<C-u>"] = actions.preview_scrolling_up,
+							["<C-d>"] = actions.preview_scrolling_down,
 							["<C-l>"] = actions.file_vsplit,
 							["<C-j>"] = actions.file_split,
 							["<C-h>"] = fb_actions.goto_cwd,
 							["<C-c>"] = fb_actions.create,
 							["<C-r>"] = fb_actions.rename,
-							["<C-d>"] = fb_actions.remove,
+							["<C-q>"] = fb_actions.remove,
 							["<C-t>"] = actions.file_tab,
 							["<C-x>"] = function(prompt_bufnr)
 								fb_actions.toggle_hidden(prompt_bufnr)
@@ -95,7 +130,16 @@ return {
 					},
 				},
 				undo = {
-					side_by_side = true,
+					side_by_side = false,
+					use_delta = true,
+					layout_config = {
+						horizontal = {
+							width_padding = 0.1,
+							height_padding = 0.1,
+							preview_width = 0.9,
+							width = 0.9,
+						},
+					},
 				},
 			},
 		})

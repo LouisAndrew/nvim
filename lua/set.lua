@@ -11,12 +11,6 @@ opt.autoindent = true
 opt.wrap = false
 opt.laststatus = 3
 
---[[ vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.md" },
-	group = group,
-	command = "setlocal wrap",
-}) ]]
-
 opt.smartindent = true
 opt.foldcolumn = "1"
 
@@ -51,3 +45,22 @@ vim.keymap.set("n", "<leader>bd", function()
 		end
 	end, bufinfos)
 end, { silent = true, desc = "Wipeout all buffers not shown in a window" })
+
+local global_group = vim.api.nvim_create_augroup("Global Highlights", { clear = true })
+local md_group = vim.api.nvim_create_augroup("MD Highlights", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.md" },
+	group = md_group,
+	callback = function()
+		vim.cmd("syntax match MDDone /@DONE/")
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = global_group,
+	callback = function()
+		-- @TODO
+		vim.cmd("syntax match TODO /@TODO/")
+	end,
+})
