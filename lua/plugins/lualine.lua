@@ -1,4 +1,7 @@
-local minimal_fedu = require("colors")
+return {
+		"nvim-lualine/lualine.nvim",
+     config = function() 
+        local minimal_fedu = require("colors")
 local lualine = require("lualine")
 
 local colors = {
@@ -261,3 +264,6 @@ ins_right({
 })
 
 lualine.setup(config)
+
+     end
+	}
