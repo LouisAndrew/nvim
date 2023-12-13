@@ -1,3 +1,15 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+event = "VeryLazy" ,
+ dependencies = {
+"nvim-treesitter/playground",
+"nvim-treesitter/nvim-treesitter-textobjects",
+"danymat/neogen",
+"windwp/nvim-ts-autotag"
+  },
+  config = function()
+
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 require("nvim-treesitter.configs").setup({
@@ -119,3 +131,5 @@ vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previ
 require("neogen").setup()
 
 vim.keymap.set("n", "<leader>tc", require("neogen").generate)
+  end
+}

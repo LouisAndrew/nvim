@@ -1,3 +1,18 @@
+return {
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make"
+      },
+			"nvim-lua/plenary.nvim",
+			"debugloop/telescope-undo.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"fdschmidt93/telescope-egrepify.nvim",
+"AckslD/nvim-neoclip.lua"
+		},
+    config = function()
 local icons = require("nvim-nonicons")
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
@@ -5,6 +20,8 @@ local config = require("telescope.config")
 
 local actions = require("telescope.actions")
 local fb_actions = telescope.extensions.file_browser.actions
+
+require("neoclip").setup()
 
 local default_maps = {
 	i = {
@@ -89,7 +106,7 @@ telescope.setup({
 telescope.load_extension("file_browser")
 telescope.load_extension("fzf")
 telescope.load_extension("egrepify")
-require("telescope").load_extension("undo")
+telescope.load_extension("undo")
 
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 vim.keymap.set("n", "<leader>po", builtin.buffers, {})
@@ -99,3 +116,5 @@ vim.keymap.set("n", "<leader>ph", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})
 vim.keymap.set("n", "<leader>pu", telescope.extensions.undo.undo, {})
 vim.keymap.set("n", "<leader>pe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
+    end
+	}
