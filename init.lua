@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 
 require("remap")
@@ -20,8 +19,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 
-
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({{import = "plugins"}})
+require("lazy").setup({ { import = "plugins" } })
 -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
