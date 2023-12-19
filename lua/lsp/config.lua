@@ -177,9 +177,13 @@ saga.setup({
 			quit = "<leader>w",
 		},
 	},
+	lightbulb = {
+		enabled = false,
+		sign_priority = 1,
+	},
 	ui = {
 		border = "rounded",
-		code_action = " ",
+		code_action = " ",
 	},
 	symbol_in_winbar = {
 		enable = false,

@@ -1,3 +1,7 @@
+-- See https://miguelcrespo.co/posts/debugging-javascript-applications-with-neovim/ for more info
+-- JSON5 related
+table.insert(vim._so_trails, "/?.dylib")
+
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -48,7 +52,14 @@ return {
 	},
 	keys = {
 		{ "<leader>dt", "<cmd>:DapToggleBreakpoint<cr>" },
+		{ "<leader>dp", "<cmd>:DapToggleBreakpoint<cr>" },
+
+		{ "<leader>di", "<cmd>:DapStepInto<cr>" },
+		{ "<leader>do", "<cmd>:DapStepOut<cr>" },
+		{ "<leader>dj", "<cmd>:DapStepOver<cr>" },
+
 		{ "<leader>dc", "<cmd>:DapContinue<cr>" },
+		{ "<leader>dr", "<cmd>:DapContinue<cr>" },
 	},
 	config = function()
 		require("lsp.dap")

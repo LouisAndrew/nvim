@@ -5,5 +5,5 @@ local i = ls.insert_node
 
 return {
 	-- ls.snippet({ trig = "vts" }, {t('<script setup lang="ts">$0</script>') }),
-	s("imd", fmt('import {{ {} }} from "{}"', { i(1), i(2) })),
+	s("imd", fmt('import {{ {} }} from "{}"', { i(2), i(1) })),
 }

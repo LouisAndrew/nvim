@@ -24,5 +24,4 @@ require("remap")
 
 -- Make sure it works
 
-vim.keymap.set("i", "<C-h>", "<Right>", { noremap = true, silent = true })
 vim.keymap.set("n", "<M-k>", "<C-w>+")

@@ -1,3 +1,4 @@
+local js_based_languages = { "typescript", "javascript", "typescriptreact", "vue" }
 -- https://github.com/nikolovlazar/dotfiles/blob/main/.config/nvim/lua/plugins/dap.lua
 --
 --[[ -- setup adapters
@@ -28,79 +29,58 @@ dap.adapters[custom_adapter] = function(cb, config)
 end
 
 -- language config
-for _, language in ipairs({ "typescript", "javascript" }) do
+for _, language in ipairs(js_based_languages) do
 	dap.configurations[language] = {
 		{
-			name = "Launch",
 			type = "pwa-node",
 			request = "launch",
+			name = "Launch file",
 			program = "${file}",
-			rootPath = "${workspaceFolder}",
-			cwd = "${workspaceFolder}",
+			cwd = vim.fn.getcwd(),
 			sourceMaps = true,
-			skipFiles = { "<node_internals>/**" },
-			protocol = "inspector",
-			console = "integratedTerminal",
 		},
+		-- Debug nodejs processes (make sure to add --inspect when you run the process)
 		{
-			name = "Attach to node process",
 			type = "pwa-node",
 			request = "attach",
-			rootPath = "${workspaceFolder}",
+			name = "Attach",
 			processId = require("dap.utils").pick_process,
-		},
-		{
-			name = "Debug Main Process (Electron)",
-			type = "pwa-node",
-			request = "launch",
-			program = "${workspaceFolder}/node_modules/.bin/electron",
-			args = {
-				"${workspaceFolder}/dist/index.js",
-			},
-			outFiles = {
-				"${workspaceFolder}/dist/*.js",
-			},
-			resolveSourceMapLocations = {
-				"${workspaceFolder}/dist/**/*.js",
-				"${workspaceFolder}/dist/*.js",
-			},
-			rootPath = "${workspaceFolder}",
-			cwd = "${workspaceFolder}",
+			cwd = vim.fn.getcwd(),
 			sourceMaps = true,
-			skipFiles = { "<node_internals>/**" },
-			protocol = "inspector",
-			console = "integratedTerminal",
 		},
+		-- Debug web applications (client side)
 		{
-			name = "Compile & Debug Main Process (Electron)",
-			type = custom_adapter,
+			type = "pwa-chrome",
 			request = "launch",
-			preLaunchTask = "npm run build-ts",
-			program = "${workspaceFolder}/node_modules/.bin/electron",
-			args = {
-				"${workspaceFolder}/dist/index.js",
-			},
-			outFiles = {
-				"${workspaceFolder}/dist/*.js",
-			},
-			resolveSourceMapLocations = {
-				"${workspaceFolder}/dist/**/*.js",
-				"${workspaceFolder}/dist/*.js",
-			},
-			rootPath = "${workspaceFolder}",
-			cwd = "${workspaceFolder}",
-			sourceMaps = true,
-			skipFiles = { "<node_internals>/**" },
+			name = "Launch & Debug Chrome",
+			url = function()
+				local co = coroutine.running()
+				return coroutine.create(function()
+					vim.ui.input({
+						prompt = "Enter URL: ",
+						default = "http://localhost:3000",
+					}, function(url)
+						if url == nil or url == "" then
+							return
+						else
+							coroutine.resume(co, url)
+						end
+					end)
+				end)
+			end,
+			webRoot = vim.fn.getcwd(),
 			protocol = "inspector",
-			console = "integratedTerminal",
+			sourceMaps = true,
+			userDataDir = false,
 		},
+		-- Example
 		{
 			name = "Debug TS",
 			type = "pwa-node",
 			request = "launch",
 			program = "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
 			args = {
-				"${workspaceFolder}/src/others/p.ts",
+				"${workspaceFolder}/src/others/p.ts", -- <- @TODO set entry file
 			},
 			rootPath = "${workspaceFolder}",
 			cwd = "${workspaceFolder}",
@@ -123,3 +103,12 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
+
+require("dap.ext.vscode").load_launchjs(nil, {
+	["pwa-node"] = js_based_languages,
+	["node"] = js_based_languages,
+	["chrome"] = js_based_languages,
+	["pwa-chrome"] = js_based_languages,
+})
+
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "dapbreakpoint", linehl = "", numhl = "" })

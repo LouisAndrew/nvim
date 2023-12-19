@@ -8,7 +8,7 @@ return {
 		{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 		{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
 		-- { "<leader>ln", ":e ~/dev/documents/notes/" },
-		{ "<leader>ln", ":ObsidianNew " },
+		{ "<leader>ln", ":ObsidianNew notes/" },
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -95,8 +95,6 @@ return {
 				end
 				return out
 			end,
-			notes_subdir = "notes",
-			new_notes_location = "notes_subdir",
 		})
 	end,
 }
