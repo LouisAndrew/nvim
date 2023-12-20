@@ -284,6 +284,7 @@ Group.new("NvimTreeSpecialFile", colors.noir_2, nil)
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
 
+Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.mfed_bg_accent)
 Group.new("telescopeborder", colors.mfed_bg_accent)
 Group.new("cmpmenu", nil, nil)

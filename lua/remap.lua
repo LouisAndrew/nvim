@@ -72,8 +72,8 @@ local M = {
 		["."] = { "/" },
 
 		-- Window management
-		["<leader>w"] = { "<cmd>:q<cr>" },
-		["<leader>W"] = { "<cmd>:bd<cr>" },
+		["<leader>w"] = { "<cmd>:bd<cr>" },
+		["<leader>W"] = { "<cmd>:q<cr>" },
 		["<leader>tj"] = { "<cmd>:sp<cr>" },
 		["<leader>tl"] = { "<cmd>:vsp<cr>" },
 	},
