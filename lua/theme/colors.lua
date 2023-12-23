@@ -53,3 +53,6 @@ Color.new("add_fg", minimal_fedu.misc.add_fg)
 Color.new("yellow_fg", minimal_fedu.palette.yellow_fg)
 Color.new("yellow", minimal_fedu.palette.yellow)
 Color.new("red", minimal_fedu.palette.red)
+
+Color.new("indigo_fg", minimal_fedu.palette.indigo_fg)
+Color.new("indigo", minimal_fedu.palette.indigo)

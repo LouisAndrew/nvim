@@ -12,6 +12,18 @@ return {
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",
 		{
+			"ray-x/lsp_signature.nvim",
+			config = function(_)
+				require("lsp_signature").setup({
+					hint_enable = false,
+				})
+
+				vim.keymap.set({ "i" }, "<c-b>", function()
+					vim.lsp.buf.signature_help()
+				end, { silent = true, noremap = true, desc = "toggle signature" })
+			end,
+		},
+		{
 
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },

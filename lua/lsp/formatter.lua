@@ -15,6 +15,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		javascript = { { "eslint_d", "eslint" } },
 		typescript = { { "eslint_d", "eslint" } },
+		typescriptreact = { { "eslint_d", "eslint" } },
 		vue = { { "eslint_d", "eslint" } },
 		rust = { "rustfmt" },
 		go = { "gofmt" },

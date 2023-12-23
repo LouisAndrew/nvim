@@ -8,8 +8,7 @@ lsp_zero.on_attach(function(_, bufnr)
 		vim.lsp.buf.definition()
 	end, opts)
 
-	vim.keymap.set("n", "<leader>ii", "<cmd>Lspsaga hover_doc<CR>", opts) -- better highlights, weird padding on top and bottom
-	-- vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "<leader>ii", "<cmd>Lspsaga hover_doc<CR>", opts)
 
 	vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
 
@@ -81,12 +80,14 @@ lspconfig.graphql.setup({
 	filetypes = { "graphql", "javascript", "typescript", "typescriptreact" },
 })
 
-lspconfig.ltex.setup({
+-- Might be too much, especialy if only using for hover docs...
+--[[ lspconfig.ltex.setup({
 	on_attach = function() -- if client is not defined here you get 'Error catching ltex client'
 		local ok, ltex_extra = pcall(require, "ltex_extra") -- protected call in case ltex_extra is not installed
 		if not ok then
 			return
 		end
+
 		ltex_extra.setup({
 			load_langs = { "en-US" },
 			init_check = true, -- You need this one set to true
@@ -94,7 +95,7 @@ lspconfig.ltex.setup({
 			log_level = "none",
 		})
 	end,
-})
+}) ]]
 
 lspconfig.tailwindcss.setup({
 	root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "tailwind.config.ts"),

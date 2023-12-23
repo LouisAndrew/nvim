@@ -249,7 +249,12 @@ return {
 				for _, client in ipairs(clients) do
 					local filetypes = client.config.filetypes
 					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
-						client_names[#client_names + 1] = client.name
+						local n = client.name
+						if n == "emmet_language_server" then
+							n = "emmet"
+						end
+
+						client_names[#client_names + 1] = n
 					end
 				end
 

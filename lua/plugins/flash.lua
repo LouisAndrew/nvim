@@ -2,7 +2,13 @@ return {
 	"folke/flash.nvim",
 	event = "BufEnter",
 	config = function()
-		require("flash").setup({})
+		require("flash").setup({
+			modes = {
+				search = {
+					enabled = false,
+				},
+			},
+		})
 
 		local ok, flash = pcall(require, "flash")
 		if not ok then

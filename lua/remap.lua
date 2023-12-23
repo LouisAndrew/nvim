@@ -91,7 +91,7 @@ local M = {
 		["N"] = { "#", "last occurence" },
 		["<C-l>"] = { "%" },
 		["<C-k>"] = { ":call VSCodeNotify('editor.action.jumpToBracket') <CR>" },
-		["<leader>"] = { "<Plug>(nvim-surround-visual)" },
+		["s"] = { "<Plug>(nvim-surround-visual)" },
 	},
 
 	x = {

@@ -54,6 +54,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = md_group,
 	callback = function()
 		vim.cmd("syntax match MDDone /@DONE/")
+		vim.cmd("syntax match MDReminder /@REMINDER/")
+		vim.cmd("syntax match MDReminder /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
+		vim.cmd("syntax match MDDate /+\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 	end,
 })
 

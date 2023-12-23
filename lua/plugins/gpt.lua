@@ -3,12 +3,14 @@ return {
 	lazy = true,
 	keys = {
 		{
-			"<leader>cc",
+			"<leader>ac",
 			"<cmd>:ChatGPT<cr>",
+			mode = { "n", "v" },
 		},
 		{
-			"<leader>cr",
+			"<leader>ar",
 			":ChatGPTRun ",
+			mode = { "n", "v" },
 		},
 	},
 	config = function()

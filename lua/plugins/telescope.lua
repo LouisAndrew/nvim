@@ -27,6 +27,7 @@ return {
 			i = {
 				["<C-l>"] = actions.file_vsplit,
 				["<C-j>"] = actions.file_split,
+				["<C-u>"] = actions.preview_scrolling_up,
 			},
 		}
 
@@ -42,7 +43,7 @@ return {
 		telescope.setup({
 			defaults = {
 				prompt_prefix = "" .. icons.get("telescope") .. "  ",
-				selection_caret = " ❯ ",
+				selection_caret = " ",
 				entry_prefix = "   ",
 				layout_config = {
 					horizontal = {
