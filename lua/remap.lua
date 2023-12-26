@@ -14,6 +14,8 @@ local M = {
 		["<C-l>"] = { "<Right>", "move right" },
 		["<C-j>"] = { "<Down>", "move down" },
 		["<C-k>"] = { "<Up>", "move up" },
+		["<C-4>"] = { "<End>" },
+		["<C-6>"] = { "<cmd>:norm ^<CR>" },
 	},
 
 	n = {
@@ -76,6 +78,8 @@ local M = {
 		["<leader>W"] = { "<cmd>:q<cr>" },
 		["<leader>tj"] = { "<cmd>:sp<cr>" },
 		["<leader>tl"] = { "<cmd>:vsp<cr>" },
+
+		["Q"] = { "@qj", "Fast macro, always save on Q" },
 	},
 
 	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },
@@ -100,6 +104,7 @@ local M = {
 		-- Don't copy the replaced text after pasting in visual mode
 		-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
 		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+		["Q"] = { ":norm @q<CR>", "Fast macro, always save on Q" },
 	},
 }
 

@@ -153,7 +153,7 @@ Group.new("@macro", colors.mfed_cyan)
 Group.new("@constant.macro", colors.mfed_cyan)
 Group.new("@conditional", colors.mfed_cyan)
 Group.new("@lsp.type.macro", colors.mfed_cyan)
-Group.new("LspSignatureActiveParameter", colors.nb_background, colors.mfed_cyan)
+Group.new("LspSignatureActiveParameter", colors.mfed_cyan)
 
 -- Editor stuff
 Group.new("CursorLineNr", colors.white, nil)
@@ -282,6 +282,10 @@ Group.new("NvimTreeIndentMarker", colors.noir_6)
 Group.new("NvimTreeExecFile", colors.noir_6)
 Group.new("NvimTreeSpecialFile", colors.noir_2, nil)
 
+-- Hl Search
+Group.new("HlSearchLensNear", colors.yellow_fg, nil)
+Group.new("HlSearchLens", colors.noir_6, nil)
+
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
@@ -294,4 +298,6 @@ Group.new("telescopeborder", colors.mfed_bg_accent)
 Group.new("cmpmenu", nil, nil)
 Group.new("cmpborder", colors.mfed_bg_accent)
 Group.new("dapbreakpoint", colors.remove_fg)
+
 Group.new("paletteborder", colors.mfed_bg_accent)
+Group.new("wildermatch", colors.yellow_fg)

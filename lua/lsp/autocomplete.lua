@@ -15,7 +15,7 @@ local cmp_kinds = {
 	Value = "  ",
 	Enum = "  ",
 	Keyword = "  ",
-	Snippet = "  ",
+	Snippet = " ",
 	Color = "  ",
 	File = "  ",
 	Reference = "  ",
@@ -30,8 +30,13 @@ local cmp_kinds = {
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-require("luasnip.loaders.from_vscode").load()
 cmp.setup({
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
 	window = {
 		completion = {
 			col_offset = 1,
@@ -56,7 +61,7 @@ cmp.setup({
 		-- { name = "nvim_lsp" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		-- { name = "luasnip" },
+		{ name = "luasnip" },
 	},
 	formatting = {
 		format = function(entry, vim_item)
