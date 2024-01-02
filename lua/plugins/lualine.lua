@@ -18,20 +18,6 @@ return {
 			red = "#ff8185",
 		}
 
-		--[[ local conditions = {
-	buffer_not_empty = function()
-		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-	end,
-	hide_in_width = function()
-		return vim.fn.winwidth(0) > 80
-	end,
-	check_git_workspace = function()
-		local filepath = vim.fn.expand("%:p:h")
-		local gitdir = vim.fn.finddir(".git", filepath .. ";")
-		return gitdir and #gitdir > 0 and #gitdir < #filepath
-	end,
-} ]]
-
 		local config = {
 			options = {
 				-- Disable sections and component separators
@@ -86,7 +72,7 @@ return {
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
 						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.palette.blue_fg, bg = minimal_fedu.palette.blue },
+						color = { fg = minimal_fedu.noir_2, bg = minimal_fedu.bg_shade },
 						-- 1: Relative path
 						-- 2: Absolute path
 						-- 3: Absolute path, with tilde as the home directory
@@ -117,7 +103,7 @@ return {
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
 						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.palette.blue_fg, gui = "" },
+						color = { fg = minimal_fedu.noir_6, gui = "" },
 						-- 1: Relative path
 						-- 2: Absolute path
 						-- 3: Absolute path, with tilde as the home directory
@@ -229,6 +215,48 @@ return {
 				color_info = { fg = minimal_fedu.misc.add_fg },
 			},
 			padding = { left = 1 },
+		})
+
+		ins_right({
+			"buffers",
+			show_filename_only = true, -- Shows shortened relative path when set to false.
+			hide_filename_extension = false, -- Hide filename extension when set to true.
+			show_modified_status = true, -- Shows indicator when the buffer is modified.
+
+			mode = 0, -- 0: Shows buffer name
+			-- 1: Shows buffer index
+			-- 2: Shows buffer name + buffer index
+			-- 3: Shows buffer number
+			-- 4: Shows buffer name + buffer number
+
+			max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+			-- it can also be a function that returns
+			-- the value of `max_length` dynamically.
+			filetype_names = {
+				TelescopePrompt = "",
+			},
+
+			use_mode_colors = false,
+
+			buffers_color = {
+				-- Same values as the general color option can be used here.
+				active = {
+					fg = minimal_fedu.white,
+				}, -- Color for active buffer.
+				inactive = {
+					fg = minimal_fedu.dimmed_white,
+				}, -- Color for inactive buffer.
+			},
+
+			symbols = {
+				modified = " ", -- Text to show when the buffer is modified
+				alternate_file = " ", -- Text to show to identify the alternate file
+				directory = "", -- Text to show when the buffer is a directory
+			},
+
+			padding = {
+				right = 1,
+			},
 		})
 
 		ins_right({ "location", color = { fg = minimal_fedu.misc.add_fg } })
