@@ -1,3 +1,4 @@
+local minimal_fedu = require("colors")
 local Group = require("colorbuddy").Group
 local colors = require("colorbuddy").colors
 local styles = require("colorbuddy").styles
@@ -11,7 +12,7 @@ Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
 
 Group.new("Comment", colors.noir_7)
-Group.new("Constant", colors.primary)
+Group.new("Constant", colors.noir_3)
 Group.new("Character", colors.noir_5)
 Group.new("Identifier", colors.noir_0)
 Group.new("Statement", colors.noir_1)
@@ -19,7 +20,6 @@ Group.new("PreProc", colors.primary)
 Group.new("Type", colors.secondary)
 Group.new("Special", colors.noir_5)
 Group.new("Error", colors.primary)
-Group.new("Todo", colors.primary, colors.noir_8)
 Group.new("Function", colors.noir_0)
 Group.new("ColorColumn", nil, colors.noir_8)
 Group.new("Conceal", colors.noir_7)
@@ -66,7 +66,7 @@ Group.new("@character", colors.secondary)
 Group.new("@character.special", colors.noir_2)
 Group.new("@comment", colors.noir_7)
 Group.new("@conditional", colors.noir_2)
-Group.new("@constant", colors.secondary)
+Group.new("@constant", colors.noir_3)
 Group.new("@constant.builtin", colors.noir_2)
 Group.new("@constant.macro", colors.primary)
 Group.new("@constructor", colors.noir_1)
@@ -99,7 +99,7 @@ Group.new("@punctuation", colors.noir_2)
 Group.new("@punctuation.bracket", colors.noir_6)
 Group.new("@punctuation.delimiter", colors.noir_6)
 Group.new("@punctuation.special", colors.primary)
-Group.new("@repeat", colors.noir_2)
+Group.new("@repeat", colors.mfed_navy)
 Group.new("@storageclass", colors.noir_2)
 Group.new("@string", colors.primary)
 Group.new("@string.escape", colors.noir_2)
@@ -111,7 +111,6 @@ Group.new("@tag.delimiter", colors.noir_3)
 Group.new("@text.literal", colors.secondary)
 Group.new("@text.reference", colors.secondary)
 Group.new("@text.title", colors.noir_2)
-Group.new("@text.todo", colors.noir_2)
 Group.new("@text.underline", colors.noir_2)
 Group.new("@text.uri", colors.noir_2)
 Group.new("@type", colors.noir_2)
@@ -142,6 +141,7 @@ Group.new("DiffText", nil, colors.change)
 -- LSP
 Group.new("Identifier", colors.noir_0)
 Group.new("@keyword.return", colors.mfed_cyan)
+Group.new("@type.qualifier", colors.mfed_navy) -- rust `mut`
 Group.new("@include", colors.mfed_cyan)
 Group.new("@punctuation.delimiter", colors.mfed_dim)
 Group.new("@tag", colors.white)
@@ -202,7 +202,10 @@ Group.new("TerminalNormal", colors.secondary, colors.nb_background)
 -- Signs
 Group.new("diffAdded", colors.add_fg)
 Group.new("diffRemoved", colors.remove_fg)
-Group.new("diffChanged", colors.primary)
+Group.new("diffChanged", colors.change)
+-- gitsigns
+Group.new("GitSignsChange", colors.blue_fg)
+
 Group.new("diffFile", colors.primary)
 Group.new("diffNewFile", colors.primary)
 Group.new("diffLine", colors.primary)
@@ -219,7 +222,7 @@ Group.new("DiagnosticError", colors.diagnostic_error, nil)
 Group.new("DiagnosticWarn", colors.yellow_fg, nil)
 
 -- LuaLine
-Group.new("LuaLineDiffChange", colors.yellow_fg, nil)
+Group.new("LuaLineDiffChange", colors.blue_fg, nil)
 Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 
@@ -290,6 +293,8 @@ Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
+Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
+Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
@@ -301,3 +306,17 @@ Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.mfed_bg_accent)
 Group.new("wildermatch", colors.yellow_fg)
+
+local level = {
+	{ "Error", minimal_fedu.diagnostic_error },
+	{ "Warn", minimal_fedu.diagnostic_warning },
+	{ "Hint", minimal_fedu.diagnostic_hint },
+	{ "Info", minimal_fedu.diagnostic_info },
+}
+
+for _, l in ipairs(level) do
+	local hi_group = "DiagnosticUnderline" .. l[1]
+	local hi_color = l[2]
+
+	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
+end

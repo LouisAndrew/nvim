@@ -1,10 +1,9 @@
 return {
- "tjdevries/colorbuddy.nvim",
+	"tjdevries/colorbuddy.nvim",
 	lazy = false,
-  priority = 1000,
+	priority = 1000,
 	config = function()
--- vim.cmd.colorscheme("minimal_fedu")
-    require("theme").setup()
-
-			end,
+		-- vim.cmd.colorscheme("minimal_fedu")
+		require("theme").setup()
+	end,
 }

@@ -3,7 +3,6 @@ local saga = require("lspsaga")
 
 lsp_zero.on_attach(function(_, bufnr)
 	local opts = { buffer = bufnr, remap = false }
-
 	vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
 
 	vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
@@ -13,9 +12,8 @@ lsp_zero.on_attach(function(_, bufnr)
 	vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
 
 	vim.keymap.set("n", "<leader>if", "<cmd>Lspsaga finder<CR>", opts) -- show definition, references
-	vim.keymap.set("n", "<leader>is", function()
-		vim.lsp.buf.workspace_symbol()
-	end, opts)
+	vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
+	vim.keymap.set("n", "<leader>it", "<cmd>Lspsaga outline<CR>", opts)
 
 	vim.keymap.set("n", "<leader>id", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
 	vim.keymap.set("n", "<leader>iD", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
@@ -202,11 +200,20 @@ saga.setup({
 		enable = false,
 		show_file = false,
 	},
+	outline = {
+		layout = "float",
+		left_width = 0.5,
+		keys = {
+			toggle_or_jump = "<CR>",
+		},
+	},
 })
 
 vim.diagnostic.config({
 	severity_sort = true,
+	signs = false,
 })
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = {
 		prefix = " ",

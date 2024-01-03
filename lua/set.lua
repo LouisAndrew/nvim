@@ -12,7 +12,7 @@ opt.wrap = false
 opt.laststatus = 3
 
 opt.smartindent = true
-opt.foldcolumn = "1"
+opt.foldcolumn = "0"
 
 -- search
 opt.ignorecase = true
@@ -64,6 +64,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = global_group,
 	callback = function()
 		-- @TODO
-		vim.cmd("syntax match TODO /@TODO/")
+		vim.cmd("syntax match TODO /@TODO/ containedin=@comment,@comment.documentation")
 	end,
 })

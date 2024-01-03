@@ -1,4 +1,5 @@
 local null_ls = require("null-ls")
+local conform = require("conform")
 
 local file_exists = function(file)
 	local f = io.open(file, "r")
@@ -10,14 +11,14 @@ local file_exists = function(file)
 	end
 end
 
-require("conform").setup({
+conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		javascript = { { "eslint_d", "eslint" } },
 		typescript = { { "eslint_d", "eslint" } },
 		typescriptreact = { { "eslint_d", "eslint" } },
 		vue = { { "eslint_d", "eslint" } },
-		rust = { "rustfmt" },
+		rust = { "rust_analyzer" },
 		go = { "gofmt" },
 		-- markdown = { "deno_fmt" },
 		json = { { "deno_fmt", "jq" } },

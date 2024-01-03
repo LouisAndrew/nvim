@@ -1,5 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
+
 	config = function()
 		local minimal_fedu = require("colors")
 		local lualine = require("lualine")
@@ -65,14 +66,14 @@ return {
 			winbar = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = {},
-				lualine_x = {
+				lualine_x = {},
+				lualine_c = {
 					{
 						"filename",
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
 						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.noir_2, bg = minimal_fedu.bg_shade },
+						color = { fg = minimal_fedu.noir_2, bg = nil },
 						-- 1: Relative path
 						-- 2: Absolute path
 						-- 3: Absolute path, with tilde as the home directory
@@ -83,8 +84,12 @@ return {
 						symbols = {
 							modified = "[+]", -- Text to show when the file is modified.
 							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-							unnamed = "[No Name]", -- Text to show for unnamed buffers.
+							unnamed = "", -- Text to show for unnamed buffers.
 							newfile = "[New]", -- Text to show for newly created file before first write
+						},
+						padding = {
+							left = 3,
+							bottom = 1,
 						},
 					},
 				},
@@ -94,16 +99,16 @@ return {
 			inactive_winbar = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = {},
+				lualine_x = {},
 				lualine_z = {},
 				lualine_y = {},
-				lualine_x = {
+				lualine_c = {
 					{
 						"filename",
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
 						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.noir_6, gui = "" },
+						color = { fg = minimal_fedu.noir_6 },
 						-- 1: Relative path
 						-- 2: Absolute path
 						-- 3: Absolute path, with tilde as the home directory
@@ -114,8 +119,12 @@ return {
 						symbols = {
 							modified = "[+]", -- Text to show when the file is modified.
 							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-							unnamed = "[No Name]", -- Text to show for unnamed buffers.
+							unnamed = "", -- Text to show for unnamed buffers.
 							newfile = "[New]", -- Text to show for newly created file before first write
+						},
+						padding = {
+							left = 3,
+							bottom = 1,
 						},
 					},
 				},
@@ -208,7 +217,7 @@ return {
 		ins_left({
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
-			symbols = { error = " ", warn = " ", info = " ", hint = " " },
+			symbols = { error = " ", warn = " ", info = " ", hint = " " },
 			diagnostics_color = {
 				color_error = { fg = minimal_fedu.misc.remove_fg },
 				color_warn = { fg = "#ffad67" },
@@ -250,7 +259,7 @@ return {
 
 			symbols = {
 				modified = " ", -- Text to show when the buffer is modified
-				alternate_file = " ", -- Text to show to identify the alternate file
+				alternate_file = "", -- Text to show to identify the alternate file
 				directory = "", -- Text to show when the buffer is a directory
 			},
 

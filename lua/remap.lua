@@ -16,6 +16,8 @@ local M = {
 		["<C-k>"] = { "<Up>", "move up" },
 		["<C-4>"] = { "<End>" },
 		["<C-6>"] = { "<cmd>:norm ^<CR>" },
+		["<S-CR>"] = { "<cmd>:norm <S-o><Down><Tab><CR>" },
+		["<S-Tab>"] = { "<cmd>:norm <<^<CR>" },
 	},
 
 	n = {

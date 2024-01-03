@@ -3,8 +3,6 @@
 local M = {}
 
 function M.setup()
-	opts = opts or {}
-
 	vim.api.nvim_command("set termguicolors")
 	vim.api.nvim_command(string.format("set background=%s", "dark"))
 

@@ -6,12 +6,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
 		"sindrets/diffview.nvim",
-		{
-			"lewis6991/gitsigns.nvim",
-			config = function()
-				require("gitsigns").setup()
-			end,
-		},
 	},
 	config = function()
 		local neogit = require("neogit")

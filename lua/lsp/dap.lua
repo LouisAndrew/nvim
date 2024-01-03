@@ -1,18 +1,19 @@
 local js_based_languages = { "typescript", "javascript", "typescriptreact", "vue" }
 -- https://github.com/nikolovlazar/dotfiles/blob/main/.config/nvim/lua/plugins/dap.lua
---
---[[ -- setup adapters
+
+--[[  setup adapters
 require("dap-vscode-js").setup({
 	debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
 	debugger_cmd = { "js-debug-adapter" },
 	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
 })
  ]]
+
 local dap = require("dap")
 
 -- custom adapter for running tasks before starting debug
 local custom_adapter = "pwa-node-custom"
-dap.adapters[custom_adapter] = function(cb, config)
+dap.adapters[custom_adapter] = function(_, config)
 	if config.preLaunchTask then
 		local async = require("plenary.async")
 		local notify = require("notify").async
