@@ -11,18 +11,18 @@ local file_exists = function(file)
 	end
 end
 
+-- Use conform for formatting
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { { "eslint_d", "eslint" } },
-		typescript = { { "eslint_d", "eslint" } },
-		typescriptreact = { { "eslint_d", "eslint" } },
-		vue = { { "eslint_d", "eslint" } },
+		javascript = { "eslint_d" },
+		typescript = { "eslint_d" },
+		typescriptreact = { "eslint_d" },
+		vue = { "eslint_d" },
 		rust = { "rust_analyzer" },
 		go = { "gofmt" },
-		-- markdown = { "deno_fmt" },
-		json = { { "deno_fmt", "jq" } },
-		-- md = { "deno_fmt" },
+		-- markdown = { "markdownlint" },
+		json = { "jq" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
@@ -30,38 +30,33 @@ conform.setup({
 	},
 })
 
+local check_project_eslint = function(utils)
+	local file_types = { "", ".js", ".cjs", ".yaml", ".yml", ".json" }
+	for _, file_type in pairs(file_types) do
+		if utils.root_has_file("/.eslintrc" .. file_type) then
+			return true
+		end
+	end
+
+	return false
+end
+
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#formatting
+-- Ideally only for diagnostics and code actions
 null_ls.setup({
 	sources = {
 		-- ESLINT
 		null_ls.builtins.diagnostics.eslint_d.with({
-			condition = function(utils)
-				local file_types = { "", ".js", ".cjs", ".yaml", ".yml", ".json" }
-				for _, file_type in pairs(file_types) do
-					if utils.root_has_file("/.eslintrc" .. file_type) then
-						return true
-					end
-				end
-
-				return false
-			end,
+			condition = check_project_eslint,
 		}),
 
 		null_ls.builtins.code_actions.eslint_d.with({
-			condition = function(utils)
-				local file_types = { "", ".js", ".cjs", ".yaml", ".yml", ".json" }
-				for _, file_type in pairs(file_types) do
-					if utils.root_has_file("/.eslintrc" .. file_type) then
-						return true
-					end
-				end
-
-				return false
-			end,
+			condition = check_project_eslint,
 		}),
 
 		-- MARKDOWN
 		null_ls.builtins.diagnostics.markdownlint,
+
 		null_ls.builtins.formatting.deno_fmt.with({
 			filetypes = { "markdown" },
 		}),

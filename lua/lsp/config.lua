@@ -124,6 +124,7 @@ end
 vim.g.PREVENT_CLASH_TS_VUE = "true"
 
 lspconfig.volar.setup({
+	-- lowPowerMode = true,
 	root_dir = lspconfig.util.root_pattern("*.vue"),
 	filetypes = { "typescript", "javascript", "vue", "json" },
 	-- Takeover mode, prevent clashes
@@ -149,7 +150,9 @@ lspconfig.volar.setup({
 		end
 	end,
 	on_new_config = function(new_config, new_root_dir)
-		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+		local path = get_typescript_server_path(new_root_dir)
+		vim.g.TS_PATH = path
+		new_config.init_options.typescript.tsdk = path
 	end,
 })
 

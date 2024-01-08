@@ -16,7 +16,7 @@ local M = {
 		["<C-k>"] = { "<Up>", "move up" },
 		["<C-4>"] = { "<End>" },
 		["<C-6>"] = { "<cmd>:norm ^<CR>" },
-		["<S-CR>"] = { "<cmd>:norm <S-o><Down><Tab><CR>" },
+		["<S-CR>"] = { "<cmd>:norm <S-o><Tab><Up> <CR>" },
 		["<S-Tab>"] = { "<cmd>:norm <<^<CR>" },
 	},
 
@@ -29,6 +29,8 @@ local M = {
 		["<leader>q"] = { "<cmd>:wqa<cr>" },
 		["<leader>]"] = { "<cmd>:bnext<cr>" },
 		["<leader>["] = { "<cmd>:bprev<cr>" },
+		["<C-]>"] = { "<cmd>:bnext<cr>" },
+		["<C-[>"] = { "<cmd>:bprev<cr>" },
 		["<leader>bw"] = { "<cmd>:%bd|e#|bd#<cr>" },
 		-- Customs
 		["<S-j>"] = { "}", "skip bracket" },
@@ -53,8 +55,6 @@ local M = {
 		["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
 
 		-- line numbers
-		["<leader>n"] = { "<cmd> set nu! <CR>", "toggle line number" },
-		["<leader>rn"] = { "<cmd> set rnu! <CR>", "toggle relative number" },
 
 		["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },

@@ -11,6 +11,7 @@ local navy = "#678CB1"
 local background = "#131313"
 local bg_shade = "#0f0f0f"
 local foreground = "#ffbb80"
+local debug = "#ff0000"
 
 return {
 	-- noirbuddy related.
@@ -37,7 +38,7 @@ return {
 	white_accent = "#727272",
 	white_softened = "#5a5a5a",
 	dimmed_white = dimmed_white,
-	debug = "#ff0000",
+	debug = debug,
 	foreground = foreground,
 	background = background,
 	bg = background,

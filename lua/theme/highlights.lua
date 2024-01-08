@@ -72,7 +72,7 @@ Group.new("@constant.macro", colors.primary)
 Group.new("@constructor", colors.noir_1)
 Group.new("@debug", colors.noir_2)
 Group.new("@define", colors.noir_2)
-Group.new("@exception", colors.noir_2)
+Group.new("@exception", colors.mfed_cyan)
 Group.new("@field", colors.noir_2)
 Group.new("@float", colors.noir_2)
 Group.new("@function", colors.noir_0)
@@ -159,7 +159,7 @@ Group.new("LspSignatureActiveParameter", colors.mfed_cyan)
 Group.new("CursorLineNr", colors.white, nil)
 Group.new("TabLine", colors.dimmed_white, nil)
 Group.new("TabLineFill", nil, nil)
-Group.new("VertSplit", colors.mfed_dim, nil)
+Group.new("VertSplit", colors.mfed_bg_accent, nil)
 Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
 Group.new("Pmenu", colors.noir_2, colors.bg_shade)
@@ -320,3 +320,67 @@ for _, l in ipairs(level) do
 
 	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
 end
+
+--- @class HlConfig
+--- @field fg string
+--- @field bg (string|nil)
+
+--- @param group string
+--- @param M HlConfig
+--- @return nil
+local setHl = function(group, M)
+	local bg = M.bg or nil
+
+	Group.new(group, M.fg, bg)
+end
+
+local dapConfig = {
+	{ "DapUIScope", colors.mfed_navy },
+	{ "DapUIModifiedValue", colors.mfed_navy },
+	{ "DapUIDecoration", colors.mfed_navy },
+	{ "DapUIStoppedThread", colors.mfed_navy },
+	{ "DapUILineNumber", colors.mfed_navy },
+	{ "DapUIFloatBorder", colors.mfed_navy },
+	{ "DapUIBreakpointsPath", colors.mfed_navy },
+	{ "DapUIStepOver", colors.mfed_navy },
+	{ "DapUIStepInto", colors.mfed_navy },
+	{ "DapUIStepBack", colors.mfed_navy },
+	{ "DapUIStepOut", colors.mfed_navy },
+	{ "DapUIType", colors.mfed_cyan },
+	{ "DapUISource", colors.mfed_cyan },
+	{ "DapUILineNumber", colors.mfed_dim },
+	{ "DapUIBreakpointsInfo", colors.mfed_cyan },
+	{ "DapUIBreakpointsCurrentLine", colors.mfed_cyan },
+	{ "DapUIWatchesValue", colors.mfed_cyan },
+	{ "DapUIWatchesEmpty", colors.diagnostic_error },
+	{ "DapUIWatchesError", colors.diagnostic_error },
+}
+
+for _, l in ipairs(dapConfig) do
+	local group = l[1]
+	local fg = l[2]
+
+	setHl(group, { fg = fg })
+end
+
+--[[ 
+
+
+DapUIThread guifg=#A9FF68
+hi default DapUILineNumber guifg=#00f1f5
+
+
+
+DapUIFloatNormal NormalFloat
+
+
+
+DapUIBreakpointsDisabledLine guifg=#424242
+DapUIBreakpointsCurrentLine
+
+DapUIStop guifg=#F70067
+DapUIPlayPause guifg=#A9FF68
+DapUIRestart guifg=#A9FF68
+DapUIUnavailable guifg=#424242
+DapUIWinSelect ctermfg=Cyan guifg=#00f1f5 gui=bold
+DapUIEndofBuffer EndofBuffer ]]

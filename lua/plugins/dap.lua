@@ -60,6 +60,7 @@ return {
 
 		{ "<leader>dc", "<cmd>:DapContinue<cr>" },
 		{ "<leader>dr", "<cmd>:DapContinue<cr>" },
+		{ "<leader>dq", "<cmd>:DapTerminate<cr>" },
 	},
 	config = function()
 		require("lsp.dap")

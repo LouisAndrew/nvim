@@ -42,7 +42,11 @@ return {
 				reference_text = { hl_group = "ObsidianRefText" },
 				highlight_text = { hl_group = "ObsidianHighlightText" },
 				tags = { hl_group = "ObsidianTag" },
-				external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+				external_link_icon = {
+					--[[ char = "", ]]
+					char = "",
+					hl_group = "ObsidianExtLinkIcon",
+				},
 				checkboxes = {
 					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
 					[" "] = { char = "󰄱", hl_group = "ObsidianTodo" },

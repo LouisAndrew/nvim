@@ -6,7 +6,9 @@ return {
 		local lualine = require("lualine")
 
 		local colors = {
+			-- Enable bg if transparent not disabled.
 			bg = minimal_fedu.background,
+			-- bg = nil,
 			fg = "#ffbb80",
 			yellow = "#ffad67",
 			cyan = "#008080",

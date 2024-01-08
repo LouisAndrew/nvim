@@ -57,6 +57,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDReminder /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /+\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
+
+		vim.opt.conceallevel = 2
 	end,
 })
 
@@ -67,3 +69,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match TODO /@TODO/ containedin=@comment,@comment.documentation")
 	end,
 })
+
+vim.api.nvim_create_user_command("LspVolarEnableTS", function()
+	vim.g.PREVENT_CLASH_TS_VUE = "false"
+	vim.cmd("LspRestart")
+	vim.cmd("LspStart tsserver")
+end, {})
+
+vim.api.nvim_create_user_command("LspVolarDisableTS", function()
+	vim.g.PREVENT_CLASH_TS_VUE = "true"
+	vim.cmd("LspRestart")
+	-- vim.cmd("LspStop tsserver")
+end, {})
+
+vim.api.nvim_create_user_command("Test", 'echo "It works!"', {})
