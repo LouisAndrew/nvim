@@ -29,6 +29,12 @@ dap.adapters[custom_adapter] = function(_, config)
 	end
 end
 
+dap.adapters.lldb = {
+	type = "executable",
+	command = "/usr/bin/lldb", -- adjust as needed. `whereis lldb`
+	name = "lldb",
+}
+
 -- language config
 for _, language in ipairs(js_based_languages) do
 	dap.configurations[language] = {
@@ -92,6 +98,43 @@ for _, language in ipairs(js_based_languages) do
 		},
 	}
 end
+
+dap.configurations.rust = {
+	{
+		name = "hello-world",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			return vim.fn.getcwd() .. "/target/debug/hello-world"
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+	},
+	{
+		name = "hello-dap",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			local co = coroutine.running()
+			local pre = vim.fn.getcwd() .. "/target/debug/"
+
+			return coroutine.create(function()
+				vim.ui.input({
+					prompt = "Select Target",
+					default = "hello-dap",
+				}, function(target)
+					if target == nil or target == "" then
+						return
+					else
+						coroutine.resume(co, pre .. target)
+					end
+				end)
+			end)
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+	},
+}
 
 local dapui = require("dapui")
 dapui.setup()

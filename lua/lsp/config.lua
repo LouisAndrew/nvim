@@ -121,7 +121,7 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 
-local PREVENT_CLASH_TS_VUE = true
+vim.g.PREVENT_CLASH_TS_VUE = "true"
 
 lspconfig.volar.setup({
 	root_dir = lspconfig.util.root_pattern("*.vue"),
@@ -138,7 +138,7 @@ lspconfig.volar.setup({
 				break
 			end
 			-- stop tsserver if denols is already active -> laggy
-			if PREVENT_CLASH_TS_VUE and client.name == "tsserver" then
+			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
 				client.stop()
 			end
 		end
@@ -160,7 +160,7 @@ lspconfig.tsserver.setup({
 		local active_clients = vim.lsp.get_active_clients()
 		for _, client in pairs(active_clients) do
 			-- stop tsserver if denols is already active
-			if PREVENT_CLASH_TS_VUE and client.name == "volar" then
+			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "volar" then
 				ts_client.stop()
 			end
 		end

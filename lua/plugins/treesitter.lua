@@ -148,6 +148,7 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "<C-s>", ts_repeat_move.repeat_last_move_next)
 		vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previous)
 		vim.keymap.set("n", "<leader>ih", "<cmd>:TSHighlightCapturesUnderCursor<cr>")
+		vim.keymap.set("n", "<leader>ic", "<cmd>:TSCaptureUnderCursor<cr>")
 
 		require("neogen").setup()
 
