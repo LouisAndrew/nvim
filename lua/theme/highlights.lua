@@ -166,6 +166,7 @@ Group.new("Pmenu", colors.noir_2, colors.bg_shade)
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
 Group.new("FloatBorder", colors.mfed_bg_accent)
+Group.new("DiagnosticShowBorder", colors.mfed_bg_accent)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)

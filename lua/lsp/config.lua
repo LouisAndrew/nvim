@@ -1,5 +1,31 @@
 local lsp_zero = require("lsp-zero")
 local saga = require("lspsaga")
+local VT_PREFIX = ""
+
+vim.diagnostic.config({
+	virtual_text = {
+		source = true,
+		prefix = VT_PREFIX,
+	},
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "",
+	},
+	signs = false,
+})
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	virtual_text = {
+		prefix = VT_PREFIX,
+	},
+})
 
 lsp_zero.on_attach(function(_, bufnr)
 	local opts = { buffer = bufnr, remap = false }
@@ -209,16 +235,5 @@ saga.setup({
 		keys = {
 			toggle_or_jump = "<CR>",
 		},
-	},
-})
-
-vim.diagnostic.config({
-	severity_sort = true,
-	signs = false,
-})
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = {
-		prefix = " ",
 	},
 })
