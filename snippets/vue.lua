@@ -13,8 +13,17 @@ return {
 	s("tem", fmt("<template>{}</template>", { i(1) })),
 	s("pcs", fmt('<style scoped lang="postcss">{}</style>', { i(1) })),
 
-	s("imd", fmt('import {{ {} }} from "{}"', { i(2), i(1) })),
-	s("imp", fmt('import {} from "{}"', { i(2), i(1) })),
+	s(
+		"imd",
+		fmt('import {actual} from "{from}"', {
+			from = i(1),
+			actual = c(2, {
+				sn(nil, fmt("{{ {} }}", { i(1) })),
+				i(1),
+			}),
+		})
+	),
+
 	s("clg", fmt("console.log({})", { i(1) })),
 
 	-- Vues

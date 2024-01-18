@@ -1,4 +1,4 @@
-return {
+--[[ return {
 	"gelguy/wilder.nvim",
 	event = "CmdlineEnter",
 	config = function()
@@ -18,4 +18,7 @@ return {
 
 		wilder.setup({ modes = { ":", "/" } })
 	end,
-}
+} ]]
+
+-- Trying out noice atm.
+return {}

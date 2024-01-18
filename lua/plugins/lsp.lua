@@ -12,18 +12,6 @@ return {
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",
 		{
-			"ray-x/lsp_signature.nvim",
-			config = function(_)
-				require("lsp_signature").setup({
-					hint_enable = false,
-				})
-
-				vim.keymap.set({ "i" }, "<c-b>", function()
-					vim.lsp.buf.signature_help()
-				end, { silent = true, noremap = true, desc = "toggle signature" })
-			end,
-		},
-		{
 
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },
@@ -34,6 +22,8 @@ return {
 			event = "InsertEnter",
 			dependencies = {
 				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-nvim-lsp",
 				-- Snippets: TBD, not sure what to do here
 				"L3MON4D3/LuaSnip",

@@ -13,7 +13,7 @@ return {
 		"AckslD/nvim-neoclip.lua",
 	},
 	config = function()
-		local icons = require("nvim-nonicons")
+		-- local icons = require("nvim-nonicons")
 		local builtin = require("telescope.builtin")
 		local telescope = require("telescope")
 		local config = require("telescope.config")
@@ -42,8 +42,16 @@ return {
 
 		telescope.setup({
 			defaults = {
-				prompt_prefix = "" .. icons.get("telescope") .. "  ",
-				selection_caret = " ",
+				path_display = {
+					shorten = {
+						len = 1,
+						exclude = { -1, -2 },
+					},
+				},
+				dynamic_preview_title = true,
+				-- prompt_prefix = " " .. icons.get("telescope") .. "  ",
+				prompt_prefix = "   ",
+				selection_caret = " > ",
 				entry_prefix = "   ",
 				layout_config = {
 					horizontal = {
@@ -132,12 +140,12 @@ return {
 				},
 				undo = {
 					side_by_side = false,
-					use_delta = true,
+					use_delta = false,
 					layout_config = {
 						horizontal = {
 							width_padding = 0.1,
 							height_padding = 0.1,
-							preview_width = 0.9,
+							preview_width = 0.7,
 							width = 0.9,
 						},
 					},
@@ -149,10 +157,12 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("egrepify")
 		telescope.load_extension("undo")
+		telescope.load_extension("noice")
 
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 		vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
-		-- vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
+		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
+		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 		vim.keymap.set("n", "<leader>ps", telescope.extensions.egrepify.egrepify, {})
 		vim.keymap.set("n", "<leader>ph", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>py", telescope.extensions.neoclip.default, {})

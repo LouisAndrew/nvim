@@ -10,8 +10,11 @@ local navy = "#678CB1"
 
 local background = "#131313"
 local bg_shade = "#0f0f0f"
+local bg_accent_light = "#657578"
 local foreground = "#ffbb80"
 local debug = "#ff0000"
+local magenta = "#e879f9"
+local orange = "#fb923c"
 
 return {
 	-- noirbuddy related.
@@ -44,17 +47,22 @@ return {
 	bg = background,
 	bg_shade = bg_shade,
 	bg_accent = "#1f2425",
+	bg_accent_light = bg_accent_light,
 
 	palette = {
 		blue = "#172554",
 		blue_fg = "#93c5fd",
 		indigo = "#1e1b4b",
-		indigo_fg = "#a5b4fc",
+		-- indigo_fg = "#a5b4fc",
+		indigo_fg = "#818cf8",
 		yellow = yellow,
 		yellow_fg = yellow_fg,
 		red_softened = "#ff8185",
 		red = red,
 		red_fg = red_fg,
+		magenta = magenta,
+		magenta_bg = "#2A1C35",
+		orange = orange,
 	},
 	misc = {
 		bool = "#eeb684",

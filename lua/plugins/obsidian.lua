@@ -1,6 +1,7 @@
 return {
 	"epwalsh/obsidian.nvim",
 	lazy = true,
+	ft = "markdown",
 	keys = {
 		{ "<leader>lo", "<cmd>:ObsidianOpen<cr>" },
 		{ "<leader>lf", "<cmd>:ObsidianQuickSwitch<cr>" },
@@ -39,31 +40,26 @@ return {
 
 		require("obsidian").setup({
 			ui = {
+				bullets = { char = "-", hl_group = "ObsidianBullet" },
 				reference_text = { hl_group = "ObsidianRefText" },
 				highlight_text = { hl_group = "ObsidianHighlightText" },
 				tags = { hl_group = "ObsidianTag" },
 				external_link_icon = {
-					--[[ char = "", ]]
 					char = "",
 					hl_group = "ObsidianExtLinkIcon",
 				},
 				checkboxes = {
-					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
 					[" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
 					["x"] = { char = "", hl_group = "ObsidianDone" },
 					[">"] = { char = "", hl_group = "ObsidianRightArrow" },
 					["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-					-- Replace the above with this if you don't have a patched font:
-					-- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-					-- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-
-					-- You can also add more custom ones...
 				},
 				hl_groups = {
 					ObsidianRefText = { fg = colors.cyan },
 					ObsidianHighlightText = { fg = colors.debug },
 					ObsidianTag = { fg = colors.palette.blue_fg, bg = colors.palette.blue },
 					ObsidianExtLinkIcon = { fg = colors.navy },
+					ObsidianBullet = { bold = false, fg = colors.dimmed_white },
 				},
 			},
 			workspaces = {
@@ -95,11 +91,9 @@ return {
 			sort_by = "modified",
 			sort_reversed = true,
 			note_frontmatter_func = function(note)
-				-- This is equivalent to the default frontmatter function.
 				local now = os.date("%d.%m.%Y")
 				local out = { id = note.id, aliases = note.aliases, tags = note.tags, created = now, modified = now }
-				-- `note.metadata` contains any manually added fields in the frontmatter.
-				-- So here we just make sure those fields are kept in the frontmatter.
+
 				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
 					for k, v in pairs(note.metadata) do
 						out[k] = v
@@ -110,6 +104,17 @@ return {
 					end
 				end
 				return out
+			end,
+			note_id_func = function(title)
+				local suffix = ""
+				if title ~= nil then
+					suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+				else
+					for _ = 1, 4 do
+						suffix = suffix .. string.char(math.random(65, 90))
+					end
+				end
+				return suffix
 			end,
 		})
 	end,

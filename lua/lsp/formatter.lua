@@ -20,6 +20,7 @@ conform.setup({
 		typescriptreact = { "eslint_d" },
 		vue = { "eslint_d" },
 		rust = { "rust_analyzer" },
+		astro = { "eslint_d" },
 		go = { "gofmt" },
 		-- markdown = { "markdownlint" },
 		json = { "jq" },
@@ -40,6 +41,7 @@ local check_project_eslint = function(utils)
 
 	return false
 end
+local js_files = { "javascript", "typescript", "typescriptreact", "vue", "astro" }
 
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#formatting
 -- Ideally only for diagnostics and code actions
@@ -48,10 +50,12 @@ null_ls.setup({
 		-- ESLINT
 		null_ls.builtins.diagnostics.eslint_d.with({
 			condition = check_project_eslint,
+			filetypes = js_files,
 		}),
 
 		null_ls.builtins.code_actions.eslint_d.with({
 			condition = check_project_eslint,
+			filetypes = js_files,
 		}),
 
 		-- MARKDOWN

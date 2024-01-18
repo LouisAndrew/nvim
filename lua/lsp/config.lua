@@ -1,11 +1,13 @@
 local lsp_zero = require("lsp-zero")
 local saga = require("lspsaga")
-local VT_PREFIX = ""
+local VT_PREFIX = " "
+-- local VT_PREFIX = nil
 
 vim.diagnostic.config({
 	virtual_text = {
 		source = true,
 		prefix = VT_PREFIX,
+		spacing = 0,
 	},
 	update_in_insert = false,
 	underline = true,
@@ -22,13 +24,39 @@ vim.diagnostic.config({
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	underline = true,
 	virtual_text = {
 		prefix = VT_PREFIX,
+		spacing = 0,
 	},
 })
 
-lsp_zero.on_attach(function(_, bufnr)
+local function remove_duplicates(client)
+	local is_duplicated = false
+	local active_clients = vim.lsp.get_active_clients()
+
+	for _, act_client in pairs(active_clients) do
+		if client.name == act_client.name and client.id ~= act_client.id then
+			is_duplicated = true
+			break
+		end
+	end
+
+	-- Prevent more than one LSP instance attached (e.g. neogit)
+	if is_duplicated then
+		client.stop()
+	end
+
+	return is_duplicated
+end
+
+lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
+
+	if remove_duplicates(client) then
+		return
+	end
+
 	vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
 
 	vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
@@ -40,6 +68,12 @@ lsp_zero.on_attach(function(_, bufnr)
 	vim.keymap.set("n", "<leader>if", "<cmd>Lspsaga finder<CR>", opts) -- show definition, references
 	vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
 	vim.keymap.set("n", "<leader>it", "<cmd>Lspsaga outline<CR>", opts)
+	vim.keymap.set(
+		"i",
+		"<c-b>",
+		vim.lsp.buf.signature_help,
+		{ silent = true, noremap = true, desc = "toggle signature" }
+	)
 
 	vim.keymap.set("n", "<leader>id", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
 	vim.keymap.set("n", "<leader>iD", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
@@ -54,7 +88,7 @@ lsp_zero.on_attach(function(_, bufnr)
 		vim.lsp.util.show_line_diagnostics()
 	end, opts)
 
-	vim.keymap.set("i", "<C-u>", function()
+	vim.keymap.set("i", "<C-,>", function()
 		vim.lsp.buf.signature_help()
 	end, opts)
 
@@ -122,8 +156,13 @@ lspconfig.graphql.setup({
 }) ]]
 
 lspconfig.tailwindcss.setup({
-	root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "tailwind.config.ts"),
-	filetypes = { "html", "css", "scss", "typescriptreact", "svelte", "vue", "javascriptreact" },
+	root_dir = lspconfig.util.root_pattern(
+		"tailwind.config.js",
+		"tailwind.config.cjs",
+		"tailwind.config.ts",
+		"tailwind.config.mjs"
+	),
+	filetypes = { "html", "css", "scss", "typescriptreact", "svelte", "vue", "javascriptreact", "astro" },
 })
 
 local util = require("lspconfig.util")
@@ -148,31 +187,28 @@ local function get_typescript_server_path(root_dir)
 end
 
 vim.g.PREVENT_CLASH_TS_VUE = "true"
+-- vim.g.PREVENT_CLASH_TS_VUE = "false"
 
 lspconfig.volar.setup({
 	-- lowPowerMode = true,
 	root_dir = lspconfig.util.root_pattern("*.vue"),
-	filetypes = { "typescript", "javascript", "vue", "json" },
+	-- enable TS and JS for takeover mode
+	filetypes = { "typescript", "vue", "javascript" },
+	-- cmd = {
+	-- 	"node",
+	-- 	"--max-old-space-size=4096",
+	-- 	"/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js",
+	-- 	"--stdio",
+	-- },
 	-- Takeover mode, prevent clashes
-	on_attach = function(volar_client)
-		-- Prevent clashes with tsserver
-		local is_volar_attached = false
+	on_attach = function()
 		local active_clients = vim.lsp.get_active_clients()
-
+		-- Prevent clashes with tsserver
 		for _, client in pairs(active_clients) do
-			if client.name == "volar" and client.id ~= volar_client.id then
-				is_volar_attached = true
-				break
-			end
 			-- stop tsserver if denols is already active -> laggy
 			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
 				client.stop()
 			end
-		end
-
-		-- Prevent more than one volar instance attached (e.g. neogit)
-		if is_volar_attached then
-			volar_client.stop()
 		end
 	end,
 	on_new_config = function(new_config, new_root_dir)
@@ -230,8 +266,6 @@ saga.setup({
 		show_file = false,
 	},
 	outline = {
-		layout = "float",
-		left_width = 0.5,
 		keys = {
 			toggle_or_jump = "<CR>",
 		},

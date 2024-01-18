@@ -6,7 +6,7 @@ local styles = require("colorbuddy").styles
 Group.new("Normal", colors.noir_4, colors.nb_background)
 Group.new("Search", colors.noir_9, colors.noir_0)
 Group.new("IncSearch", colors.noir_9, colors.noir_0)
-Group.new("Visual", nil, colors.noir_8)
+Group.new("Visual", nil, colors.magenta_bg)
 Group.new("SignColumn", nil, colors.nb_background)
 Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
@@ -108,9 +108,9 @@ Group.new("@structure", colors.noir_2)
 Group.new("@tag", colors.noir_6)
 Group.new("@tag.attribute", colors.noir_4)
 Group.new("@tag.delimiter", colors.noir_3)
-Group.new("@text.literal", colors.secondary)
+Group.new("@text.literal", colors.noir_1)
 Group.new("@text.reference", colors.secondary)
-Group.new("@text.title", colors.noir_2)
+Group.new("@text.title", colors.noir_2, nil, styles.bold)
 Group.new("@text.underline", colors.noir_2)
 Group.new("@text.uri", colors.noir_2)
 Group.new("@type", colors.noir_2)
@@ -122,6 +122,12 @@ Group.new("@variable.builtin", colors.noir_2)
 Group.new("@lsp.type.function", colors.noir_0)
 Group.new("@lsp.type.macro", colors.primary)
 Group.new("@lsp.type.method", colors.noir_2)
+Group.new("@markup.heading", colors.noir_2, nil, styles.bold)
+Group.new("@markup.italic", nil, nil, styles.italic)
+Group.new("@markup.list", colors.noir_2, nil)
+Group.new("@markup.raw", colors.mfed_num, nil)
+Group.new("@keyword.conditional.ternary", colors.noir_6, nil)
+Group.new("@punctuation.special", colors.noir_3)
 
 -- Semantic Highlighting
 Group.new("DiagnosticError", colors.diagnostic_error)
@@ -153,6 +159,8 @@ Group.new("@macro", colors.mfed_cyan)
 Group.new("@constant.macro", colors.mfed_cyan)
 Group.new("@conditional", colors.mfed_cyan)
 Group.new("@lsp.type.macro", colors.mfed_cyan)
+Group.new("@text.strong", nil, nil, styles.bold)
+Group.new("@text.emphasis", nil, nil, styles.italic)
 Group.new("LspSignatureActiveParameter", colors.mfed_cyan)
 
 -- Editor stuff
@@ -163,6 +171,8 @@ Group.new("VertSplit", colors.mfed_bg_accent, nil)
 Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
 Group.new("Pmenu", colors.noir_2, colors.bg_shade)
+--[[ Group.new("NoicePopupmenu", nil, colors.debug)
+Group.new("Pmenu", colors.noir_2, colors.debug) ]]
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
 Group.new("FloatBorder", colors.mfed_bg_accent)
@@ -233,6 +243,7 @@ Group.new("TelescopeBorder", colors.noir_7)
 Group.new("TelescopeMatching", colors.noir_0)
 Group.new("TelescopePromptCounter", colors.noir_8, nil)
 Group.new("TelescopeResultsNormal", colors.mfed_dim)
+Group.new("TelescopeSelection", nil, colors.noir_8)
 
 -- Saga
 Group.new("TitleString", colors.secondary)
@@ -294,6 +305,7 @@ Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
+Group.new("Bold", nil, nil, styles.bold)
 Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
@@ -307,15 +319,25 @@ Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.mfed_bg_accent)
 Group.new("wildermatch", colors.yellow_fg)
+Group.new("IlluminatedWordText", nil, colors.noir_9, nil)
+Group.new("IlluminatedWordRead", nil, colors.noir_9, nil)
+Group.new("IlluminatedWordWrite", nil, colors.noir_9, nil)
 
-local level = {
+local level_hl_raw = {
 	{ "Error", minimal_fedu.diagnostic_error },
 	{ "Warn", minimal_fedu.diagnostic_warning },
 	{ "Hint", minimal_fedu.diagnostic_hint },
 	{ "Info", minimal_fedu.diagnostic_info },
 }
 
-for _, l in ipairs(level) do
+local level = {
+	{ "Error", colors.diagnostic_error },
+	{ "Warn", colors.diagnostic_warning },
+	{ "Hint", colors.diagnostic_hint },
+	{ "Info", colors.diagnostic_info },
+}
+
+for _, l in ipairs(level_hl_raw) do
 	local hi_group = "DiagnosticUnderline" .. l[1]
 	local hi_color = l[2]
 
@@ -329,13 +351,13 @@ end
 --- @param group string
 --- @param M HlConfig
 --- @return nil
-local setHl = function(group, M)
+local set_hl = function(group, M)
 	local bg = M.bg or nil
 
 	Group.new(group, M.fg, bg)
 end
 
-local dapConfig = {
+local dap_config = {
 	{ "DapUIScope", colors.mfed_navy },
 	{ "DapUIModifiedValue", colors.mfed_navy },
 	{ "DapUIDecoration", colors.mfed_navy },
@@ -357,31 +379,44 @@ local dapConfig = {
 	{ "DapUIWatchesError", colors.diagnostic_error },
 }
 
-for _, l in ipairs(dapConfig) do
-	local group = l[1]
-	local fg = l[2]
+local notify_config = {
+	{ "NotifyERRORBorder", colors.mfed_bg_accent },
+	{ "NotifyWARNBorder", colors.mfed_bg_accent },
+	{ "NotifyINFOBorder", colors.mfed_bg_accent },
+	{ "NotifyDEBUGBorder", colors.mfed_bg_accent },
+	{ "NotifyTRACEBorder", colors.mfed_bg_accent },
+}
 
-	setHl(group, { fg = fg })
+local noice_config = {
+	{ "NoiceCmdlinePopupBorder", colors.mfed_bg_accent:light() },
+	{ "NoiceCmdlineIcon", colors.mfed_bg_accent_light },
+	{ "NoiceCmdlineIconSearch", colors.mfed_bg_accent_light },
+	{ "NoiceCmdlinePopupBorderSearch", colors.mfed_bg_accent },
+	{ "NoiceCursor", nil, colors.blue },
+	{ "NoiceVirtualText", colors.yellow_fg },
+}
+
+for _, lvl in ipairs(level) do
+	for _, group in ipairs({ "Icon", "Title" }) do
+		local hl_group = "Notify" .. lvl[1] .. group
+		local hl_color = lvl[2]
+
+		notify_config[#notify_config + 1] = { hl_group, hl_color }
+	end
 end
 
---[[ 
+local hl_group_configs = {
+	dap_config,
+	notify_config,
+	noice_config,
+}
 
+for _, config in ipairs(hl_group_configs) do
+	for _, l in ipairs(config) do
+		local group = l[1]
+		local fg = l[2]
+		local bg = l[3] or nil
 
-DapUIThread guifg=#A9FF68
-hi default DapUILineNumber guifg=#00f1f5
-
-
-
-DapUIFloatNormal NormalFloat
-
-
-
-DapUIBreakpointsDisabledLine guifg=#424242
-DapUIBreakpointsCurrentLine
-
-DapUIStop guifg=#F70067
-DapUIPlayPause guifg=#A9FF68
-DapUIRestart guifg=#A9FF68
-DapUIUnavailable guifg=#424242
-DapUIWinSelect ctermfg=Cyan guifg=#00f1f5 gui=bold
-DapUIEndofBuffer EndofBuffer ]]
+		set_hl(group, { fg = fg, bg = bg })
+	end
+end

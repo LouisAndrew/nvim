@@ -1,4 +1,4 @@
-local js_based_languages = { "typescript", "javascript", "typescriptreact", "vue" }
+local js_based_languages = { "typescript", "javascript", "typescriptreact", "vue", "astro" }
 -- https://github.com/nikolovlazar/dotfiles/blob/main/.config/nvim/lua/plugins/dap.lua
 
 --[[  setup adapters

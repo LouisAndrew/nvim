@@ -1,6 +1,5 @@
 return {
 	"nvim-lualine/lualine.nvim",
-
 	config = function()
 		local minimal_fedu = require("colors")
 		local lualine = require("lualine")
@@ -23,13 +22,9 @@ return {
 
 		local config = {
 			options = {
-				-- Disable sections and component separators
-				component_separators = "",
 				section_separators = "",
+				component_separators = "",
 				theme = {
-					-- We are going to use lualine_c an lualine_x as left and
-					-- right section. Both are highlighted by c theme .  So we
-					-- are just setting default looks o statusline
 					normal = { c = { fg = colors.fg, bg = colors.bg } },
 					inactive = { c = { fg = colors.fg, bg = colors.bg } },
 				},
@@ -67,7 +62,16 @@ return {
 			},
 			winbar = {
 				lualine_a = {},
-				lualine_b = {},
+				lualine_b = {
+					{
+						"filetype",
+						colored = false,
+						icon_only = true,
+						icon = { align = "right" },
+						padding = { left = 3 },
+						color = { fg = minimal_fedu.noir_2, bg = nil },
+					},
+				},
 				lualine_x = {},
 				lualine_c = {
 					{
@@ -84,14 +88,10 @@ return {
 						shorting_target = 60, -- Shortens path to leave 40 spaces in the window
 						-- for other components. (terrible name, any suggestions?)
 						symbols = {
-							modified = "[+]", -- Text to show when the file is modified.
-							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+							modified = "", -- Text to show when the file is modified.
+							readonly = "", -- Text to show when the file is non-modifiable or readonly.
 							unnamed = "", -- Text to show for unnamed buffers.
 							newfile = "[New]", -- Text to show for newly created file before first write
-						},
-						padding = {
-							left = 3,
-							bottom = 1,
 						},
 					},
 				},
@@ -100,10 +100,16 @@ return {
 			},
 			inactive_winbar = {
 				lualine_a = {},
-				lualine_b = {},
-				lualine_x = {},
-				lualine_z = {},
-				lualine_y = {},
+				lualine_b = {
+					{
+						"filetype",
+						colored = false,
+						icon_only = true,
+						icon = { align = "right" },
+						padding = { left = 3 },
+						color = { fg = minimal_fedu.noir_6, bg = nil },
+					},
+				},
 				lualine_c = {
 					{
 						"filename",
@@ -119,17 +125,16 @@ return {
 						shorting_target = 60, -- Shortens path to leave 40 spaces in the window
 						-- for other components. (terrible name, any suggestions?)
 						symbols = {
-							modified = "[+]", -- Text to show when the file is modified.
-							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+							modified = "", -- Text to show when the file is modified.
+							readonly = "", -- Text to show when the file is non-modifiable or readonly.
 							unnamed = "", -- Text to show for unnamed buffers.
 							newfile = "[New]", -- Text to show for newly created file before first write
 						},
-						padding = {
-							left = 3,
-							bottom = 1,
-						},
 					},
 				},
+				lualine_x = {},
+				lualine_z = {},
+				lualine_y = {},
 			},
 		}
 
@@ -162,10 +167,10 @@ return {
 				local mode_color = {
 					n = minimal_fedu.misc.remove_fg,
 					i = minimal_fedu.misc.add_fg,
-					v = minimal_fedu.palette.blue_fg,
-					[""] = minimal_fedu.palette.blue_fg,
-					V = minimal_fedu.palette.blue_fg,
-					c = minimal_fedu.palette.yellow_fg,
+					v = minimal_fedu.palette.magenta,
+					[""] = minimal_fedu.palette.magenta,
+					V = minimal_fedu.palette.magenta,
+					c = minimal_fedu.palette.orange,
 					no = colors.red,
 					s = colors.orange,
 					S = colors.orange,
@@ -190,9 +195,12 @@ return {
 					c = minimal_fedu.palette.yellow,
 				}
 
-				local bg = mode_color_bg[vim.fn.mode()]
+				-- local bg = mode_color_bg[vim.fn.mode()]
 
-				return { fg = mode_color[vim.fn.mode()], bg = bg }
+				return {
+					fg = mode_color[vim.fn.mode()],
+					-- bg = bg,
+				}
 			end,
 			padding = { right = 1, left = 1 },
 		})
@@ -200,7 +208,10 @@ return {
 		ins_left({
 			"branch",
 			icon = "",
-			color = { fg = minimal_fedu.palette.indigo_fg, bg = minimal_fedu.palette.indigo },
+			color = {
+				fg = minimal_fedu.palette.indigo_fg,
+				-- bg = minimal_fedu.palette.indigo,
+			},
 			padding = { right = 1, left = 1 },
 		})
 
@@ -224,9 +235,26 @@ return {
 				color_error = { fg = minimal_fedu.misc.remove_fg },
 				color_warn = { fg = "#ffad67" },
 				color_info = { fg = minimal_fedu.misc.add_fg },
+				color_hint = { fg = minimal_fedu.noir_9 },
 			},
 			padding = { left = 1 },
 		})
+
+		ins_left({
+			function()
+				local mode = require("noice").api.statusline.mode.get()
+				if mode:find("^recording") then
+					return mode
+				end
+
+				return ""
+			end,
+			cond = require("noice").api.statusline.mode.has,
+			color = { fg = minimal_fedu.dimmed_white },
+			padding = { left = 2 },
+		})
+
+		ins_right({ "location", color = { fg = minimal_fedu.dimmed_white } })
 
 		ins_right({
 			"buffers",
@@ -234,11 +262,7 @@ return {
 			hide_filename_extension = false, -- Hide filename extension when set to true.
 			show_modified_status = true, -- Shows indicator when the buffer is modified.
 
-			mode = 0, -- 0: Shows buffer name
-			-- 1: Shows buffer index
-			-- 2: Shows buffer name + buffer index
-			-- 3: Shows buffer number
-			-- 4: Shows buffer name + buffer number
+			mode = 0,
 
 			max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
 			-- it can also be a function that returns
@@ -260,7 +284,8 @@ return {
 			},
 
 			symbols = {
-				modified = " ", -- Text to show when the buffer is modified
+				modified = "  ", -- Text to show when the buffer is modified
+				-- modified = "*",
 				alternate_file = "", -- Text to show to identify the alternate file
 				directory = "", -- Text to show when the buffer is a directory
 			},
@@ -270,12 +295,10 @@ return {
 			},
 		})
 
-		ins_right({ "location", color = { fg = minimal_fedu.misc.add_fg } })
-
 		ins_right({
 			-- Lsp server name .
 			function()
-				local msg = "  no lsp"
+				local msg = "|    no lsp"
 				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 				local clients = vim.lsp.get_active_clients()
 
@@ -298,12 +321,15 @@ return {
 				end
 
 				if #client_names > 0 then
-					return "  " .. table.concat(client_names, ", ")
+					return "|    " .. table.concat(client_names, ", ")
 				else
 					return msg
 				end
 			end,
-			color = { fg = minimal_fedu.misc.add_fg, bg = minimal_fedu.misc.add },
+			color = {
+				fg = minimal_fedu.cyan,
+				-- bg = minimal_fedu.misc.add
+			},
 			padding = { left = 1, right = 1 },
 		})
 

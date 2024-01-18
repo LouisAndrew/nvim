@@ -29,10 +29,10 @@ cmp.setup({
 			name = "nvim_lsp",
 			entry_filter = function(entry)
 				-- Disable snippets from LSP
-				return cmp.lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+				local kind = entry:get_kind()
+				return cmp.lsp.CompletionItemKind.Snippet ~= kind and cmp.lsp.CompletionItemKind.Text ~= kind
 			end,
 		},
-		-- { name = "nvim_lsp" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
@@ -59,4 +59,25 @@ cmp.setup({
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 	}),
+})
+
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
+	}),
+})
+
+cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
 })

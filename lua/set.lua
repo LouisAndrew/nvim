@@ -1,6 +1,8 @@
 local opt = vim.opt
+-- opt.nu = true
 opt.nu = true
-opt.relativenumber = true
+opt.rnu = true
+opt.numberwidth = 3
 
 -- indents etc
 opt.tabstop = 2
@@ -55,10 +57,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.cmd("syntax match MDDone /@DONE/")
 		vim.cmd("syntax match MDReminder /@REMINDER/")
-		vim.cmd("syntax match MDReminder /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
-		vim.cmd("syntax match MDDate /+\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
+		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
+		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/")
+		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
-		vim.opt.conceallevel = 2
+		local o = vim.opt
+		o.conceallevel = 2
+		o.tabstop = 2
+		o.softtabstop = 2
+		o.shiftwidth = 2
 	end,
 })
 

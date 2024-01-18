@@ -7,18 +7,12 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"danymat/neogen",
 		"windwp/nvim-ts-autotag",
+		{ "echasnovski/mini.ai", version = "*" },
+		{ "echasnovski/mini.pairs", branch = "stable" },
+		{ "RRethy/vim-illuminate" },
 	},
 	config = function()
 		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			underline = true,
-			virtual_text = {
-				spacing = 5,
-				severity_limit = "Warning",
-			},
-			update_in_insert = true,
-		})
 
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
@@ -56,7 +50,7 @@ return {
 				enable = true,
 			},
 
-			textobjects = {
+			--[[ textobjects = {
 				select = {
 					enable = true,
 
@@ -142,7 +136,7 @@ return {
 						["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
 					},
 				},
-			},
+			}, ]]
 		})
 
 		vim.keymap.set({ "n", "x", "o" }, "<C-s>", ts_repeat_move.repeat_last_move_next)
@@ -150,8 +144,41 @@ return {
 		vim.keymap.set("n", "<leader>ih", "<cmd>:TSHighlightCapturesUnderCursor<cr>")
 		vim.keymap.set("n", "<leader>ic", "<cmd>:TSCaptureUnderCursor<cr>")
 
-		require("neogen").setup()
+		local ai = require("mini.ai")
+		ai.setup({
+			n_lines = 500,
+			mappings = {
+				goto_left = "[",
+				goto_right = "]",
+				-- `val=` -> goes to `local ->ai`
+			},
+			custom_textobjects = {
+				o = ai.gen_spec.treesitter({
+					a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+					i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+				}, {}),
 
+				["="] = ai.gen_spec.treesitter({
+					a = { "@assignment.lhs" },
+					i = { "@assignment.rhs" },
+				}),
+
+				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+				t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+
+				x = ai.gen_spec.treesitter({
+					a = { "@call.outer" },
+					i = { "@call.inner" },
+				}, {}),
+			},
+			search_method = "cover_or_next",
+		})
+
+		require("neogen").setup()
 		vim.keymap.set("n", "<leader>tc", require("neogen").generate)
+
+		local pairs = require("mini.pairs")
+		pairs.setup()
 	end,
 }
