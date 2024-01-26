@@ -6,7 +6,9 @@ local styles = require("colorbuddy").styles
 Group.new("Normal", colors.noir_4, colors.nb_background)
 Group.new("Search", colors.noir_9, colors.noir_0)
 Group.new("IncSearch", colors.noir_9, colors.noir_0)
-Group.new("Visual", nil, colors.magenta_bg)
+Group.new("CurSearch", colors.nb_background, colors.yellow_fg)
+
+Group.new("Visual", nil, colors.magenta)
 Group.new("SignColumn", nil, colors.nb_background)
 Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
@@ -23,7 +25,9 @@ Group.new("Error", colors.primary)
 Group.new("Function", colors.noir_0)
 Group.new("ColorColumn", nil, colors.noir_8)
 Group.new("Conceal", colors.noir_7)
-Group.new("Cursor", nil)
+Group.new("Cursor", nil, colors.noir_8)
+Group.new("TermCursor", colors.debug, colors.debug)
+Group.new("lCursor", nil, colors.mfed_bg_accent)
 Group.new("CursorColumn", nil, colors.noir_9)
 Group.new("CursorLine", nil, colors.noir_9)
 Group.new("CursorLineNr", colors.noir_6, colors.noir_9)
@@ -34,8 +38,8 @@ Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
-Group.new("Folded", colors.noir_5, colors.noir_8)
-Group.new("FoldColumn", colors.noir_5, colors.noir_8)
+Group.new("Folded", colors.debug, colors.mfed_bg_accent)
+Group.new("FoldColumn", nil, nil)
 Group.new("MatchParen", nil, colors.noir_7)
 Group.new("MoreMsg", nil, colors.noir_6)
 Group.new("NonText", colors.noir_8, nil)
@@ -58,6 +62,7 @@ Group.new("WildMenu", colors.noir_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.noir_0)
 Group.new("NormalFloat", colors.noir_4)
+-- Group.new("NormalFloat", colors.noir_4, colors.bg_shade)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -175,8 +180,8 @@ Group.new("Pmenu", colors.noir_2, colors.bg_shade)
 Group.new("Pmenu", colors.noir_2, colors.debug) ]]
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.mfed_bg_accent)
-Group.new("DiagnosticShowBorder", colors.mfed_bg_accent)
+Group.new("FloatBorder", colors.bg_shade)
+Group.new("DiagnosticShowBorder", colors.bg_shade)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)
@@ -249,8 +254,7 @@ Group.new("TelescopeSelection", nil, colors.noir_8)
 Group.new("TitleString", colors.secondary)
 Group.new("TitleSymbol", colors.primary)
 Group.new("TitleIcon", colors.primary)
-Group.new("SagaBorder", colors.noir_7)
-Group.new("SagaNormal", nil, colors.nb_background)
+Group.new("SagaNormal", nil, colors.bg_shade)
 Group.new("SagaExpand", colors.remove_fg)
 Group.new("SagaCollapse", colors.remove_fg)
 Group.new("SagaBeacon", colors.primary)
@@ -297,10 +301,6 @@ Group.new("NvimTreeIndentMarker", colors.noir_6)
 Group.new("NvimTreeExecFile", colors.noir_6)
 Group.new("NvimTreeSpecialFile", colors.noir_2, nil)
 
--- Hl Search
-Group.new("HlSearchLensNear", colors.yellow_fg, nil)
-Group.new("HlSearchLens", colors.noir_6, nil)
-
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
@@ -311,10 +311,10 @@ Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
-Group.new("sagaborder", colors.mfed_bg_accent)
+Group.new("sagaborder", colors.bg_shade)
 Group.new("telescopeborder", colors.mfed_bg_accent)
-Group.new("cmpmenu", nil, nil)
-Group.new("cmpborder", colors.mfed_bg_accent)
+Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("cmpborder", colors.bg_shade, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.mfed_bg_accent)
@@ -322,6 +322,9 @@ Group.new("wildermatch", colors.yellow_fg)
 Group.new("IlluminatedWordText", nil, colors.noir_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.noir_9, nil)
 Group.new("IlluminatedWordWrite", nil, colors.noir_9, nil)
+
+Group.new("InclineNormal", colors.noir_2, nil)
+Group.new("InclineNormalNC", colors.noir_6, nil)
 
 local level_hl_raw = {
 	{ "Error", minimal_fedu.diagnostic_error },
@@ -388,12 +391,22 @@ local notify_config = {
 }
 
 local noice_config = {
+	-- { "NoiceCmdline", colors.white, colors.mfed_navy:dark():dark():dark() },
+	-- { "NoiceCmdline", colors.white, colors.indigo_fg:dark():dark() },
+	{ "NoiceCmdlinePrompt", colors.nb_background },
+	{ "NoiceCmdlinePopupBorder", colors.bg_shade:dark(), colors.nb_background },
+	{ "NoiceCmdlinePopup", nil, colors.bg_shade:dark() },
 	{ "NoiceCmdlinePopupBorder", colors.mfed_bg_accent:light() },
-	{ "NoiceCmdlineIcon", colors.mfed_bg_accent_light },
-	{ "NoiceCmdlineIconSearch", colors.mfed_bg_accent_light },
-	{ "NoiceCmdlinePopupBorderSearch", colors.mfed_bg_accent },
-	{ "NoiceCursor", nil, colors.blue },
+	{ "NoiceCmdlineIcon", colors.noir_3 },
+	{ "NoiceCmdlineIconSearch", colors.nb_background },
+	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
+	{ "NoiceCursor", colors.noir_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
+	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
+	{ "NoicePopup", nil, colors.bg_shade },
+	{ "NoiceCmdlineSearch", colors.nb_background, colors.primary },
+	{ "NoiceCmdline", colors.white, colors.indigo:light() },
+	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark() },
 }
 
 for _, lvl in ipairs(level) do

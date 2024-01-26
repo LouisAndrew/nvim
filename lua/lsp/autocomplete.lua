@@ -1,26 +1,30 @@
 local cmp = require("cmp")
 
+local special_chars = require("theme.special_chars")
 local cmp_kinds = require("theme.icons")
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
 	snippet = {
-		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+			require("luasnip").lsp_expand(args.body)
 		end,
 	},
 	window = {
 		completion = {
 			col_offset = 1,
 			side_padding = 1,
-			border = "rounded",
+			border = special_chars.create_special_border({
+				side_padding = true,
+			}),
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
-		documentation = { -- no border; native-style scrollbar
-			border = "rounded",
-			side_padding = 1,
+		documentation = {
+			border = special_chars.create_special_border({
+				side_padding = true,
+				padding_char = special_chars.full_block,
+			}),
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 	},
@@ -39,7 +43,6 @@ cmp.setup({
 	},
 	formatting = {
 		format = function(entry, vim_item)
-			-- This concatonates the icons with the name of the item kind
 			vim_item.kind = string.format("      %s %s", cmp_kinds[vim_item.kind], vim_item.kind:lower())
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
@@ -64,7 +67,9 @@ cmp.setup({
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		{
+			name = "path",
+		},
 	}, {
 		{
 			name = "cmdline",

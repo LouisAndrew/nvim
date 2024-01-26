@@ -14,7 +14,6 @@ opt.wrap = false
 opt.laststatus = 3
 
 opt.smartindent = true
-opt.foldcolumn = "0"
 
 -- search
 opt.ignorecase = true

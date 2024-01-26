@@ -13,7 +13,7 @@ local bg_shade = "#0f0f0f"
 local bg_accent_light = "#657578"
 local foreground = "#ffbb80"
 local debug = "#ff0000"
-local magenta = "#e879f9"
+local magenta = "#291A2E"
 local orange = "#fb923c"
 
 return {
@@ -23,6 +23,12 @@ return {
 	diagnostic_warning = yellow_fg,
 	diagnostic_info = "#81c5ff",
 	diagnostic_hint = dimmed_white,
+	diag = {
+		Error = red_fg,
+		Warn = yellow_fg,
+		ErrorInactive = "#b75c5f",
+		WarnInactive = "#b19676",
+	},
 
 	noir_0 = white,
 	noir_1 = "#f5f5f5",
@@ -61,7 +67,7 @@ return {
 		red = red,
 		red_fg = red_fg,
 		magenta = magenta,
-		magenta_bg = "#2A1C35",
+		magenta_fg = "#e879f9",
 		orange = orange,
 	},
 	misc = {
