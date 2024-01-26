@@ -1,3 +1,6 @@
+local special_chars = require("theme.special_chars")
+local keymaps = require("lsp.keymaps")
+
 local lsp_zero = require("lsp-zero")
 local saga = require("lspsaga")
 local VT_PREFIX = " "
@@ -12,14 +15,6 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	underline = true,
 	severity_sort = true,
-	float = {
-		focusable = false,
-		style = "minimal",
-		border = "rounded",
-		source = true,
-		header = "",
-		prefix = "",
-	},
 	signs = false,
 })
 
@@ -51,65 +46,17 @@ local function remove_duplicates(client)
 end
 
 lsp_zero.on_attach(function(client, bufnr)
-	local opts = { buffer = bufnr, remap = false }
-
 	if remove_duplicates(client) then
 		return
 	end
-
-	vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
-
-	vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
-	-- Try to get out from
-	vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
-
-	vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-
-	vim.keymap.set("n", "<leader>if", "<cmd>Lspsaga finder<CR>", opts) -- show definition, references
-	vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
-	vim.keymap.set("n", "<leader>it", "<cmd>Lspsaga outline<CR>", opts)
-	vim.keymap.set(
-		"i",
-		"<c-b>",
-		vim.lsp.buf.signature_help,
-		{ silent = true, noremap = true, desc = "toggle signature" }
-	)
-
-	vim.keymap.set("n", "<leader>id", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-	vim.keymap.set("n", "<leader>iD", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
-	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-	vim.keymap.set("n", "<leader>ia", "<cmd>Lspsaga code_action<CR>", opts)
-	vim.keymap.set("n", "<leader>ir", "<cmd>Telescope lsp_references<cr>", opts)
-	vim.keymap.set("n", "<leader>in", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-	vim.keymap.set("n", "<leader>rr", "<cmd>LspRestart<CR>", opts) -- smart rename
-
-	vim.keymap.set("n", "<leader>ie", function()
-		vim.lsp.util.show_line_diagnostics()
-	end, opts)
-
-	vim.keymap.set("i", "<C-,>", function()
-		vim.lsp.buf.signature_help()
-	end, opts)
-
-	vim.keymap.set("n", "<leader>iw", function()
-		vim.lsp.buf.format({ async = true })
-	end, opts)
-
-	-- make sure it works
-	vim.keymap.set("i", "<C-h>", "<Left>", opts)
+	keymaps.generate_keymaps(bufnr)
 end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		-- RUST
 		"rust_analyzer",
-
-		-- LUA
 		"lua_ls",
-
-		-- WEBDEV
 		"tailwindcss",
 		"cssls",
 		"html",
@@ -190,9 +137,7 @@ vim.g.PREVENT_CLASH_TS_VUE = "true"
 -- vim.g.PREVENT_CLASH_TS_VUE = "false"
 
 lspconfig.volar.setup({
-	-- lowPowerMode = true,
 	root_dir = lspconfig.util.root_pattern("*.vue"),
-	-- enable TS and JS for takeover mode
 	filetypes = { "typescript", "vue", "javascript" },
 	-- cmd = {
 	-- 	"node",
@@ -200,12 +145,9 @@ lspconfig.volar.setup({
 	-- 	"/Users/louis.andrew/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/out/index.js",
 	-- 	"--stdio",
 	-- },
-	-- Takeover mode, prevent clashes
-	on_attach = function()
+	on_attach = function(clientnr, bufnr)
 		local active_clients = vim.lsp.get_active_clients()
-		-- Prevent clashes with tsserver
 		for _, client in pairs(active_clients) do
-			-- stop tsserver if denols is already active -> laggy
 			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
 				client.stop()
 			end
@@ -221,10 +163,8 @@ lspconfig.volar.setup({
 lspconfig.tsserver.setup({
 	filetypes = { "typescript", "vue", "typescriptreact", "javascript" },
 	on_attach = function(ts_client)
-		-- Set volar as prio when vue files exists
 		local active_clients = vim.lsp.get_active_clients()
 		for _, client in pairs(active_clients) do
-			-- stop tsserver if denols is already active
 			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "volar" then
 				ts_client.stop()
 			end
@@ -258,7 +198,9 @@ saga.setup({
 		sign_priority = 1,
 	},
 	ui = {
-		border = "rounded",
+		border = special_chars.create_special_border({
+			side_padding = true,
+		}),
 		code_action = " ",
 	},
 	symbol_in_winbar = {
@@ -269,5 +211,9 @@ saga.setup({
 		keys = {
 			toggle_or_jump = "<CR>",
 		},
+	},
+	diagnostic = {
+		border_follow = false,
+		text_hl_follow = false,
 	},
 })

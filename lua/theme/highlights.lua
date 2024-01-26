@@ -6,7 +6,8 @@ local styles = require("colorbuddy").styles
 Group.new("Normal", colors.noir_4, colors.nb_background)
 Group.new("Search", colors.noir_9, colors.noir_0)
 Group.new("IncSearch", colors.noir_9, colors.noir_0)
-Group.new("Visual", nil, colors.magenta_bg)
+Group.new("Visual", nil, colors.magenta_bg:dark())
+-- Group.new("Visual", nil, colors.noir_8)
 Group.new("SignColumn", nil, colors.nb_background)
 Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
@@ -34,8 +35,8 @@ Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
-Group.new("Folded", colors.noir_5, colors.noir_8)
-Group.new("FoldColumn", colors.noir_5, colors.noir_8)
+Group.new("Folded", colors.debug, colors.mfed_bg_accent)
+Group.new("FoldColumn", nil, nil)
 Group.new("MatchParen", nil, colors.noir_7)
 Group.new("MoreMsg", nil, colors.noir_6)
 Group.new("NonText", colors.noir_8, nil)
@@ -58,6 +59,7 @@ Group.new("WildMenu", colors.noir_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.noir_0)
 Group.new("NormalFloat", colors.noir_4)
+-- Group.new("NormalFloat", colors.noir_4, colors.bg_shade)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -175,8 +177,8 @@ Group.new("Pmenu", colors.noir_2, colors.bg_shade)
 Group.new("Pmenu", colors.noir_2, colors.debug) ]]
 Group.new("PmenuSel", colors.white, colors.mfed_bg_accent)
 Group.new("StatusLine", colors.mfed_bg_accent, colors.mfed_bg_accent)
-Group.new("FloatBorder", colors.mfed_bg_accent)
-Group.new("DiagnosticShowBorder", colors.mfed_bg_accent)
+Group.new("FloatBorder", colors.bg_shade)
+Group.new("DiagnosticShowBorder", colors.bg_shade)
 
 -- code action
 Group.new("ActionPreviewTitle", colors.primary)
@@ -249,8 +251,7 @@ Group.new("TelescopeSelection", nil, colors.noir_8)
 Group.new("TitleString", colors.secondary)
 Group.new("TitleSymbol", colors.primary)
 Group.new("TitleIcon", colors.primary)
-Group.new("SagaBorder", colors.noir_7)
-Group.new("SagaNormal", nil, colors.nb_background)
+Group.new("SagaNormal", nil, colors.bg_shade)
 Group.new("SagaExpand", colors.remove_fg)
 Group.new("SagaCollapse", colors.remove_fg)
 Group.new("SagaBeacon", colors.primary)
@@ -297,10 +298,6 @@ Group.new("NvimTreeIndentMarker", colors.noir_6)
 Group.new("NvimTreeExecFile", colors.noir_6)
 Group.new("NvimTreeSpecialFile", colors.noir_2, nil)
 
--- Hl Search
-Group.new("HlSearchLensNear", colors.yellow_fg, nil)
-Group.new("HlSearchLens", colors.noir_6, nil)
-
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
 Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
@@ -311,10 +308,10 @@ Group.new("@text.todo", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
-Group.new("sagaborder", colors.mfed_bg_accent)
+Group.new("sagaborder", colors.bg_shade)
 Group.new("telescopeborder", colors.mfed_bg_accent)
-Group.new("cmpmenu", nil, nil)
-Group.new("cmpborder", colors.mfed_bg_accent)
+Group.new("cmpmenu", nil, colors.bg_shade)
+Group.new("cmpborder", colors.bg_shade)
 Group.new("dapbreakpoint", colors.remove_fg)
 
 Group.new("paletteborder", colors.mfed_bg_accent)
@@ -322,6 +319,9 @@ Group.new("wildermatch", colors.yellow_fg)
 Group.new("IlluminatedWordText", nil, colors.noir_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.noir_9, nil)
 Group.new("IlluminatedWordWrite", nil, colors.noir_9, nil)
+
+Group.new("InclineNormal", colors.noir_2, nil)
+Group.new("InclineNormalNC", colors.noir_6, nil)
 
 local level_hl_raw = {
 	{ "Error", minimal_fedu.diagnostic_error },
@@ -394,6 +394,7 @@ local noice_config = {
 	{ "NoiceCmdlinePopupBorderSearch", colors.mfed_bg_accent },
 	{ "NoiceCursor", nil, colors.blue },
 	{ "NoiceVirtualText", colors.yellow_fg },
+	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
 }
 
 for _, lvl in ipairs(level) do

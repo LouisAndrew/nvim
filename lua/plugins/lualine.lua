@@ -3,6 +3,7 @@ return {
 	config = function()
 		local minimal_fedu = require("colors")
 		local lualine = require("lualine")
+		local icons = require("theme.icons")
 
 		local colors = {
 			-- Enable bg if transparent not disabled.
@@ -25,8 +26,8 @@ return {
 				section_separators = "",
 				component_separators = "",
 				theme = {
-					normal = { c = { fg = colors.fg, bg = colors.bg } },
-					inactive = { c = { fg = colors.fg, bg = colors.bg } },
+					normal = { c = { bg = colors.bg } },
+					inactive = { c = { bg = colors.bg } },
 				},
 			},
 			disabled_filetypes = {
@@ -62,76 +63,16 @@ return {
 			},
 			winbar = {
 				lualine_a = {},
-				lualine_b = {
-					{
-						"filetype",
-						colored = false,
-						icon_only = true,
-						icon = { align = "right" },
-						padding = { left = 3 },
-						color = { fg = minimal_fedu.noir_2, bg = nil },
-					},
-				},
+				lualine_b = {},
 				lualine_x = {},
-				lualine_c = {
-					{
-						"filename",
-						file_status = true, -- Displays file status (readonly status, modified status)
-						newfile_status = false, -- Display new file status (new file means no write after created)
-						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.noir_2, bg = nil },
-						-- 1: Relative path
-						-- 2: Absolute path
-						-- 3: Absolute path, with tilde as the home directory
-						-- 4: Filename and parent dir, with tilde as the home directory
-
-						shorting_target = 60, -- Shortens path to leave 40 spaces in the window
-						-- for other components. (terrible name, any suggestions?)
-						symbols = {
-							modified = "", -- Text to show when the file is modified.
-							readonly = "", -- Text to show when the file is non-modifiable or readonly.
-							unnamed = "", -- Text to show for unnamed buffers.
-							newfile = "[New]", -- Text to show for newly created file before first write
-						},
-					},
-				},
+				lualine_c = {},
 				lualine_y = {},
 				lualine_z = {},
 			},
 			inactive_winbar = {
 				lualine_a = {},
-				lualine_b = {
-					{
-						"filetype",
-						colored = false,
-						icon_only = true,
-						icon = { align = "right" },
-						padding = { left = 3 },
-						color = { fg = minimal_fedu.noir_6, bg = nil },
-					},
-				},
-				lualine_c = {
-					{
-						"filename",
-						file_status = true, -- Displays file status (readonly status, modified status)
-						newfile_status = false, -- Display new file status (new file means no write after created)
-						path = 4, -- 0: Just the filename
-						color = { fg = minimal_fedu.noir_6 },
-						-- 1: Relative path
-						-- 2: Absolute path
-						-- 3: Absolute path, with tilde as the home directory
-						-- 4: Filename and parent dir, with tilde as the home directory
-
-						shorting_target = 60, -- Shortens path to leave 40 spaces in the window
-						-- for other components. (terrible name, any suggestions?)
-						symbols = {
-							modified = "", -- Text to show when the file is modified.
-							readonly = "", -- Text to show when the file is non-modifiable or readonly.
-							unnamed = "", -- Text to show for unnamed buffers.
-							newfile = "[New]", -- Text to show for newly created file before first write
-						},
-					},
-				},
+				lualine_b = {},
+				lualine_c = {},
 				lualine_x = {},
 				lualine_z = {},
 				lualine_y = {},
@@ -148,6 +89,46 @@ return {
 			table.insert(config.sections.lualine_x, component)
 		end
 
+		local function ins_winbar_left(component, inactive_color)
+			table.insert(config.winbar.lualine_c, component)
+
+			local inactive_component = vim.deepcopy(component)
+			inactive_component.color = inactive_color
+			table.insert(config.inactive_winbar.lualine_c, inactive_component)
+		end
+
+		local function ins_winbar_right(component, inactive_color)
+			table.insert(config.winbar.lualine_x, component)
+
+			local inactive_component = vim.deepcopy(component)
+			inactive_component.color = inactive_color
+			table.insert(config.inactive_winbar.lualine_x, inactive_component)
+		end
+
+		-- ins_winbar_right({
+		-- 	"filetype",
+		-- 	colored = false,
+		-- 	icon_only = true,
+		-- 	icon = { align = "right" },
+		-- 	padding = { right = 1 },
+		-- 	color = { fg = minimal_fedu.noir_2, bg = nil },
+		-- }, { fg = minimal_fedu.noir_6, bg = nil })
+		--
+		-- ins_winbar_right({
+		-- 	"filename",
+		-- 	file_status = true, -- Displays file status (readonly status, modified status)
+		-- 	newfile_status = false, -- Display new file status (new file means no write after created)
+		-- 	path = 4, -- 0: Just the filename
+		-- 	color = { fg = minimal_fedu.noir_2 },
+		-- 	shorting_target = 60,
+		-- 	symbols = {
+		-- 		modified = "",
+		-- 		readonly = "",
+		-- 		unnamed = "",
+		-- 		newfile = "[New]",
+		-- 	},
+		-- }, { fg = minimal_fedu.noir_6 })
+		--
 		ins_left({
 			-- mode component
 			function()
@@ -230,7 +211,12 @@ return {
 		ins_left({
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
-			symbols = { error = " ", warn = " ", info = " ", hint = " " },
+			symbols = {
+				error = icons.Error,
+				warn = icons.Warn,
+				info = icons.Info,
+				hint = icons.Hint,
+			},
 			diagnostics_color = {
 				color_error = { fg = minimal_fedu.misc.remove_fg },
 				color_warn = { fg = "#ffad67" },
@@ -284,7 +270,7 @@ return {
 			},
 
 			symbols = {
-				modified = "  ", -- Text to show when the buffer is modified
+				modified = icons.Modified, -- Text to show when the buffer is modified
 				-- modified = "*",
 				alternate_file = "", -- Text to show to identify the alternate file
 				directory = "", -- Text to show when the buffer is a directory

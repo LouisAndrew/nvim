@@ -61,7 +61,7 @@ return {
 		red = red,
 		red_fg = red_fg,
 		magenta = magenta,
-		magenta_bg = "#2A1C35",
+		magenta_bg = "#3f3249",
 		orange = orange,
 	},
 	misc = {
