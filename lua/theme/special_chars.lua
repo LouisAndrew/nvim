@@ -38,4 +38,8 @@ return {
 	half_right_block = half_right_block,
 	full_block = full_block,
 	create_special_border = create_special_border,
+	quadrant_lower_right = "▗",
+	quadrant_lower_left = "▖",
+	quadrant_upper_right = "▝",
+	quadrant_upper_left = "▘",
 }

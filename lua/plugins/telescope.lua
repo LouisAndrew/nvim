@@ -1,3 +1,4 @@
+local special_chars = require("theme.special_chars")
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.4",
@@ -13,7 +14,6 @@ return {
 		"AckslD/nvim-neoclip.lua",
 	},
 	config = function()
-		-- local icons = require("nvim-nonicons")
 		local builtin = require("telescope.builtin")
 		local telescope = require("telescope")
 		local config = require("telescope.config")
@@ -42,6 +42,38 @@ return {
 
 		telescope.setup({
 			defaults = {
+				borderchars = {
+					preview = {
+						special_chars.half_lower_block,
+						special_chars.full_block,
+						special_chars.half_upper_block,
+						special_chars.full_block,
+						special_chars.half_lower_block,
+						special_chars.half_lower_block,
+						special_chars.half_upper_block,
+						special_chars.half_upper_block,
+					},
+					prompt = {
+						special_chars.half_lower_block,
+						special_chars.half_left_block,
+						special_chars.half_upper_block,
+						special_chars.half_right_block,
+						special_chars.quadrant_lower_right,
+						special_chars.quadrant_lower_left,
+						special_chars.quadrant_upper_left,
+						special_chars.quadrant_upper_right,
+					},
+					results = {
+						special_chars.half_lower_block,
+						special_chars.half_left_block,
+						special_chars.half_upper_block,
+						special_chars.half_right_block,
+						special_chars.quadrant_lower_right,
+						special_chars.quadrant_lower_left,
+						special_chars.quadrant_upper_left,
+						special_chars.quadrant_upper_right,
+					},
+				},
 				path_display = {
 					shorten = {
 						len = 1,
@@ -49,14 +81,13 @@ return {
 					},
 				},
 				dynamic_preview_title = true,
-				-- prompt_prefix = " " .. icons.get("telescope") .. "  ",
 				prompt_prefix = "   ",
 				selection_caret = " > ",
 				entry_prefix = "   ",
 				layout_config = {
 					horizontal = {
-						width_padding = 0.1,
-						height_padding = 0.1,
+						width_padding = 1,
+						height_padding = 1,
 						preview_width = 0.6,
 						width = 0.9,
 					},

@@ -243,11 +243,13 @@ Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 
 -- Telescope
-Group.new("TelescopeTitle", colors.noir_2)
-Group.new("TelescopeBorder", colors.noir_7)
+Group.new("TelescopeTitle", colors.white, colors.bg_shade, styles.bold)
+Group.new("TelescopeNormal", nil, colors.bg_shade)
+-- Group.new("TelescopeBorder", colors.noir_7)
+Group.new("TelescopeBorder", colors.bg_shade, colors.nb_background)
 Group.new("TelescopeMatching", colors.noir_0)
 Group.new("TelescopePromptCounter", colors.noir_8, nil)
-Group.new("TelescopeResultsNormal", colors.mfed_dim)
+Group.new("TelescopeResultsNormal", colors.noir_4, colors.bg_shade)
 Group.new("TelescopeSelection", nil, colors.noir_8)
 
 -- Saga
@@ -312,7 +314,6 @@ Group.new("Debug", colors.debug, colors.debug)
 
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.bg_shade)
-Group.new("telescopeborder", colors.mfed_bg_accent)
 Group.new("cmpmenu", nil, colors.bg_shade)
 Group.new("cmpborder", colors.bg_shade, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
@@ -350,14 +351,16 @@ end
 --- @class HlConfig
 --- @field fg string
 --- @field bg (string|nil)
+--- @field guicg? string
 
 --- @param group string
 --- @param M HlConfig
 --- @return nil
 local set_hl = function(group, M)
 	local bg = M.bg or nil
+	local guicg = M.guicg or nil
 
-	Group.new(group, M.fg, bg)
+	Group.new(group, M.fg, bg, guicg)
 end
 
 local dap_config = {
@@ -397,8 +400,8 @@ local noice_config = {
 	{ "NoiceCmdlinePopupBorder", colors.bg_shade:dark(), colors.nb_background },
 	{ "NoiceCmdlinePopup", nil, colors.bg_shade:dark() },
 	{ "NoiceCmdlinePopupBorder", colors.mfed_bg_accent:light() },
-	{ "NoiceCmdlineIcon", colors.noir_3 },
-	{ "NoiceCmdlineIconSearch", colors.nb_background },
+	{ "NoiceCmdlineIcon", colors.noir_3, nil, styles.bold },
+	{ "NoiceCmdlineIconSearch", colors.nb_background, nil, styles.bold },
 	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.noir_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
@@ -429,7 +432,8 @@ for _, config in ipairs(hl_group_configs) do
 		local group = l[1]
 		local fg = l[2]
 		local bg = l[3] or nil
+		local guicg = l[4] or nil
 
-		set_hl(group, { fg = fg, bg = bg })
+		set_hl(group, { fg = fg, bg = bg, guicg = guicg })
 	end
 end

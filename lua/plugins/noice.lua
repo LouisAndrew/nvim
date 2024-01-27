@@ -102,14 +102,6 @@ return {
 						row = 2,
 					},
 				},
-				signature = {
-					border = {
-						style = special_chars.create_special_border(),
-					},
-					position = {
-						row = -2,
-					},
-				},
 			},
 			notify = {
 				enabled = false,
@@ -122,6 +114,11 @@ return {
 				},
 				signature = {
 					enabled = true,
+					opts = {
+						position = {
+							-- row = -2,
+						},
+					},
 				},
 				progress = {
 					enabled = false,
