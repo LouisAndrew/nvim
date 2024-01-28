@@ -3,7 +3,7 @@ return {
 	event = "BufEnter",
 	config = function()
 		require("flash").setup({
-			labels = "asdhjkl",
+			labels = "ashjkl",
 			modes = {
 				search = {
 					enabled = false,

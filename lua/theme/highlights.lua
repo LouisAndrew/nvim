@@ -6,9 +6,9 @@ local styles = require("colorbuddy").styles
 Group.new("Normal", colors.noir_4, colors.nb_background)
 Group.new("Search", colors.noir_9, colors.noir_0)
 Group.new("IncSearch", colors.noir_9, colors.noir_0)
-Group.new("CurSearch", colors.nb_background, colors.yellow_fg)
+Group.new("CurSearch", colors.noir_9, colors.yellow_fg)
 
-Group.new("Visual", nil, colors.magenta)
+Group.new("Visual", nil, colors.visual)
 Group.new("SignColumn", nil, colors.nb_background)
 Group.new("LineNr", colors.noir_7, nil)
 Group.new("EndOfBuffer", colors.noir_8, nil)
@@ -277,6 +277,7 @@ Group.new("CmpItemKindText", colors.mfed_navy)
 
 Group.new("CmpItemKindFunction", colors.mfed_bool)
 Group.new("CmpItemKindMethod", colors.mfed_bool)
+Group.new("CmpItemKindClass", colors.remove_fg)
 
 Group.new("CmpItemKindKeyword", colors.mfed_cyan)
 Group.new("CmpItemKindProperty", colors.mfed_cyan)
@@ -394,7 +395,6 @@ local notify_config = {
 }
 
 local noice_config = {
-	-- { "NoiceCmdline", colors.white, colors.mfed_navy:dark():dark():dark() },
 	-- { "NoiceCmdline", colors.white, colors.indigo_fg:dark():dark() },
 	{ "NoiceCmdlinePrompt", colors.nb_background },
 	{ "NoiceCmdlinePopupBorder", colors.bg_shade:dark(), colors.nb_background },
@@ -408,8 +408,40 @@ local noice_config = {
 	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoicePopup", nil, colors.bg_shade },
 	{ "NoiceCmdlineSearch", colors.nb_background, colors.primary },
-	{ "NoiceCmdline", colors.white, colors.indigo:light() },
+	-- { "NoiceCmdlineSearch", colors.nb_background, colors.indigo_fg:dark() },
+	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark() },
+}
+
+local navic_config = {
+	{ "NavicIconsFile", colors.noir_2 },
+	{ "NavicIconsModule", colors.noir_2 },
+	{ "NavicIconsNamespace", colors.noir_2 },
+	{ "NavicIconsPackage", colors.noir_2 },
+	{ "NavicIconsClass", colors.remove_fg },
+	{ "NavicIconsMethod", colors.mfed_bool },
+	{ "NavicIconsProperty", colors.mfed_cyan },
+	{ "NavicIconsField", colors.mfed_cyan },
+	{ "NavicIconsConstructor", colors.noir_2 },
+	{ "NavicIconsEnum", colors.add_fg },
+	{ "NavicIconsInterface", colors.mfed_navy },
+	{ "NavicIconsFunction", colors.mfed_bool },
+	{ "NavicIconsVariable", colors.mfed_navy },
+	{ "NavicIconsConstant", colors.noir_2 },
+	{ "NavicIconsString", colors.add_fg },
+	{ "NavicIconsNumber", colors.noir_2 },
+	{ "NavicIconsBoolean", colors.noir_2 },
+	{ "NavicIconsArray", colors.noir_2 },
+	{ "NavicIconsObject", colors.noir_2 },
+	{ "NavicIconsKey", colors.add_fg },
+	{ "NavicIconsNull", colors.noir_2 },
+	{ "NavicIconsEnumMember", colors.noir_2 },
+	{ "NavicIconsStruct", colors.noir_2 },
+	{ "NavicIconsEvent", colors.noir_2 },
+	{ "NavicIconsOperator", colors.noir_2 },
+	{ "NavicIconsTypeParameter", colors.noir_2 },
+	{ "NavicText", colors.noir_4 },
+	{ "NavicSeparator", colors.noir_2 },
 }
 
 for _, lvl in ipairs(level) do
@@ -425,6 +457,7 @@ local hl_group_configs = {
 	dap_config,
 	notify_config,
 	noice_config,
+	navic_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

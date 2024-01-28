@@ -64,3 +64,4 @@ Color.new("blue", minimal_fedu.palette.blue)
 
 Color.new("magenta", minimal_fedu.palette.magenta)
 Color.new("magenta_fg", minimal_fedu.palette.magenta_fg)
+Color.new("visual", minimal_fedu.misc.visual)

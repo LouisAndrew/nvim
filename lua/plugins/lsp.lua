@@ -1,3 +1,4 @@
+local icons = require("theme.icons")
 return {
 	"VonHeikemen/lsp-zero.nvim",
 	event = "BufEnter",
@@ -12,7 +13,6 @@ return {
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",
 		{
-
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },
 			lazy = true,
@@ -37,6 +37,16 @@ return {
 			keys = { { "<leader>id", "<cmd>:TroubleToggle<cr>" } },
 			config = function()
 				require("trouble").setup({ auto_preview = false })
+			end,
+		},
+		{
+			"SmiteshP/nvim-navic",
+			config = function()
+				require("nvim-navic").setup({
+					icons = icons,
+					depth_limit = 8,
+					highlight = true,
+				})
 			end,
 		},
 	},

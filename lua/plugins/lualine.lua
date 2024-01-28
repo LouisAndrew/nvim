@@ -1,11 +1,10 @@
-local search_count = require("search").search_count
-
 return {
 	"nvim-lualine/lualine.nvim",
 	config = function()
 		local minimal_fedu = require("colors")
 		local lualine = require("lualine")
 		local icons = require("theme.icons")
+		local search_count = require("search").search_count
 
 		local colors = {
 			-- Enable bg if transparent not disabled.
@@ -66,18 +65,18 @@ return {
 			winbar = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_x = {},
-				lualine_c = {},
 				lualine_y = {},
 				lualine_z = {},
+				lualine_c = {},
+				lualine_x = {},
 			},
 			inactive_winbar = {
 				lualine_a = {},
 				lualine_b = {},
+				lualine_y = {},
+				lualine_z = {},
 				lualine_c = {},
 				lualine_x = {},
-				lualine_z = {},
-				lualine_y = {},
 			},
 		}
 
@@ -107,30 +106,37 @@ return {
 			table.insert(config.inactive_winbar.lualine_x, inactive_component)
 		end
 
-		-- ins_winbar_right({
-		-- 	"filetype",
-		-- 	colored = false,
-		-- 	icon_only = true,
-		-- 	icon = { align = "right" },
-		-- 	padding = { right = 1 },
-		-- 	color = { fg = minimal_fedu.noir_2, bg = nil },
-		-- }, { fg = minimal_fedu.noir_6, bg = nil })
-		--
-		-- ins_winbar_right({
-		-- 	"filename",
-		-- 	file_status = true, -- Displays file status (readonly status, modified status)
-		-- 	newfile_status = false, -- Display new file status (new file means no write after created)
-		-- 	path = 4, -- 0: Just the filename
-		-- 	color = { fg = minimal_fedu.noir_2 },
-		-- 	shorting_target = 60,
-		-- 	symbols = {
-		-- 		modified = "",
-		-- 		readonly = "",
-		-- 		unnamed = "",
-		-- 		newfile = "[New]",
-		-- 	},
-		-- }, { fg = minimal_fedu.noir_6 })
-		--
+		ins_winbar_left({
+			"navic",
+			fmt = function(text)
+				return string.gsub(text, "%%%*$", "")
+			end,
+		})
+
+		ins_winbar_right({
+			"filetype",
+			colored = false,
+			icon_only = true,
+			icon = { align = "right" },
+			padding = { right = 0 },
+			color = { fg = minimal_fedu.noir_2, bg = nil },
+		}, { fg = minimal_fedu.noir_6, bg = nil })
+
+		ins_winbar_right({
+			"filename",
+			file_status = true, -- Displays file status (readonly status, modified status)
+			newfile_status = false, -- Display new file status (new file means no write after created)
+			path = 4, -- 0: Just the filename
+			color = { fg = minimal_fedu.noir_2 },
+			shorting_target = 60,
+			symbols = {
+				modified = icons.Modified,
+				readonly = "",
+				unnamed = "",
+				newfile = "[New]",
+			},
+		}, { fg = minimal_fedu.noir_6 })
+
 		ins_left({
 			-- mode component
 			function()
@@ -276,7 +282,7 @@ return {
 			},
 
 			symbols = {
-				modified = icons.Modified, -- Text to show when the buffer is modified
+				modified = " " .. icons.Modified, -- Text to show when the buffer is modified
 				alternate_file = "", -- Text to show to identify the alternate file
 				directory = "", -- Text to show when the buffer is a directory
 			},
