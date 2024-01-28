@@ -2,7 +2,7 @@ local opt = vim.opt
 -- opt.nu = true
 opt.nu = true
 opt.rnu = true
-opt.numberwidth = 3
+opt.numberwidth = 4
 
 -- indents etc
 opt.tabstop = 2

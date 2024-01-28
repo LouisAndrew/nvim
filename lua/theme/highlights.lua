@@ -25,9 +25,9 @@ Group.new("Error", colors.primary)
 Group.new("Function", colors.noir_0)
 Group.new("ColorColumn", nil, colors.noir_8)
 Group.new("Conceal", colors.noir_7)
-Group.new("Cursor", nil, colors.noir_8)
-Group.new("TermCursor", colors.debug, colors.debug)
-Group.new("lCursor", nil, colors.mfed_bg_accent)
+-- Group.new("Cursor", nil, colors.noir_8)
+-- Group.new("TermCursor", colors.debug, colors.debug)
+-- Group.new("lCursor", nil, colors.mfed_bg_accent)
 Group.new("CursorColumn", nil, colors.noir_9)
 Group.new("CursorLine", nil, colors.noir_9)
 Group.new("CursorLineNr", colors.noir_6, colors.noir_9)
@@ -38,9 +38,10 @@ Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
-Group.new("Folded", colors.debug, colors.mfed_bg_accent)
+Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
 Group.new("FoldColumn", nil, nil)
 Group.new("MatchParen", nil, colors.noir_7)
+
 Group.new("MoreMsg", nil, colors.noir_6)
 Group.new("NonText", colors.noir_8, nil)
 Group.new("PmenuSbar", colors.primary, colors.noir_8)
@@ -172,7 +173,6 @@ Group.new("LspSignatureActiveParameter", colors.mfed_cyan)
 Group.new("CursorLineNr", colors.white, nil)
 Group.new("TabLine", colors.dimmed_white, nil)
 Group.new("TabLineFill", nil, nil)
-Group.new("VertSplit", colors.mfed_bg_accent, nil)
 Group.new("EndOfBuffer", colors.background, nil)
 Group.new("ErrorMsg", colors.dimmed_red)
 Group.new("Pmenu", colors.noir_2, colors.bg_shade)
@@ -202,7 +202,7 @@ Group.new("FinderVirtText", colors.noir_7)
 -- hover
 Group.new("HoverNormal", colors.primary, colors.nb_background)
 -- rename
-Group.new("RenameNormal", colors.primary, colors.nb_background)
+Group.new("RenameNormal", colors.secondary, colors.bg_shade)
 -- diagnostic
 Group.new("DiagnosticSource", colors.primary)
 Group.new("DiagnosticPos", colors.noir_7)
@@ -319,7 +319,7 @@ Group.new("cmpmenu", nil, colors.bg_shade)
 Group.new("cmpborder", colors.bg_shade, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
-Group.new("paletteborder", colors.mfed_bg_accent)
+Group.new("paletteborder", colors.bg_shade)
 Group.new("wildermatch", colors.yellow_fg)
 Group.new("IlluminatedWordText", nil, colors.noir_9, nil)
 Group.new("IlluminatedWordRead", nil, colors.noir_9, nil)
@@ -327,6 +327,8 @@ Group.new("IlluminatedWordWrite", nil, colors.noir_9, nil)
 
 Group.new("InclineNormal", colors.noir_2, nil)
 Group.new("InclineNormalNC", colors.noir_6, nil)
+Group.new("RainbowDelimiterCyan", colors.mfed_cyan)
+Group.new("TreesitterContext", nil, colors.mfed_bg_accent)
 
 local level_hl_raw = {
 	{ "Error", minimal_fedu.diagnostic_error },
@@ -411,6 +413,7 @@ local noice_config = {
 	-- { "NoiceCmdlineSearch", colors.nb_background, colors.indigo_fg:dark() },
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark() },
+	{ "NoiceInputNormal", colors.white, colors.bg_shade },
 }
 
 local navic_config = {
@@ -470,3 +473,6 @@ for _, config in ipairs(hl_group_configs) do
 		set_hl(group, { fg = fg, bg = bg, guicg = guicg })
 	end
 end
+
+Group.new("VertSplit", colors.debug, colors.debug)
+Group.new("WinSeparator", colors.mfed_bg_accent)

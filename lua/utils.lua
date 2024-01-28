@@ -1,4 +1,3 @@
----
 ---@param tab table
 ---@param val  string
 ---@return boolean
@@ -29,5 +28,6 @@ end
 
 return {
 	has_value = has_value,
+	has_key = has_key,
 	dump = dump,
 }

@@ -5,6 +5,7 @@ return {
 	dependencies = {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		-- "nvim-treesitter/nvim-treesitter-context",
 		"danymat/neogen",
 		"windwp/nvim-ts-autotag",
 		{ "echasnovski/mini.ai", version = "*" },
@@ -18,9 +19,23 @@ return {
 				})
 			end,
 		},
+
 		{
 			"kevinhwang91/nvim-ufo",
-			dependencies = "kevinhwang91/promise-async",
+			dependencies = {
+				"kevinhwang91/promise-async",
+				{
+					"chrisgrieser/nvim-origami",
+					event = "BufReadPost", -- later or on keypress would prevent saving folds
+					config = function()
+						require("origami").setup({
+							keepFoldsAcrossSessions = true,
+							pauseFoldsOnSearch = true,
+							setupFoldKeymaps = false,
+						})
+					end,
+				},
+			},
 			config = function()
 				vim.o.foldcolumn = "0" -- '0' is not bad
 				vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -29,11 +44,11 @@ return {
 				vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 				vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
-				require("ufo").setup({
-					provider_selector = function(bufnr, filetype, buftype)
-						return { "treesitter", "indent" }
-					end,
-				})
+				-- require("ufo").setup({
+				-- 	provider_selector = function(bufnr, filetype, buftype)
+				-- 		return { "treesitter", "indent" }
+				-- 	end,
+				-- })
 			end,
 		},
 	},
@@ -169,6 +184,9 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "<C-a>", ts_repeat_move.repeat_last_move_previous)
 		vim.keymap.set("n", "<leader>ih", "<cmd>:TSHighlightCapturesUnderCursor<cr>")
 		vim.keymap.set("n", "<leader>ic", "<cmd>:TSCaptureUnderCursor<cr>")
+		-- vim.keymap.set("n", "[c", function()
+		-- 	require("treesitter-context").go_to_context(vim.v.count1)
+		-- end, { silent = true })
 
 		local ai = require("mini.ai")
 		ai.setup({
@@ -203,6 +221,21 @@ return {
 
 		require("neogen").setup()
 		vim.keymap.set("n", "<leader>tc", require("neogen").generate)
+
+		-- require("treesitter-context").setup({
+		-- 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+		-- 	max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+		-- 	min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+		-- 	line_numbers = true,
+		-- 	multiline_threshold = 20, -- Maximum number of lines to show for a single context
+		-- 	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+		-- 	mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+		-- 	-- Separator between context and content. Should be a single character string, like '-'.
+		-- 	-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+		-- 	separator = nil,
+		-- 	zindex = 20, -- The Z-index of the context window
+		-- 	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+		-- })
 
 		local pairs = require("mini.pairs")
 		pairs.setup()

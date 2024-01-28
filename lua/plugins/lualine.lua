@@ -5,6 +5,7 @@ return {
 		local lualine = require("lualine")
 		local icons = require("theme.icons")
 		local search_count = require("search").search_count
+		local utils = require("utils")
 
 		local colors = {
 			-- Enable bg if transparent not disabled.
@@ -303,7 +304,11 @@ return {
 					return msg
 				end
 
-				local client_names = {}
+				---
+				---@class Client
+				---@field name string
+				---@field count number
+				local client_map = {}
 
 				for _, client in ipairs(clients) do
 					local filetypes = client.config.filetypes
@@ -313,8 +318,19 @@ return {
 							n = "emmet"
 						end
 
-						client_names[#client_names + 1] = n
+						local entry = client_map[n]
+						if entry then
+							entry.count = entry.count + 1
+						else
+							client_map[n] = { name = n, count = 1 }
+						end
 					end
+				end
+
+				local client_names = {}
+				for _, client in pairs(client_map) do
+					local count = client.count == 1 and "" or " (" .. client.count .. ")"
+					table.insert(client_names, client.name .. count)
 				end
 
 				if #client_names > 0 then

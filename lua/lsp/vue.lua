@@ -54,14 +54,6 @@ lspconfig.volar.setup({
 			schemaRequestService = true,
 		},
 	},
-	on_attach = function(clientnr, bufnr)
-		local active_clients = vim.lsp.get_active_clients()
-		for _, client in pairs(active_clients) do
-			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
-				client.stop()
-			end
-		end
-	end,
 	on_new_config = function(new_config, new_root_dir)
 		local path = get_typescript_server_path(new_root_dir)
 		vim.g.TS_PATH = path

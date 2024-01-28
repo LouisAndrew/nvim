@@ -67,7 +67,19 @@ return {
 						},
 					},
 					help = { pattern = "^:%s*he?l?p?%s+", icon = " ?" },
-					input = {},
+					input = {
+						opts = {
+							win_options = {
+								winhighlight = {
+									Normal = "NoiceInputNormal",
+								},
+							},
+
+							border = {
+								style = special_chars.create_special_border(),
+							},
+						},
+					},
 				},
 			},
 			views = {
@@ -86,7 +98,6 @@ return {
 						height = "auto",
 					},
 					border = {
-						padding = { 3 },
 						style = special_chars.create_special_border(),
 						text = {
 							top_align = "left",
@@ -102,6 +113,16 @@ return {
 						row = 2,
 					},
 				},
+				ui = {
+					hover = {
+						border = {
+							style = special_chars.create_special_border(),
+						},
+						position = {
+							row = 2,
+						},
+					},
+				},
 			},
 			notify = {
 				enabled = false,
@@ -113,15 +134,11 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 				signature = {
-					enabled = true,
-					opts = {
-						position = {
-							-- row = -2,
-						},
+					auto_open = {
+						enabled = false,
+						trigger = false,
+						luasnip = false,
 					},
-				},
-				progress = {
-					enabled = false,
 				},
 			},
 			presets = {
@@ -142,6 +159,23 @@ return {
 			},
 			format = {
 				level = { icons = { error = icons.Error, warn = icons.Warn, info = icons.Info } },
+			},
+			progress = {
+				view = "mini",
+			},
+			routes = {
+				{
+					filter = {
+						event = "lsp",
+						cond = function(message)
+							local client = vim.tbl_get(message.opts, "progress", "client")
+							return client == "null-ls"
+						end,
+					},
+					opts = {
+						skip = true,
+					},
+				},
 			},
 		})
 	end,

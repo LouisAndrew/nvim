@@ -1,10 +1,10 @@
 local special_chars = require("theme.special_chars")
 local keymaps = require("lsp.keymaps")
-local utils = require("utils")
 
 local lsp_zero = require("lsp-zero")
 local lsputils = require("lspconfig.util")
 local saga = require("lspsaga")
+local utils = require("utils")
 
 -- local VT_PREFIX = " "
 local VT_PREFIX = "⏹ "
@@ -16,32 +16,34 @@ local custom_navic_lsps = {
 }
 
 vim.diagnostic.config({
-	virtual_text = {
-		source = true,
-		prefix = VT_PREFIX,
-		spacing = 0,
-	},
+	virtual_text = false,
 	update_in_insert = false,
 	underline = true,
 	severity_sort = true,
 	signs = false,
 })
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.diagnostic.config({
+	virtual_lines = { only_current_line = true },
+	virtual_text = false,
+	signs = false,
+	severity_sort = true,
+	update_in_insert = false,
 	underline = true,
-	virtual_text = {
-		prefix = VT_PREFIX,
-		spacing = 0,
-	},
 })
 
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- 	underline = true,
+-- 	virtual_text = false,
+-- 	update_in_insert = false,
+-- 	virtual_lines = { only_current_line = true },
+-- })
+
 local function remove_duplicates(client)
-	local is_duplicated = false
 	local active_clients = vim.lsp.get_active_clients()
 
 	for _, act_client in pairs(active_clients) do
 		if client.name == act_client.name and client.id ~= act_client.id then
-			is_duplicated = true
 			act_client.stop()
 			break
 		end
@@ -51,14 +53,10 @@ local function remove_duplicates(client)
 	-- if is_duplicated then
 	-- 	client.stop()
 	-- end
-
-	return is_duplicated
 end
 
 lsp_zero.on_attach(function(client, bufnr)
-	if remove_duplicates(client) then
-		return
-	end
+	-- remove_duplicates(client)
 
 	if client.server_capabilities["documentSymbolProvider"] then
 		if utils.has_value(custom_navic_lsps, client.name) ~= true then
@@ -133,7 +131,7 @@ lspconfig.tsserver.setup({
 			return
 		end
 
-		navic.attach(ts_client, bufnr)
+		-- navic.attach(ts_client, bufnr)
 	end,
 })
 
@@ -141,7 +139,7 @@ local saga_keys = {
 	edit = "<cr>",
 	vsplit = "<C-l>",
 	split = "<C-j>",
-	quit = "<leader>w",
+	quit = "<C-c>",
 	tabe = "<C-t>",
 }
 
@@ -182,3 +180,17 @@ saga.setup({
 		text_hl_follow = false,
 	},
 })
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+for _, ls in ipairs(language_servers) do
+	require("lspconfig")[ls].setup({
+		capabilities = capabilities,
+		-- you can add other fields for setting up lsp server in this table
+	})
+end
+require("ufo").setup()

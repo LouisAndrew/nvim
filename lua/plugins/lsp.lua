@@ -13,6 +13,17 @@ return {
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",
 		{
+			"zeioth/garbage-day.nvim",
+			event = "VeryLazy",
+			opts = {},
+		},
+		-- {
+		-- 	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		-- 	config = function()
+		-- 		require("lsp_lines").setup()
+		-- 	end,
+		-- },
+		{
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },
 			lazy = true,
@@ -39,15 +50,30 @@ return {
 				require("trouble").setup({ auto_preview = false })
 			end,
 		},
+		-- Disabling for now, seeing a performance issue
 		{
 			"SmiteshP/nvim-navic",
 			config = function()
 				require("nvim-navic").setup({
 					icons = icons,
-					depth_limit = 8,
+					depth_limit = 4,
 					highlight = true,
+					---@param text string
+					format_text = function(text)
+						return text:gsub("callback", "cb")
+					end,
 				})
 			end,
+			{
+				"dgagn/diagflow.nvim",
+				-- event = 'LspAttach', This is what I use personnally and it works great
+				opts = {
+					enabled = false,
+					placement = "inline",
+					inline_padding_left = 5,
+					toggle_event = { "InsertEnter" },
+				},
+			},
 		},
 	},
 	config = function()
