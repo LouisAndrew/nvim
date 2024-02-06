@@ -2,19 +2,9 @@ local special_chars = require("theme.special_chars")
 local keymaps = require("lsp.keymaps")
 
 local lsp_zero = require("lsp-zero")
-local lsputils = require("lspconfig.util")
 local saga = require("lspsaga")
-local utils = require("utils")
-
--- local VT_PREFIX = " "
-local VT_PREFIX = "⏹ "
 local navic = require("nvim-navic")
-local util = require("lspconfig.util")
-
-local custom_navic_lsps = {
-	"tsserver",
-	"graphql",
-}
+local utils = require("utils")
 
 vim.diagnostic.config({
 	virtual_text = false,
@@ -34,10 +24,14 @@ vim.diagnostic.config({
 })
 
 lsp_zero.on_attach(function(client, bufnr)
-	if client.server_capabilities["documentSymbolProvider"] then
-		if utils.has_value(custom_navic_lsps, client.name) ~= true then
-			navic.attach(client, bufnr)
-		end
+	if
+		client.server_capabilities["documentSymbolProvider"]
+		and utils.has_value({
+			"tsserver",
+			"graphql",
+		}, client.name) ~= true
+	then
+		navic.attach(client, bufnr)
 	end
 
 	keymaps.generate_keymaps(bufnr)
@@ -67,11 +61,6 @@ require("mason-lspconfig").setup({
 				},
 			})
 		end,
-		volar = function()
-			require("lspconfig").volar.setup({
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-			})
-		end,
 	},
 })
 
@@ -91,16 +80,13 @@ lspconfig.tailwindcss.setup({
 	filetypes = { "html", "css", "scss", "typescriptreact", "svelte", "vue", "javascriptreact", "astro" },
 })
 
-lspconfig.volar.setup({
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-	on_attach = function()
-		print("Volar attached")
-	end,
-})
-
+local util = require("lspconfig.util")
+-- Get TS version for volar, use installed version if not found
 local function get_typescript_server_path(root_dir)
 	-- Highly dependent on nvm and node version
-	local global_ts = "/Users/louis.andrew/Library/pnpm/global/5/node_modules/typescript/lib"
+	local global_ts = "/Users/louis.andrew/.nvm/versions/node/v20.10.0/lib/node_modules/typescript/lib"
+	-- Alternative location if installed as root:
+	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
 	local found_ts = ""
 	local function check_dir(path)
 		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
@@ -115,49 +101,28 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 
--- `pnpm add -g @vue/language-server`
--- local volar_cmd = { "vue-language-server", "--stdio" }
+vim.g.PREVENT_CLASH_TS_VUE = "true"
 
--- lspconfig.volar.setup({
--- 	-- cmd = volar_cmd,
--- 	root_dir = util.root_pattern("*.vue"),
--- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
--- 	init_options = {
--- 		languageFeatures = {
--- 			implementation = true, -- new in @volar/vue-language-server v0.33
--- 			references = true,
--- 			definition = true,
--- 			typeDefinition = true,
--- 			callHierarchy = true,
--- 			hover = true,
--- 			rename = true,
--- 			renameFileRefactoring = true,
--- 			signatureHelp = true,
--- 			codeAction = true,
--- 			workspaceSymbol = true,
--- 			completion = {
--- 				defaultTagNameCase = "both",
--- 				defaultAttrNameCase = "kebabCase",
--- 				getDocumentNameCasesRequest = false,
--- 				getDocumentSelectionRequest = false,
--- 			},
--- 			documentHighlight = true,
--- 			documentLink = true,
--- 			codeLens = { showReferencesNotification = true },
--- 			-- not supported - https://github.com/neovim/neovim/pull/15723
--- 			semanticTokens = false,
--- 			diagnostics = true,
--- 			schemaRequestService = true,
--- 		},
--- 	},
--- 	on_new_config = function(new_config, new_root_dir)
--- 		local path = get_typescript_server_path(new_root_dir)
--- 		vim.g.TS_PATH = path
--- 		new_config.init_options.typescript.tsdk = path
--- 	end,
--- })
+lspconfig.volar.setup({
+	root_dir = lspconfig.util.root_pattern("*.vue"),
+	filetypes = { "typescript", "vue", "javascript" },
+	on_attach = function(clientnr, bufnr)
+		local active_clients = vim.lsp.get_active_clients()
+		for _, client in pairs(active_clients) do
+			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
+				client.stop()
+			end
+		end
+	end,
+	on_new_config = function(new_config, new_root_dir)
+		local path = get_typescript_server_path(new_root_dir)
+		vim.g.TS_PATH = path
+		new_config.init_options.typescript.tsdk = path
+	end,
+})
 
 local vue_project = true
+local lsputils = require("lspconfig.util")
 lspconfig.tsserver.setup({
 	filetypes = { "typescript", "typescriptreact", "javascript" },
 	root_dir = function(filename, bufnr)
@@ -178,12 +143,11 @@ lspconfig.tsserver.setup({
 		navic.attach(ts_client, bufnr)
 	end,
 })
-
 local saga_keys = {
 	edit = "<cr>",
 	vsplit = "<C-l>",
 	split = "<C-j>",
-	quit = "<C-c>",
+	quit = "<leader>w",
 	tabe = "<C-t>",
 }
 
@@ -224,17 +188,3 @@ saga.setup({
 		text_hl_follow = false,
 	},
 })
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
-local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-for _, ls in ipairs(language_servers) do
-	require("lspconfig")[ls].setup({
-		capabilities = capabilities,
-		-- you can add other fields for setting up lsp server in this table
-	})
-end
-require("ufo").setup()
