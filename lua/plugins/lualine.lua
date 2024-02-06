@@ -110,6 +110,10 @@ return {
 		ins_winbar_left({
 			"navic",
 			fmt = function(text)
+				if vim.g.DISPLAY_NAVIC == utils.CONST.falsy then
+					return ""
+				end
+
 				return string.gsub(text, "%%%*$", "")
 			end,
 		})

@@ -38,8 +38,8 @@ local M = {
 		["<S-l>"] = { "$", "end of line" },
 		["'"] = { "*", "next occurence" },
 		[";"] = { "#", "last occurence" },
-		["<C-u>"] = { "<C-u>zz", "scroll page down" },
-		["<C-d>"] = { "<C-d>zz", "scroll page up" },
+		-- ["<C-u>"] = { "<C-u>zz", "scroll page down" },
+		-- ["<C-d>"] = { "<C-d>zz", "scroll page up" },
 
 		["<A-k>"] = { "O", "move line up" },
 

@@ -39,6 +39,12 @@ return {
 		local colors = require("colors")
 
 		require("obsidian").setup({
+			picker = {
+				mappings = {
+					["<C-l>"] = "vsplit",
+					["<C-c>"] = "new",
+				},
+			},
 			ui = {
 				bullets = { char = "-", hl_group = "ObsidianBullet" },
 				reference_text = { hl_group = "ObsidianRefText" },

@@ -26,8 +26,17 @@ local function dump(o)
 	end
 end
 
+local nvim_config_path = function()
+	return vim.fn.stdpath("config")
+end
+
 return {
 	has_value = has_value,
-	has_key = has_key,
 	dump = dump,
+	nvim_config_path = nvim_config_path(),
+	CONST = {
+		truthy = 1,
+		falsy = 0,
+		emptyString = "",
+	},
 }

@@ -96,6 +96,25 @@ for _, language in ipairs(js_based_languages) do
 			protocol = "inspector",
 			console = "integratedTerminal",
 		},
+		{
+			name = "Debug Node npm run start",
+			type = "pwa-node",
+			request = "launch",
+			program = "/Users/louis.andrew/.nvm/versions/node/v20.10.0/bin/npm",
+			args = {
+				"run-script",
+				"start",
+				"--",
+				"--inspect-brk=9229",
+			},
+			port = 9229,
+			rootPath = "${workspaceFolder}",
+			cwd = "${workspaceFolder}",
+			sourceMaps = true,
+			skipFiles = { "<node_internals>/**" },
+			protocol = "inspector",
+			console = "integratedTerminal",
+		},
 	}
 end
 

@@ -132,6 +132,7 @@ Group.new("@markup.heading", colors.noir_2, nil, styles.bold)
 Group.new("@markup.italic", nil, nil, styles.italic)
 Group.new("@markup.list", colors.noir_2, nil)
 Group.new("@markup.raw", colors.mfed_num, nil)
+Group.new("@markup.raw.block", nil, colors.bg_shade)
 Group.new("@keyword.conditional.ternary", colors.noir_6, nil)
 Group.new("@punctuation.special", colors.noir_3)
 
