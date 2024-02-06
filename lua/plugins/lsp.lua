@@ -64,15 +64,15 @@ return {
 					end,
 				})
 			end,
-			{
-				"dgagn/diagflow.nvim",
-				-- event = 'LspAttach', This is what I use personnally and it works great
-				opts = {
-					enabled = false,
-					placement = "inline",
-					inline_padding_left = 5,
-					toggle_event = { "InsertEnter" },
-				},
+		},
+		{
+			"dgagn/diagflow.nvim",
+			-- event = 'LspAttach', This is what I use personnally and it works great
+			opts = {
+				enabled = false,
+				placement = "inline",
+				inline_padding_left = 5,
+				toggle_event = { "InsertEnter" },
 			},
 		},
 	},

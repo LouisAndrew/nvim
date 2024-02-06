@@ -9,6 +9,7 @@ local utils = require("utils")
 -- local VT_PREFIX = " "
 local VT_PREFIX = "⏹ "
 local navic = require("nvim-navic")
+local util = require("lspconfig.util")
 
 local custom_navic_lsps = {
 	"tsserver",
@@ -32,32 +33,7 @@ vim.diagnostic.config({
 	underline = true,
 })
 
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
--- 	underline = true,
--- 	virtual_text = false,
--- 	update_in_insert = false,
--- 	virtual_lines = { only_current_line = true },
--- })
-
-local function remove_duplicates(client)
-	local active_clients = vim.lsp.get_active_clients()
-
-	for _, act_client in pairs(active_clients) do
-		if client.name == act_client.name and client.id ~= act_client.id then
-			act_client.stop()
-			break
-		end
-	end
-
-	-- Prevent more than one LSP instance attached (e.g. neogit)
-	-- if is_duplicated then
-	-- 	client.stop()
-	-- end
-end
-
 lsp_zero.on_attach(function(client, bufnr)
-	-- remove_duplicates(client)
-
 	if client.server_capabilities["documentSymbolProvider"] then
 		if utils.has_value(custom_navic_lsps, client.name) ~= true then
 			navic.attach(client, bufnr)
@@ -91,6 +67,11 @@ require("mason-lspconfig").setup({
 				},
 			})
 		end,
+		volar = function()
+			require("lspconfig").volar.setup({
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+			})
+		end,
 	},
 })
 
@@ -110,8 +91,71 @@ lspconfig.tailwindcss.setup({
 	filetypes = { "html", "css", "scss", "typescriptreact", "svelte", "vue", "javascriptreact", "astro" },
 })
 
--- Take a look, cos it's a bit complex
-require("lsp.vue")
+lspconfig.volar.setup({
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+	on_attach = function()
+		print("Volar attached")
+	end,
+})
+
+local function get_typescript_server_path(root_dir)
+	-- Highly dependent on nvm and node version
+	local global_ts = "/Users/louis.andrew/Library/pnpm/global/5/node_modules/typescript/lib"
+	local found_ts = ""
+	local function check_dir(path)
+		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+		if util.path.exists(found_ts) then
+			return path
+		end
+	end
+	if util.search_ancestors(root_dir, check_dir) then
+		return found_ts
+	else
+		return global_ts
+	end
+end
+
+-- `pnpm add -g @vue/language-server`
+-- local volar_cmd = { "vue-language-server", "--stdio" }
+
+-- lspconfig.volar.setup({
+-- 	-- cmd = volar_cmd,
+-- 	root_dir = util.root_pattern("*.vue"),
+-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+-- 	init_options = {
+-- 		languageFeatures = {
+-- 			implementation = true, -- new in @volar/vue-language-server v0.33
+-- 			references = true,
+-- 			definition = true,
+-- 			typeDefinition = true,
+-- 			callHierarchy = true,
+-- 			hover = true,
+-- 			rename = true,
+-- 			renameFileRefactoring = true,
+-- 			signatureHelp = true,
+-- 			codeAction = true,
+-- 			workspaceSymbol = true,
+-- 			completion = {
+-- 				defaultTagNameCase = "both",
+-- 				defaultAttrNameCase = "kebabCase",
+-- 				getDocumentNameCasesRequest = false,
+-- 				getDocumentSelectionRequest = false,
+-- 			},
+-- 			documentHighlight = true,
+-- 			documentLink = true,
+-- 			codeLens = { showReferencesNotification = true },
+-- 			-- not supported - https://github.com/neovim/neovim/pull/15723
+-- 			semanticTokens = false,
+-- 			diagnostics = true,
+-- 			schemaRequestService = true,
+-- 		},
+-- 	},
+-- 	on_new_config = function(new_config, new_root_dir)
+-- 		local path = get_typescript_server_path(new_root_dir)
+-- 		vim.g.TS_PATH = path
+-- 		new_config.init_options.typescript.tsdk = path
+-- 	end,
+-- })
 
 local vue_project = true
 lspconfig.tsserver.setup({
@@ -131,7 +175,7 @@ lspconfig.tsserver.setup({
 			return
 		end
 
-		-- navic.attach(ts_client, bufnr)
+		navic.attach(ts_client, bufnr)
 	end,
 })
 
