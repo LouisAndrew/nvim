@@ -1,6 +1,6 @@
 return {
 	"NeogitOrg/neogit",
-	lazy = true,
+	lazy = false,
 	keys = { { "<leader>gd", "<cmd>:DiffviewOpen<cr>" } },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -8,6 +8,19 @@ return {
 		"sindrets/diffview.nvim",
 	},
 	config = function()
+		local icons = require("theme.icons")
+		require("diffview").setup({
+			icons = { -- Only applies when use_icons is true.
+				folder_closed = icons.FolderClosed,
+				folder_open = icons.FolderOpened,
+			},
+			signs = {
+				fold_closed = icons.ArrowClosed,
+				fold_open = icons.ArrowOpened,
+				done = "✓",
+			},
+		})
+
 		local neogit = require("neogit")
 		neogit.setup({
 			integrations = {

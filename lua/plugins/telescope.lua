@@ -195,6 +195,10 @@ return {
 		vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
+		-- find siblings
+		vim.keymap.set("n", "<leader>pj", function()
+			builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
+		end)
 		vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
 		vim.keymap.set("n", "<leader>pc", builtin.grep_string, {})
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})

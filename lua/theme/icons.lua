@@ -39,4 +39,8 @@ return {
 	Warn = " ",
 	Info = " ",
 	Hint = " ",
+	FolderClosed = "",
+	FolderOpened = "",
+	ArrowOpened = "",
+	ArrowClosed = "",
 }

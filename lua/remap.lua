@@ -15,7 +15,6 @@ local M = {
 		["<C-k>"] = { "<Up>", "move up" },
 		["<C-4>"] = { "<End>" },
 		["<C-6>"] = { "<cmd>:norm ^<CR>" },
-		["<S-CR>"] = { "<cmd>:norm <S-o><CR>" },
 		["<S-Tab>"] = { "<cmd>:norm <<^<CR>" },
 	},
 
@@ -38,8 +37,8 @@ local M = {
 		["<S-l>"] = { "$", "end of line" },
 		["'"] = { "*", "next occurence" },
 		[";"] = { "#", "last occurence" },
-		-- ["<C-u>"] = { "<C-u>zz", "scroll page down" },
-		-- ["<C-d>"] = { "<C-d>zz", "scroll page up" },
+		["<C-u>"] = { "<C-u>zz", "scroll page down" },
+		["<C-d>"] = { "<C-d>zz", "scroll page up" },
 
 		["<A-k>"] = { "O", "move line up" },
 

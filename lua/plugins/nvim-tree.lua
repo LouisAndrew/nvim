@@ -1,3 +1,4 @@
+local icons = require("theme.icons")
 return {
 	"nvim-tree/nvim-tree.lua",
 	keys = {
@@ -10,8 +11,13 @@ return {
 				icons = {
 					glyphs = {
 						folder = {
-							default = "",
-							open = "",
+							default = icons.FolderClosed,
+							open = icons.FolderOpened,
+							arrow_closed = icons.ArrowClosed,
+							arrow_open = icons.ArrowClosed,
+							empty = "",
+							empty_open = "",
+							symlink = "",
 						},
 					},
 					web_devicons = {
