@@ -1,7 +1,7 @@
 return {
 	"NeogitOrg/neogit",
 	lazy = false,
-	keys = { { "<leader>gd", "<cmd>:DiffviewOpen<cr>" } },
+	keys = { { "<leader>gd", "<cmd>:DiffviewOpen<cr>" }, { "<leader>go", "<cmd>:DiffviewOpen<cr>" } },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",

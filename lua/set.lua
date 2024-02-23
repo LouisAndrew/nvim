@@ -37,7 +37,7 @@ opt.cursorlineopt = "number"
 opt.undofile = true
 vim.cmd("set noswapfile")
 
-vim.keymap.set("n", "<leader>[d", function()
+vim.keymap.set("n", "<leader>pd", function()
 	local bufinfos = vim.fn.getbufinfo({ buflisted = true })
 	vim.tbl_map(function(bufinfo)
 		if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then

@@ -39,6 +39,6 @@ vim.keymap.set("n", "<D-=>", guifontscale(1), { noremap = true })
 vim.keymap.set("n", "<D-->", guifontscale(-1), { noremap = true })
 vim.keymap.set("n", "<D-0>", guifontscale(0), { noremap = true })
 
-vim.opt.linespace = 8
-vim.cmd("source " .. utils.nvim_config_path .. "/macmap.vim")
-setguifont()
+-- vim.opt.linespace = 8
+-- vim.cmd("source " .. utils.nvim_config_path .. "/macmap.vim")
+-- setguifont()

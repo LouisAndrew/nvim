@@ -1,14 +1,6 @@
 local js_based_languages = { "typescript", "javascript", "typescriptreact", "vue", "astro" }
 -- https://github.com/nikolovlazar/dotfiles/blob/main/.config/nvim/lua/plugins/dap.lua
 
---[[  setup adapters
-require("dap-vscode-js").setup({
-	debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
-	debugger_cmd = { "js-debug-adapter" },
-	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-})
- ]]
-
 local dap = require("dap")
 
 -- custom adapter for running tasks before starting debug
