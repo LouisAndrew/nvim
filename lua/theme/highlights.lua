@@ -398,22 +398,22 @@ local notify_config = {
 }
 
 local noice_config = {
-	-- { "NoiceCmdline", colors.white, colors.indigo_fg:dark():dark() },
 	{ "NoiceCmdlinePrompt", colors.nb_background },
-	{ "NoiceCmdlinePopupBorder", colors.bg_shade:dark(), colors.nb_background },
-	{ "NoiceCmdlinePopup", nil, colors.bg_shade:dark() },
-	{ "NoiceCmdlinePopupBorder", colors.mfed_bg_accent:light() },
+	{ "NoiceCmdlinePopup", nil, colors.bg_shade },
+	{ "NoiceCmdlinePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoiceCmdlineIcon", colors.noir_3, nil, styles.bold },
 	{ "NoiceCmdlineIconSearch", colors.nb_background, nil, styles.bold },
+	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
 	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.noir_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
 	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoicePopup", nil, colors.bg_shade },
 	{ "NoiceCmdlineSearch", colors.nb_background, colors.primary },
-	-- { "NoiceCmdlineSearch", colors.nb_background, colors.indigo_fg:dark() },
+	{ "NoiceCmdlineSearchBorder", colors.primary, colors.nb_background },
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
-	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark() },
+	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
+	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
 	{ "NoiceInputNormal", colors.white, colors.bg_shade },
 }
 
