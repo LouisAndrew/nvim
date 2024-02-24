@@ -12,11 +12,11 @@ return {
 		noice.setup({
 			cmdline = {
 				enabled = true,
-				view = "cmdline",
 				opts = {},
 				format = {
-					cmdline = { pattern = "^:", icon = "  ", lang = "vim" },
+					cmdline = { pattern = "^:", icon = "  ", lang = "vim", title = "" },
 					search_down = {
+						title = "",
 						kind = "search",
 						pattern = "^/",
 						icon = "  ",
@@ -25,11 +25,13 @@ return {
 							win_options = {
 								winhighlight = {
 									Normal = "NoiceCmdlineSearch",
+									FloatBorder = "NoiceCmdlineSearchBorder",
 								},
 							},
 						},
 					},
 					search_up = {
+						title = "",
 						kind = "search",
 						pattern = "^%?",
 						icon = "  ",
@@ -38,11 +40,13 @@ return {
 							win_options = {
 								winhighlight = {
 									Normal = "NoiceCmdlineSearch",
+									FloatBorder = "NoiceCmdlineSearchBorder",
 								},
 							},
 						},
 					},
 					filter = {
+						title = "",
 						pattern = "^:%s*!",
 						icon = " $ ",
 						lang = "bash",
@@ -50,11 +54,13 @@ return {
 							win_options = {
 								winhighlight = {
 									Normal = "NoiceCmdlineScript",
+									FloatBorder = "NoiceCmdlineScriptBorder",
 								},
 							},
 						},
 					},
 					lua = {
+						title = "",
 						pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
 						icon = "  ",
 						lang = "lua",
@@ -62,11 +68,12 @@ return {
 							win_options = {
 								winhighlight = {
 									Normal = "NoiceCmdlineScript",
+									FloatBorder = "NoiceCmdlineScriptBorder",
 								},
 							},
 						},
 					},
-					help = { pattern = "^:%s*he?l?p?%s+", icon = " ?" },
+					help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = " ?" },
 					input = {
 						opts = {
 							win_options = {
@@ -76,7 +83,7 @@ return {
 							},
 
 							border = {
-								style = special_chars.create_special_border(),
+								style = special_chars.create_special_border({ vertical_padding = false }),
 							},
 						},
 					},
@@ -97,11 +104,13 @@ return {
 						width = 0.3,
 						height = "auto",
 					},
+					-- border = {
+					-- 	style = "none",
+					-- 	padding = { 1, 3 },
+					-- },
 					border = {
 						style = special_chars.create_special_border(),
-						text = {
-							top_align = "left",
-						},
+						text = nil,
 					},
 				},
 				mini = {},
@@ -142,8 +151,8 @@ return {
 				},
 			},
 			presets = {
-				bottom_search = true,
-				command_palette = false,
+				bottom_search = false,
+				command_palette = true,
 				long_message_to_split = true,
 				inc_rename = false,
 				lsp_doc_border = false,
