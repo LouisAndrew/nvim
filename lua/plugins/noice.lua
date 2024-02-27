@@ -101,37 +101,18 @@ return {
 						col = "50%",
 					},
 					size = {
-						width = 0.3,
+						width = 64,
 						height = "auto",
 					},
-					-- border = {
-					-- 	style = "none",
-					-- 	padding = { 1, 3 },
-					-- },
 					border = {
-						style = special_chars.create_special_border(),
+						style = special_chars.create_special_border({
+							vertical_half = true,
+						}),
 						text = nil,
 					},
 				},
 				mini = {},
-				hover = {
-					border = {
-						style = special_chars.create_special_border(),
-					},
-					position = {
-						row = 2,
-					},
-				},
-				ui = {
-					hover = {
-						border = {
-							style = special_chars.create_special_border(),
-						},
-						position = {
-							row = 2,
-						},
-					},
-				},
+				hover = {},
 			},
 			notify = {
 				enabled = false,

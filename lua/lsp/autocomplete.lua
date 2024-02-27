@@ -15,15 +15,13 @@ cmp.setup({
 		completion = {
 			col_offset = 1,
 			side_padding = 1,
-			border = special_chars.create_special_border({
-				side_padding = true,
-			}),
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},
 		documentation = {
 			border = special_chars.create_special_border({
 				side_padding = true,
 				padding_char = special_chars.full_block,
+				hide_vertical_padding = true,
 			}),
 			winhighlight = "Normal:cmpmenu,FloatBorder:cmpborder,Search:None",
 		},

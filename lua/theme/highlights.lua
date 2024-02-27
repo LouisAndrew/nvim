@@ -44,8 +44,8 @@ Group.new("MatchParen", nil, colors.noir_7)
 
 Group.new("MoreMsg", nil, colors.noir_6)
 Group.new("NonText", colors.noir_8, nil)
-Group.new("PmenuSbar", colors.primary, colors.noir_8)
-Group.new("PmenuThumb", colors.primary, colors.noir_7)
+Group.new("PmenuThumb", nil, colors.bg_shade:light())
+Group.new("PmenuSbar", nil, colors.nb_background)
 Group.new("Question", colors.noir_1, colors.noir_8)
 Group.new("SpecialKey", colors.noir_6, nil)
 Group.new("SpellBad", colors.primary)
@@ -251,7 +251,7 @@ Group.new("TelescopeBorder", colors.bg_shade, colors.nb_background)
 Group.new("TelescopeMatching", colors.noir_0)
 Group.new("TelescopePromptCounter", colors.noir_8, nil)
 Group.new("TelescopeResultsNormal", colors.noir_4, colors.bg_shade)
-Group.new("TelescopeSelection", nil, colors.noir_8)
+Group.new("TelescopeSelection", colors.white, colors.nb_background, styles.bold)
 
 -- Saga
 Group.new("TitleString", colors.secondary)
@@ -402,15 +402,15 @@ local noice_config = {
 	{ "NoiceCmdlinePopup", nil, colors.bg_shade },
 	{ "NoiceCmdlinePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoiceCmdlineIcon", colors.noir_3, nil, styles.bold },
-	{ "NoiceCmdlineIconSearch", colors.nb_background, nil, styles.bold },
+	{ "NoiceCmdlineIconSearch", colors.white, nil, styles.bold },
 	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
 	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.noir_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
 	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoicePopup", nil, colors.bg_shade },
-	{ "NoiceCmdlineSearch", colors.nb_background, colors.primary },
-	{ "NoiceCmdlineSearchBorder", colors.primary, colors.nb_background },
+	{ "NoiceCmdlineSearch", colors.white, colors.visual },
+	{ "NoiceCmdlineSearchBorder", colors.visual, colors.nb_background },
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },

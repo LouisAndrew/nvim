@@ -169,8 +169,10 @@ saga.setup({
 		sign_priority = 1,
 	},
 	ui = {
+		title = false,
 		border = special_chars.create_special_border({
 			side_padding = true,
+			hide_vertical_padding = true,
 		}),
 		code_action = " ",
 	},
@@ -186,5 +188,8 @@ saga.setup({
 	diagnostic = {
 		border_follow = false,
 		text_hl_follow = false,
+	},
+	rename = {
+		in_select = false,
 	},
 })

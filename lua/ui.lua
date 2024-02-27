@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 local primary_font = "Varys"
 local fallbacks = "nonicons,codicon,octicons"
 

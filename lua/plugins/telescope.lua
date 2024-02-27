@@ -82,8 +82,8 @@ return {
 				},
 				dynamic_preview_title = true,
 				prompt_prefix = "   ",
-				selection_caret = " > ",
-				entry_prefix = "   ",
+				selection_caret = " ",
+				entry_prefix = " ",
 				layout_config = {
 					horizontal = {
 						width_padding = 1,
@@ -189,10 +189,6 @@ return {
 		telescope.load_extension("egrepify")
 		telescope.load_extension("undo")
 		telescope.load_extension("noice")
-
-		vim.keymap.set("n", "<C-f>", builtin.find_files, {})
-		vim.keymap.set("n", "<C-b>", builtin.buffers, {})
-		vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 		-- find siblings

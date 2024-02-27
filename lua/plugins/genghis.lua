@@ -9,6 +9,7 @@ return {
 					border = special_chars.create_special_border({
 						side_padding = true,
 						start_in_insert = false,
+						vertical_half = true,
 					}),
 					win_options = {
 						winhighlight = "NormalFloat:NoiceInputNormal",
@@ -24,7 +25,6 @@ return {
 								height = 0.5,
 								prompt_position = "top",
 							},
-							-- other layout configuration here
 						},
 						borderchars = {
 							prompt = {

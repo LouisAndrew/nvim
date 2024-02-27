@@ -269,7 +269,7 @@ return {
 
 			mode = 0,
 
-			max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+			max_length = vim.o.columns * 4 / 5, -- Maximum width of buffers component,
 			-- it can also be a function that returns
 			-- the value of `max_length` dynamically.
 			filetype_names = {
@@ -332,8 +332,9 @@ return {
 				end
 
 				local client_names = {}
+				local display_count = false
 				for _, client in pairs(client_map) do
-					local count = client.count == 1 and "" or " (" .. client.count .. ")"
+					local count = (client.count == 1 or display_count == false) and "" or " (" .. client.count .. ")"
 					table.insert(client_names, client.name .. count)
 				end
 
