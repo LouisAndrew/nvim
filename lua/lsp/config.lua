@@ -11,13 +11,13 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	underline = true,
 	severity_sort = true,
-	signs = false,
+	signs = true,
 })
 
 vim.diagnostic.config({
 	virtual_lines = { only_current_line = true },
 	virtual_text = false,
-	signs = false,
+	signs = true,
 	severity_sort = true,
 	update_in_insert = false,
 	underline = true,

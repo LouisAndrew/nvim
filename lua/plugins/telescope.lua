@@ -190,9 +190,9 @@ return {
 		telescope.load_extension("undo")
 		telescope.load_extension("noice")
 
-		vim.keymap.set("n", "<C-f>", builtin.find_files, {})
-		vim.keymap.set("n", "<C-b>", builtin.buffers, {})
-		vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
+		-- vim.keymap.set("n", "<C-f>", builtin.find_files, {})
+		-- vim.keymap.set("n", "<C-b>", builtin.buffers, {})
+		-- vim.keymap.set("n", "<C-g>", telescope.extensions.egrepify.egrepify, {})
 
 		vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 		-- find siblings

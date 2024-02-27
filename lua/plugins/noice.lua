@@ -109,14 +109,18 @@ return {
 					-- 	padding = { 1, 3 },
 					-- },
 					border = {
-						style = special_chars.create_special_border(),
+						style = special_chars.create_special_border({
+							vertical_half = true,
+						}),
 						text = nil,
 					},
 				},
 				mini = {},
 				hover = {
 					border = {
-						style = special_chars.create_special_border(),
+						style = special_chars.create_special_border({
+							vertical_half = true,
+						}),
 					},
 					position = {
 						row = 2,
