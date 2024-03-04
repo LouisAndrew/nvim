@@ -16,6 +16,11 @@ return {
 				require("illuminate").configure({
 					min_count_to_highlight = 2,
 					delay = 200,
+					filetypes_denylist = {
+						"dirbuf",
+						"dirvish",
+						"NvimTree",
+					},
 				})
 			end,
 		},

@@ -63,6 +63,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 		local o = vim.opt
 		o.conceallevel = 2
+		-- o.conceallevel = 0
 		o.tabstop = 2
 		o.softtabstop = 2
 		o.shiftwidth = 2
