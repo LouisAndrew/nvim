@@ -15,6 +15,15 @@ vim.diagnostic.config({
 	underline = true,
 })
 
+-- local function lspSymbol(name, icon)
+-- 	vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, numhl = "DiagnosticDefault" .. name })
+-- end
+-- lspSymbol("Error", "")
+-- lspSymbol("Information", "")
+-- lspSymbol("Hint", "")
+-- lspSymbol("Info", "")
+-- lspSymbol("Warning", "")
+
 lsp_zero.on_attach(function(client, bufnr)
 	if
 		client.server_capabilities["documentSymbolProvider"]
@@ -60,6 +69,15 @@ local lspconfig = require("lspconfig")
 
 lspconfig.graphql.setup({
 	filetypes = { "graphql", "javascript", "typescript", "typescriptreact" },
+})
+
+lspconfig.eslint.setup({
+	on_attach = function(_, bufnr)
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			command = "EslintFixAll",
+		})
+	end,
 })
 
 lspconfig.tailwindcss.setup({
@@ -185,3 +203,16 @@ saga.setup({
 		in_select = false,
 	},
 })
+
+local icons = require("theme.icons")
+
+local signs = {
+	{ name = "DiagnosticSignError", text = icons.Error },
+	{ name = "DiagnosticSignWarn", text = icons.Warn },
+	{ name = "DiagnosticSignHint", text = icons.Hint },
+	{ name = "DiagnosticSignInfo", text = icons.Info },
+}
+
+for _, sign in ipairs(signs) do
+	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end

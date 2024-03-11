@@ -95,4 +95,15 @@ return {
 			),
 		})
 	),
+
+	s(
+		"ds",
+		fmt("const {destructure} = {variable};", {
+			variable = i(1),
+			destructure = c(2, {
+				sn(nil, fmt("{{ {} }}", { i(1) })),
+				sn(nil, fmt("[{}]", { i(1) })),
+			}),
+		})
+	),
 }

@@ -11,6 +11,7 @@ return {
 		local noice = require("noice")
 		noice.setup({
 			cmdline = {
+				view = "cmdline",
 				enabled = true,
 				opts = {},
 				format = {
@@ -76,14 +77,14 @@ return {
 					help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = " ?" },
 					input = {
 						opts = {
-							win_options = {
-								winhighlight = {
-									Normal = "NoiceInputNormal",
-								},
-							},
+							-- win_options = {
+							-- 	winhighlight = {
+							-- 		Normal = "NoiceInputNormal",
+							-- 	},
+							-- },
 
 							border = {
-								style = special_chars.create_special_border({ vertical_padding = false }),
+								-- style = special_chars.create_special_border({ vertical_padding = false }),
 							},
 						},
 					},

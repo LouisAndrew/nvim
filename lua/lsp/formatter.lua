@@ -15,15 +15,15 @@ end
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		javascript = { "eslint_d" },
-		typescript = { "eslint_d" },
-		typescriptreact = { "eslint_d" },
-		vue = { "eslint_d" },
+		-- javascript = { "eslint_d" },
+		-- typescript = { "eslint_d" },
+		-- typescriptreact = { "eslint_d" },
+		-- vue = { "eslint_d" },
 		rust = { "rust_analyzer" },
 		astro = { "eslint_d" },
 		go = { "gofmt" },
-		-- markdown = { "markdownlint" },
 		json = { "jq" },
+		markdown = { "prettier" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
@@ -48,22 +48,23 @@ local js_files = { "javascript", "typescript", "typescriptreact", "vue", "astro"
 null_ls.setup({
 	sources = {
 		-- ESLINT
-		null_ls.builtins.diagnostics.eslint_d.with({
-			condition = check_project_eslint,
-			filetypes = js_files,
-		}),
+		-- null_ls.builtins.diagnostics.eslint_d.with({
+		-- 	condition = check_project_eslint,
+		-- 	filetypes = js_files,
+		-- }),
 
-		null_ls.builtins.code_actions.eslint_d.with({
-			condition = check_project_eslint,
-			filetypes = js_files,
-		}),
+		-- null_ls.builtins.code_actions.eslint_d.with({
+		-- 	condition = check_project_eslint,
+		-- 	filetypes = js_files,
+		-- }),
 
 		-- MARKDOWN
 		null_ls.builtins.diagnostics.markdownlint,
-
-		null_ls.builtins.formatting.deno_fmt.with({
-			filetypes = { "markdown" },
-		}),
+		--
+		-- null_ls.builtins.formatting.deno_fmt.with({
+		-- 	filetypes = { "markdown" },
+		-- }),
+		null_ls.builtins.formatting.textlint,
 
 		-- JSON
 		null_ls.builtins.diagnostics.spectral,

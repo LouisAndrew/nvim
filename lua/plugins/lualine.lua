@@ -332,7 +332,7 @@ return {
 				end
 
 				local client_names = {}
-				local display_count = false
+				local display_count = true
 				for _, client in pairs(client_map) do
 					local count = (client.count == 1 or display_count == false) and "" or " (" .. client.count .. ")"
 					table.insert(client_names, client.name .. count)

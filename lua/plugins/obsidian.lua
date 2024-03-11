@@ -14,7 +14,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"godlygeek/tabular",
-		"dfendr/clipboard-image.nvim",
+		-- "dfendr/clipboard-image.nvim",
 		{
 			"ellisonleao/glow.nvim",
 			cmd = "Glow",
@@ -79,20 +79,20 @@ return {
 				vim.fn.jobstart({ "open", url })
 			end,
 			attachments = {
-				img_folder = "assets/imgs",
-				img_text_func = function(client, path)
-					local link_path
-					local vault_relative_path = client:vault_relative_path(path)
-					if vault_relative_path ~= nil then
-						-- Use relative path if the image is saved in the vault dir.
-						link_path = vault_relative_path
-					else
-						-- Otherwise use the absolute path.
-						link_path = tostring(path)
-					end
-					local display_name = vim.fs.basename(link_path)
-					return string.format("![%s](%s)", display_name, link_path)
-				end,
+				img_folder = "imgs",
+				-- img_text_func = function(client, path)
+				-- 	local link_path
+				-- 	local vault_relative_path = client:vault_relative_path(path)
+				-- 	if vault_relative_path ~= nil then
+				-- 		-- Use relative path if the image is saved in the vault dir.
+				-- 		link_path = vault_relative_path
+				-- 	else
+				-- 		-- Otherwise use the absolute path.
+				-- 		link_path = tostring(path)
+				-- 	end
+				-- 	local display_name = vim.fs.basename(link_path)
+				-- 	return string.format("![%s](%s)", display_name, link_path)
+				-- end,
 			},
 			sort_by = "modified",
 			sort_reversed = true,

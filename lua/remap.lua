@@ -21,6 +21,8 @@ local M = {
 	n = {
 		["<ESC>"] = { "<cmd> noh <CR>", "no highlight" },
 		["<leader>pv"] = { vim.cmd.Ex },
+		["<leader>tn"] = { ":e %:h" }, -- adjacent
+		["<leader>tt"] = { ":e %:r.spec.ts" }, -- spec file
 		["<leader>s"] = { "<cmd>:w<cr>" },
 
 		["<leader>tw"] = { "<cmd>:tabclose<cr>" },

@@ -20,6 +20,7 @@ return {
 						"dirbuf",
 						"dirvish",
 						"NvimTree",
+						"DiffviewFiles",
 					},
 				})
 			end,

@@ -17,5 +17,17 @@ return {
 			}),
 		})
 	),
+
 	s("clg", fmt("console.log({})", { i(1) })),
+
+	s(
+		"ds",
+		fmt("const {destructure} = {variable};", {
+			variable = i(1),
+			destructure = c(2, {
+				sn(nil, fmt("{{ {} }}", { i(1) })),
+				sn(nil, fmt("[{}]", { i(1) })),
+			}),
+		})
+	),
 }
