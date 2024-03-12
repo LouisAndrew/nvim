@@ -15,15 +15,6 @@ vim.diagnostic.config({
 	underline = true,
 })
 
--- local function lspSymbol(name, icon)
--- 	vim.fn.sign_define("DiagnosticSign" .. name, { text = icon, numhl = "DiagnosticDefault" .. name })
--- end
--- lspSymbol("Error", "")
--- lspSymbol("Information", "")
--- lspSymbol("Hint", "")
--- lspSymbol("Info", "")
--- lspSymbol("Warning", "")
-
 lsp_zero.on_attach(function(client, bufnr)
 	if
 		client.server_capabilities["documentSymbolProvider"]
@@ -72,11 +63,12 @@ lspconfig.graphql.setup({
 })
 
 lspconfig.eslint.setup({
+	-- @TODO disable eslint autoformat for now
 	on_attach = function(_, bufnr)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = bufnr,
-			command = "EslintFixAll",
-		})
+		-- vim.api.nvim_create_autocmd("BufWritePre", {
+		-- 	buffer = bufnr,
+		-- 	command = "EslintFixAll",
+		-- })
 	end,
 })
 

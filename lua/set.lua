@@ -98,20 +98,19 @@ local split_by_space = function(s)
 	return words
 end
 
--- @TODO
-local dump = require("utils").dump
+local utils = require("utils")
+local pngpastePath = "~/dev/utils/dotfiles/pngpaste.sh"
 vim.api.nvim_create_user_command("PasteImgClipboard", function(args)
-	local words = split_by_space(args["args"][1] or "")
-	print(args["args"][1])
+	local words = split_by_space(args["args"] or "")
 
-	print(words[2])
 	local dir = words[2] or "~/dev/documents/assets/imgs"
 
 	local now = os.date("%d.%m.%Y")
 	local filename = words[1] or now
 
 	local dest = dir .. "/" .. filename .. ".png"
-	-- vim.cmd("!~/dev/utils/dotfiles/pngpaste.sh " .. dest)
+	vim.cmd("!" .. pngpastePath .. " " .. dest)
+	utils.insert("![](" .. dest .. ")", true)
 end, { nargs = "?" })
 
 vim.api.nvim_create_user_command("Test", 'echo "It works!"', {})

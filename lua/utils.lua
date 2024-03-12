@@ -30,10 +30,21 @@ local nvim_config_path = function()
 	return vim.fn.stdpath("config")
 end
 
+--- @param text string
+local insert = function(text, append)
+	local content = text
+	if append then
+		content = vim.api.nvim_get_current_line() .. " " .. text
+	end
+
+	vim.api.nvim_set_current_line(content)
+end
+
 return {
 	has_value = has_value,
 	dump = dump,
 	nvim_config_path = nvim_config_path(),
+	insert = insert,
 	CONST = {
 		truthy = 1,
 		falsy = 0,
