@@ -14,10 +14,6 @@ end
 -- Use conform for formatting
 conform.setup({
 	formatters_by_ft = {
-		javascript = { "eslint_d" },
-		typescript = { "eslint_d" },
-		typescriptreact = { "eslint_d" },
-		vue = { "eslint_d" },
 		lua = { "stylua" },
 		rust = { "rust_analyzer" },
 		astro = { "eslint_d" },
@@ -27,7 +23,6 @@ conform.setup({
 	},
 	format_on_save = {
 		timeout_ms = 500,
-		lsp_fallback = true,
 	},
 })
 
