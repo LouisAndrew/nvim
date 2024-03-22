@@ -8,8 +8,30 @@ return {
 	event = "BufEnter",
 	config = function()
 		local ls = require("luasnip")
+		local types = require("luasnip.util.types")
+
 		ls.setup({
 			update_events = { "TextChanged", "TextChangedI" },
+			ext_opts = {
+				[types.insertNode] = {
+					active = {
+						hl_group = "LuaSnipInsertActive",
+					},
+					passive = {
+						hl_group = "LuaSnipInsertPassive",
+					},
+				},
+				[types.choiceNode] = {
+					active = {
+						hl_group = "LuaSnipChoiceActive",
+					},
+					passive = {
+						hl_group = "LuaSnipChoicePassive",
+					},
+				},
+			},
+			ext_base_prio = 200,
+			ext_prio_increase = 2,
 		})
 
 		vim.keymap.set({ "i" }, "<C-o>", function()

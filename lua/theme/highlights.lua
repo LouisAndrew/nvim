@@ -448,6 +448,13 @@ local navic_config = {
 	{ "NavicSeparator", colors.noir_2 },
 }
 
+local luasnip_config = {
+	{ "LuaSnipInsertActive", nil, colors.mfed_bg_accent },
+	{ "LuaSnipInsertPassive", nil, colors.nb_background },
+	{ "LuaSnipChoiceActive", nil, colors.add },
+	{ "LuaSnipChoicePassive", nil, colors.nb_background },
+}
+
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
 		local hl_group = "Notify" .. lvl[1] .. group
@@ -462,6 +469,7 @@ local hl_group_configs = {
 	notify_config,
 	noice_config,
 	navic_config,
+	luasnip_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

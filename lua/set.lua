@@ -102,15 +102,15 @@ local utils = require("utils")
 local pngpastePath = "~/dev/utils/dotfiles/pngpaste.sh"
 vim.api.nvim_create_user_command("PasteImgClipboard", function(args)
 	local words = split_by_space(args["args"] or "")
-
 	local dir = words[2] or "~/dev/documents/assets/imgs"
 
 	local now = os.date("%d.%m.%Y")
 	local filename = words[1] or now
 
-	local dest = dir .. "/" .. filename .. ".png"
+	local dest = dir .. "/" .. filename
 	vim.cmd("!" .. pngpastePath .. " " .. dest)
-	utils.insert("![](" .. dest .. ")", true)
+	utils.insert("![](" .. dest .. ".png)", true)
+	utils.insert(" ![[" .. filename .. ".png]]", true)
 end, { nargs = "?" })
 
 vim.api.nvim_create_user_command("Test", 'echo "It works!"', {})
