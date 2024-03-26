@@ -1,4 +1,4 @@
-local Color = require("colorbuddy").setup()
+local Color = require("colorbuddy").Color
 local minimal_fedu = require("colors")
 
 Color.new("nb_background", minimal_fedu.background)
@@ -6,22 +6,11 @@ Color.new("primary", minimal_fedu.foreground)
 -- Variables and stuff
 Color.new("secondary", minimal_fedu.white)
 
---
--- Set up semantic color palette
--- These are to be used sparingly, but have semantic meaning for things like lsp diagnostics, git diffs, etc.
--- Can be configured by preset or end user
 Color.new("diagnostic_error", minimal_fedu.diagnostic_error)
 Color.new("diagnostic_warning", minimal_fedu.diagnostic_warning)
 Color.new("diagnostic_info", minimal_fedu.diagnostic_info)
 Color.new("diagnostic_hint", minimal_fedu.diagnostic_hint)
-Color.new("diff_add", minimal_fedu.diff_add)
-Color.new("diff_change", minimal_fedu.diff_change)
-Color.new("diff_delete", minimal_fedu.diff_delete)
 
--- Set up noir grayscale palette
--- The rest of the theme is based on this grayscale palette, hence the name 'noir' buddy
--- For dark themes: 0 is light and 9 is dark
--- For light themes: 0 is dark and 9 is light
 Color.new("noir_0", minimal_fedu.noir_0)
 Color.new("noir_1", minimal_fedu.noir_1)
 Color.new("noir_2", minimal_fedu.noir_2)

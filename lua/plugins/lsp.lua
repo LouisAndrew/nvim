@@ -1,7 +1,7 @@
 local icons = require("theme.icons")
 return {
 	"VonHeikemen/lsp-zero.nvim",
-	event = "BufEnter",
+	-- event = "BufEnter",
 	branch = "v3.x",
 	dependencies = {
 		"williamboman/mason.nvim",
@@ -66,13 +66,20 @@ return {
 			end,
 		},
 		{
-			"dgagn/diagflow.nvim",
-			-- event = 'LspAttach', This is what I use personnally and it works great
-			opts = {
-				enabled = false,
-				placement = "inline",
-				inline_padding_left = 5,
-				toggle_event = { "InsertEnter" },
+			"kevinhwang91/nvim-ufo",
+			dependencies = {
+				"kevinhwang91/promise-async",
+				{
+					"chrisgrieser/nvim-origami",
+					event = "BufReadPost", -- later or on keypress would prevent saving folds
+					config = function()
+						require("origami").setup({
+							keepFoldsAcrossSessions = true,
+							pauseFoldsOnSearch = true,
+							setupFoldKeymaps = false,
+						})
+					end,
+				},
 			},
 		},
 	},

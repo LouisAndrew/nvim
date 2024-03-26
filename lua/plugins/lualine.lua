@@ -143,6 +143,26 @@ return {
 		}, { fg = minimal_fedu.noir_6 })
 
 		ins_left({
+			function()
+				local root = vim.fn.getcwd()
+				return string.gsub(root, "^.*/(.*)$", "%1")
+			end,
+			padding = { right = 1, left = 1 },
+			color = {
+				fg = minimal_fedu.white_accent,
+			},
+		})
+
+		ins_left({
+			"branch",
+			icon = "",
+			color = {
+				fg = minimal_fedu.palette.indigo_fg,
+			},
+			padding = { right = 1, left = 1 },
+		})
+
+		ins_left({
 			-- mode component
 			function()
 				local mode = vim.fn.mode()
@@ -197,28 +217,6 @@ return {
 				}
 			end,
 			padding = { right = 1, left = 1 },
-		})
-
-		ins_left({
-			"branch",
-			icon = "",
-			color = {
-				fg = minimal_fedu.palette.indigo_fg,
-				-- bg = minimal_fedu.palette.indigo,
-			},
-			padding = { right = 1, left = 1 },
-		})
-
-		ins_left({
-			"diff",
-			colored = true, -- Displays a colored diff status if set to true
-			diff_color = {
-				-- Same color values as the general color option can be used here.
-				added = "LuaLineDiffAdd", -- Changes the diff's added color
-				modified = "LuaLineDiffChange", -- Changes the diff's modified color
-				removed = "LuaLineDiffDelete", -- Changes the diff's removed color you
-			},
-			symbols = { added = "+", modified = "~", removed = "-" },
 		})
 
 		ins_left({

@@ -31,4 +31,18 @@ return {
 			}
 		)
 	),
+	s(
+		"tr",
+		fmt(
+			[[
+  t.Run("{name}", func(t *testing.T) {{
+    {}
+  }})
+  ]],
+			{
+				name = i(1),
+				i(2),
+			}
+		)
+	),
 }

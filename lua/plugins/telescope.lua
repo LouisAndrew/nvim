@@ -1,4 +1,3 @@
-local special_chars = require("theme.special_chars")
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.4",
@@ -34,45 +33,17 @@ return {
 		---@diagnostic disable-next-line: deprecated
 		local vimgrep_arguments = { unpack(config.values.vimgrep_arguments) }
 
-		-- I want to search in hidden/dot files.
 		table.insert(vimgrep_arguments, "--hidden")
-		-- I don't want to search in the `.git` directory.
 		table.insert(vimgrep_arguments, "--glob")
 		table.insert(vimgrep_arguments, "!**/.git/*")
 
 		telescope.setup({
 			defaults = {
 				borderchars = {
-					preview = {
-						special_chars.half_lower_block,
-						special_chars.full_block,
-						special_chars.half_upper_block,
-						special_chars.full_block,
-						special_chars.half_lower_block,
-						special_chars.half_lower_block,
-						special_chars.half_upper_block,
-						special_chars.half_upper_block,
-					},
-					prompt = {
-						special_chars.half_lower_block,
-						special_chars.half_left_block,
-						special_chars.half_upper_block,
-						special_chars.half_right_block,
-						special_chars.quadrant_lower_right,
-						special_chars.quadrant_lower_left,
-						special_chars.quadrant_upper_left,
-						special_chars.quadrant_upper_right,
-					},
-					results = {
-						special_chars.half_lower_block,
-						special_chars.half_left_block,
-						special_chars.half_upper_block,
-						special_chars.half_right_block,
-						special_chars.quadrant_lower_right,
-						special_chars.quadrant_lower_left,
-						special_chars.quadrant_upper_left,
-						special_chars.quadrant_upper_right,
-					},
+					preview = { " ", " ", "", " ", "", "", "", "" },
+					results = { " ", "│", " ", " ", "", "", "│", " " },
+					prompt = { " ", "│", "", " ", " ", "│", "", "" },
+					-- prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }, -- for reference
 				},
 				path_display = {
 					shorten = {
@@ -95,38 +66,6 @@ return {
 				vimgrep_arguments = vimgrep_arguments,
 				mappings = default_maps,
 				color_devicons = false,
-
-				preview = {
-					mime_hook = function(filepath, bufnr, opts)
-						local is_image = function(filepath)
-							local image_extensions = { "png", "jpg" } -- Supported image formats
-							local split_path = vim.split(filepath:lower(), ".", { plain = true })
-							local extension = split_path[#split_path]
-							return vim.tbl_contains(image_extensions, extension)
-						end
-
-						if is_image(filepath) then
-							local term = vim.api.nvim_open_term(bufnr, {})
-							local function send_output(_, data, _)
-								for _, d in ipairs(data) do
-									vim.api.nvim_chan_send(term, d .. "\r\n")
-								end
-							end
-
-							-- still not working :((
-							vim.fn.jobstart({
-								"viu",
-								filepath, -- Terminal image viewer command
-							}, { on_stdout = send_output, stdout_buffered = true, pty = true })
-						else
-							require("telescope.previewers.utils").set_preview_message(
-								bufnr,
-								opts.winid,
-								"Binary cannot be previewed"
-							)
-						end
-					end,
-				},
 			},
 			pickers = {
 				find_files = {

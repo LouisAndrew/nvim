@@ -15,12 +15,12 @@ return {
 				enabled = true,
 				opts = {},
 				format = {
-					cmdline = { pattern = "^:", icon = "  ", lang = "vim", title = "" },
+					cmdline = { pattern = "^:", icon = "   ", lang = "vim", title = "" },
 					search_down = {
 						title = "",
 						kind = "search",
 						pattern = "^/",
-						icon = "  ",
+						icon = "   ",
 						lang = "regex",
 						opts = {
 							win_options = {
@@ -35,7 +35,7 @@ return {
 						title = "",
 						kind = "search",
 						pattern = "^%?",
-						icon = "  ",
+						icon = "   ",
 						lang = "regex",
 						opts = {
 							win_options = {
@@ -49,7 +49,7 @@ return {
 					filter = {
 						title = "",
 						pattern = "^:%s*!",
-						icon = " $ ",
+						icon = "  $ ",
 						lang = "bash",
 						opts = {
 							win_options = {
@@ -63,7 +63,7 @@ return {
 					lua = {
 						title = "",
 						pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
-						icon = "  ",
+						icon = "   ",
 						lang = "lua",
 						opts = {
 							win_options = {
@@ -74,7 +74,7 @@ return {
 							},
 						},
 					},
-					help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = " ?" },
+					help = { title = "", pattern = "^:%s*he?l?p?%s+", icon = "  ? " },
 					input = {
 						opts = {
 							-- win_options = {
@@ -113,7 +113,11 @@ return {
 					},
 				},
 				mini = {},
-				hover = {},
+				hover = {
+					win_options = {
+						winhighlight = "Normal:NoiceHoverNormal,FloatBorder:cmpborder",
+					},
+				},
 			},
 			notify = {
 				enabled = false,

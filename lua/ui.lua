@@ -1,5 +1,5 @@
 local primary_font = "Varys"
-local fallbacks = "nonicons,codicon,octicons"
+local fallbacks = "nonicons"
 
 local fontheight_base = 13
 local fontheight = {
@@ -37,6 +37,17 @@ vim.keymap.set("n", "<D-=>", guifontscale(1), { noremap = true })
 vim.keymap.set("n", "<D-->", guifontscale(-1), { noremap = true })
 vim.keymap.set("n", "<D-0>", guifontscale(0), { noremap = true })
 
--- vim.opt.linespace = 8
--- vim.cmd("source " .. utils.nvim_config_path .. "/macmap.vim")
 -- setguifont()
+-- vim.cmd("source " .. utils.nvim_config_path .. "/macmap.vim")
+
+local PADDING = 10
+
+if vim.g.neovide then
+	-- vim.o.guifont = "Varys:h13:w1:l,nonicons"
+	vim.opt.linespace = 8
+	vim.g.neovide_padding_top = PADDING
+	vim.g.neovide_padding_bottom = PADDING
+	vim.g.neovide_padding_right = PADDING
+	vim.g.neovide_padding_left = PADDING
+	-- setguifont()
+end

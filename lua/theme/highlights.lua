@@ -62,8 +62,7 @@ Group.new("WarningMsg", colors.primary)
 Group.new("WildMenu", colors.noir_5, colors.noir_8)
 
 Group.new("FloatTitle", colors.noir_0)
-Group.new("NormalFloat", colors.noir_4)
--- Group.new("NormalFloat", colors.noir_4, colors.bg_shade)
+Group.new("NormalFloat", colors.noir_4, colors.bg_shade)
 
 -- Treesitter Syntax Highlighting
 -- See :help treesitter-highlight-groups
@@ -244,14 +243,14 @@ Group.new("LuaLineDiffAdd", colors.add_fg, nil)
 Group.new("LuaLineDiffDelete", colors.remove_fg, nil)
 
 -- Telescope
-Group.new("TelescopeTitle", colors.white, colors.bg_shade, styles.bold)
+-- Group.new("TelescopeTitle", colors.white, colors.bg_shade, styles.bold)
+Group.new("TelescopeTitle", colors.dimmed_white:dark(), nil, styles.bold)
 Group.new("TelescopeNormal", nil, colors.bg_shade)
--- Group.new("TelescopeBorder", colors.noir_7)
-Group.new("TelescopeBorder", colors.bg_shade, colors.nb_background)
+Group.new("TelescopeBorder", colors.mfed_bg_accent_light, colors.bg_shade)
 Group.new("TelescopeMatching", colors.noir_0)
-Group.new("TelescopePromptCounter", colors.noir_8, nil)
-Group.new("TelescopeResultsNormal", colors.noir_4, colors.bg_shade)
-Group.new("TelescopeSelection", colors.white, colors.nb_background, styles.bold)
+Group.new("TelescopePromptCounter", colors.mfed_dim:dark(), nil)
+Group.new("TelescopeResultsNormal", colors.mfed_dim, colors.bg_shade)
+Group.new("TelescopeSelection", colors.white, colors.mfed_bg_accent)
 
 -- Saga
 Group.new("TitleString", colors.secondary)
@@ -317,6 +316,7 @@ Group.new("Debug", colors.debug, colors.debug)
 Group.new("nvimtreefoldericon", colors.mfed_dim)
 Group.new("sagaborder", colors.bg_shade)
 Group.new("cmpmenu", nil, colors.bg_shade)
+
 Group.new("cmpborder", colors.bg_shade, nil)
 Group.new("dapbreakpoint", colors.remove_fg)
 
@@ -399,22 +399,23 @@ local notify_config = {
 
 local noice_config = {
 	{ "NoiceCmdlinePrompt", colors.nb_background },
-	{ "NoiceCmdlinePopup", nil, colors.bg_shade },
+	{ "NoiceCmdlinePopup", nil, colors.indigo_fg },
 	{ "NoiceCmdlinePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoiceCmdlineIcon", colors.noir_3, nil, styles.bold },
-	{ "NoiceCmdlineIconSearch", colors.white, nil, styles.bold },
+	{ "NoiceCmdlineIconSearch", colors.nb_background, nil, styles.bold },
 	{ "NoiceCmdlinePopupTitle", colors.dimmed_white:light() },
 	{ "NoiceCmdlinePopupBorderSearch", colors.bg_shade:dark(), colors.nb_background },
 	{ "NoiceCursor", colors.noir_2, colors.noir_9 },
 	{ "NoiceVirtualText", colors.yellow_fg },
 	{ "NoicePopupBorder", colors.bg_shade, colors.nb_background },
 	{ "NoicePopup", nil, colors.bg_shade },
-	{ "NoiceCmdlineSearch", colors.white, colors.visual },
-	{ "NoiceCmdlineSearchBorder", colors.visual, colors.nb_background },
+	{ "NoiceCmdlineSearch", colors.nb_background, colors.yellow_fg },
+	{ "NoiceCmdlineSearchBorder", colors.nb_background, colors.yellow_fg },
 	{ "NoiceCmdline", colors.white, colors.bg_shade },
 	{ "NoiceCmdlineScript", colors.white, colors.mfed_navy:dark():dark():dark():dark() },
 	{ "NoiceCmdlineScriptBorder", colors.mfed_navy:dark():dark():dark():dark(), colors.nb_background },
 	{ "NoiceInputNormal", colors.white, colors.bg_shade },
+	{ "NoiceHoverNormal", nil, colors.bg_shade },
 }
 
 local navic_config = {
@@ -449,11 +450,15 @@ local navic_config = {
 }
 
 local luasnip_config = {
-	{ "LuaSnipInsertActive", nil, colors.mfed_bg_accent },
-	{ "LuaSnipInsertPassive", nil, colors.nb_background },
-	{ "LuaSnipChoiceActive", nil, colors.add },
-	{ "LuaSnipChoicePassive", nil, colors.nb_background },
+	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
+	{ "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
 }
+
+for _, pair in pairs(luasnip_config) do
+	local hi_group = pair[1]
+	local hi_color = pair[2]
+	vim.cmd("hi! " .. hi_group .. " gui=underline guisp=" .. hi_color)
+end
 
 for _, lvl in ipairs(level) do
 	for _, group in ipairs({ "Icon", "Title" }) do
@@ -469,7 +474,6 @@ local hl_group_configs = {
 	notify_config,
 	noice_config,
 	navic_config,
-	luasnip_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

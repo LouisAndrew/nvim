@@ -9,8 +9,10 @@ local white = "#ffffff"
 local navy = "#678CB1"
 
 local background = "#131313"
-local bg_shade = "#0f0f0f"
-local bg_accent_light = "#657578"
+-- local bg_shade = "#0f0f0f"
+
+local bg_shade = "#0c0c0c"
+local bg_accent_light = "#202020"
 -- local foreground = "#ffbb80"
 local foreground = "#ffcfa7"
 local debug = "#ff0000"
