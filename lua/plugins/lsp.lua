@@ -82,6 +82,24 @@ return {
 				},
 			},
 		},
+		{
+			"dgagn/diagflow.nvim",
+			event = "LspAttach",
+			opts = {
+				format = function(diag)
+					local source = diag.source
+					local msg = diag.message
+					return string.format("(%s) %s", source, msg)
+				end,
+				toggle_event = { "InsertEnter", "InsertLeave" },
+				update_event = { "DiagnosticChanged", "BufReadPost" },
+				gap_size = 0,
+				padding_top = -1,
+				scope = "line",
+				text_align = "right",
+				placement = "top",
+			},
+		},
 	},
 	config = function()
 		require("lsp")

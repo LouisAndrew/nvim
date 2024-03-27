@@ -48,9 +48,6 @@ local M = {
 		["<leader>mj"] = { "<cmd> :m+ <CR>", "line down" },
 		-- ["gh"] = { "<Plug>VSCodeCommentaryLine" },
 
-		["¬"] = { ":call VSCodeNotify('workbench.action.splitEditorRight') <CR>" },
-		["˙"] = { ":call VSCodeNotify('workbench.action.splitEditorLeft') <CR>" },
-
 		-- Copy all
 		["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
 
@@ -66,10 +63,10 @@ local M = {
 		["<C-k>"] = { "<C-w>k" },
 		["<C-8>"] = { "zh" },
 		["<C-9>"] = { "zl" },
-		["<M-h>"] = { "<C-w><" },
-		["<M-l>"] = { "<C-w>>" },
-		["<M-k>"] = { "<C-w>+" },
-		["<M-j>"] = { "<C-w>-" },
+		["˙"] = { "<C-w><" },
+		["¬"] = { "<C-w>>" },
+		["˚"] = { "<C-w>+" },
+		["∆"] = { "<C-w>-" },
 		-- ["<C-f>"] = { "<C-w>>" },
 		["<leader>'"] = { "gt" },
 		["<leader>;"] = { "gT" },

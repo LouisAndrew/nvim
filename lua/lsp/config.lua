@@ -9,7 +9,7 @@ local utils = require("utils")
 vim.diagnostic.config({
 	virtual_lines = { only_current_line = true },
 	virtual_text = false,
-	signs = true,
+	signs = false,
 	severity_sort = true,
 	update_in_insert = false,
 	underline = true,

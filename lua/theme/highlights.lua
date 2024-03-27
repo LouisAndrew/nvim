@@ -39,7 +39,7 @@ Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
 Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
-Group.new("FoldColumn", nil, nil)
+Group.new("FoldColumn", colors.mfed_bg_accent_light:light(), nil)
 Group.new("MatchParen", nil, colors.noir_7)
 
 Group.new("MoreMsg", nil, colors.noir_6)

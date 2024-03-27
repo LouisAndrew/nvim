@@ -1,8 +1,10 @@
 local opt = vim.opt
--- opt.nu = true
+vim.o.statuscolumn =
+	'%=%l%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
+
 opt.nu = true
 opt.rnu = true
-opt.numberwidth = 4
+opt.numberwidth = 1
 
 -- indents etc
 opt.tabstop = 2
