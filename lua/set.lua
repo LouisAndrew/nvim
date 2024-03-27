@@ -33,7 +33,12 @@ opt.background = "dark" -- set this to dark or light
 opt.iskeyword:append("-")
 opt.cursorline = true
 opt.cursorlineopt = "number"
+local block = "n-c:block-Cursor,i-ci:ver10-iCursor,v:hor100-vCursor,o:hor50-pCursor,r:hor100-rCursor"
+-- opt.guicursor=i:ver100-iCursor
+-- " set guicursor+=n-v-c:blinkon0
+-- " set guicursor+=i:blinkwait10
 
+opt.guicursor = block
 -- " Disable swapfile and save undo {{{=====
 -- opt.noswapfile = true -- " Fuck you swapfiles
 opt.undofile = true

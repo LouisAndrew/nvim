@@ -83,5 +83,6 @@ return {
 		remove = red,
 		-- 15% of visual in `modes.lua`
 		visual = "#242536",
+		-- visual = "#2e1065",
 	},
 }
