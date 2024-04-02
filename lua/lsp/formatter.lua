@@ -11,6 +11,8 @@ local file_exists = function(file)
 	end
 end
 
+local utils = require("utils")
+
 -- Use conform for formatting
 conform.setup({
 	formatters_by_ft = {
@@ -18,12 +20,26 @@ conform.setup({
 		rust = { "rust_analyzer" },
 		astro = { "eslint_d" },
 		go = { "gofmt" },
-		json = { "jq" },
 		markdown = { "prettier" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
 	},
+})
+
+local lsp_fallback_format_ft = {
+	"json",
+}
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		local file = args.file
+		local extension = vim.fn.fnamemodify(file, ":e")
+		if utils.has_value(lsp_fallback_format_ft, extension) then
+			vim.lsp.buf.format()
+		end
+	end,
 })
 
 local check_project_eslint = function(utils)

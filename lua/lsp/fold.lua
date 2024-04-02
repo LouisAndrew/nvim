@@ -4,15 +4,8 @@ vim.o.foldenable = true
 
 vim.o.foldcolumn = "0"
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.foldingRange = {
--- 	dynamicRegistration = false,
--- 	lineFoldingOnly = true,
--- }
-
 local ftMap = {
 	yaml = { "treesitter", "indent" },
-	-- lua = { "treesitter", "indent" },
 }
 
 require("ufo").setup({

@@ -62,6 +62,9 @@ return {
 					format_text = function(text)
 						return text:gsub("callback", "cb")
 					end,
+					lsp = {
+						preference = { "volar" },
+					},
 				})
 			end,
 		},
@@ -103,6 +106,9 @@ return {
 		},
 		{
 			"b0o/SchemaStore.nvim",
+		},
+		{
+			"pmizio/typescript-tools.nvim",
 		},
 	},
 	config = function()

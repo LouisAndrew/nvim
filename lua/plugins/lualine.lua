@@ -318,6 +318,8 @@ return {
 						local n = client.name
 						if n == "emmet_language_server" then
 							n = "emmet"
+						elseif n == "typescript-tools" then
+							n = "tss"
 						end
 
 						local entry = client_map[n]
