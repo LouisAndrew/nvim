@@ -12,6 +12,7 @@ vim.o.foldcolumn = "0"
 
 local ftMap = {
 	yaml = { "treesitter", "indent" },
+	-- lua = { "treesitter", "indent" },
 }
 
 require("ufo").setup({

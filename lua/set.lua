@@ -1,6 +1,6 @@
 local opt = vim.opt
 vim.o.statuscolumn =
-	'%=%l%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
+	'%s%r%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
 
 opt.nu = true
 opt.rnu = true

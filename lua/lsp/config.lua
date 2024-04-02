@@ -102,19 +102,9 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 
-vim.g.PREVENT_CLASH_TS_VUE = "true"
-
 lspconfig.volar.setup({
 	root_dir = lspconfig.util.root_pattern("*.vue"),
 	filetypes = { "typescript", "vue", "javascript" },
-	on_attach = function(clientnr, bufnr)
-		local active_clients = vim.lsp.get_active_clients()
-		for _, client in pairs(active_clients) do
-			if vim.g.PREVENT_CLASH_TS_VUE == "true" and client.name == "tsserver" then
-				client.stop()
-			end
-		end
-	end,
 	on_new_config = function(new_config, new_root_dir)
 		local path = get_typescript_server_path(new_root_dir)
 		vim.g.TS_PATH = path
@@ -122,28 +112,43 @@ lspconfig.volar.setup({
 	end,
 })
 
-local vue_project = true
-local lsputils = require("lspconfig.util")
+local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
+local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
+
 lspconfig.tsserver.setup({
-	filetypes = { "typescript", "typescriptreact", "javascript" },
-	root_dir = function(filename, bufnr)
-		local has_vue = lsputils.root_pattern("*.vue")(filename, bufnr)
-		vue_project = has_vue ~= nil
-		if vue_project then
-			return
-		end
-
-		return lsputils.root_pattern("package.json")(filename, bufnr)
-	end,
-	on_attach = function(ts_client, bufnr)
-		if vue_project then
-			ts_client.stop()
-			return
-		end
-
-		navic.attach(ts_client, bufnr)
-	end,
+	filetypes = { "typescript", "typescriptreact", "javascript", "vue" },
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_ts_plugin_path,
+				languages = { "vue", "typescript" },
+			},
+		},
+	},
 })
+
+require("lspconfig").jsonls.setup({
+	settings = {
+		json = {
+			schemas = require("schemastore").json.schemas(),
+			validate = { enable = true },
+		},
+	},
+})
+
+require("lspconfig").yamlls.setup({
+	settings = {
+		yaml = {
+			schemaStore = {
+				enable = false,
+				url = "",
+			},
+			schemas = require("schemastore").yaml.schemas(),
+		},
+	},
+})
+
 local saga_keys = {
 	edit = "<cr>",
 	vsplit = "<C-l>",

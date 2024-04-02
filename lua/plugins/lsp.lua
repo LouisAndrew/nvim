@@ -101,6 +101,9 @@ return {
 				placement = "top",
 			},
 		},
+		{
+			"b0o/SchemaStore.nvim",
+		},
 	},
 	config = function()
 		require("lsp")

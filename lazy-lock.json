@@ -1,6 +1,7 @@
 {
   "ChatGPT.nvim": { "branch": "main", "commit": "df53728e05129278d6ea26271ec086aa013bed90" },
   "LuaSnip": { "branch": "master", "commit": "8ae1dedd988eb56441b7858bd1e8554dfadaa46d" },
+  "SchemaStore.nvim": { "branch": "main", "commit": "f0ca13e2634f08f127e086909d18a9387a47e760" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "d250c63aa13ead745e3a40f61fdd3470efde3923" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
@@ -27,7 +28,6 @@
   "mini.ai": { "branch": "main", "commit": "ee9446a17c160aba6a04ff22097389c41872c878" },
   "mini.comment": { "branch": "main", "commit": "a4b7e46deb9ad2feb8902cc5dbf087eced112ee5" },
   "mini.pairs": { "branch": "stable", "commit": "04f58f2545ed80ac3b52dd4826e93f33e15b2af6" },
-  "modes.nvim": { "branch": "main", "commit": "3188692abf02a8838ec75e59d68c2ce3e4323f5c" },
   "neogen": { "branch": "main", "commit": "0daffcec249bf42275e322361fe55b89a05ff278" },
   "neogit": { "branch": "master", "commit": "20ab5a688c2de6fa371865528c737ae901989aa5" },
   "noice.nvim": { "branch": "main", "commit": "d29b26c329558ee4bb2e7f3cc25078929ef89b2f" },
