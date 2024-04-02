@@ -458,7 +458,7 @@ local navic_config = {
 
 local luasnip_config = {
 	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
-	{ "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
+	-- { "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
 }
 
 for _, pair in pairs(luasnip_config) do

@@ -23,15 +23,14 @@ return {
 				},
 				[types.choiceNode] = {
 					active = {
-						hl_group = "LuaSnipChoiceActive",
-					},
-					passive = {
-						hl_group = "LuaSnipChoicePassive",
+						virt_text = { { "<-", "LuaLineDiffChange" } },
+						hl_mode = "combine",
 					},
 				},
 			},
 			ext_base_prio = 200,
 			ext_prio_increase = 2,
+			history = true,
 		})
 
 		vim.keymap.set({ "i" }, "<C-o>", function()
