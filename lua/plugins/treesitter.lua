@@ -21,6 +21,7 @@ return {
 						"dirvish",
 						"NvimTree",
 						"DiffviewFiles",
+						"DiffviewFileHistory",
 					},
 				})
 			end,

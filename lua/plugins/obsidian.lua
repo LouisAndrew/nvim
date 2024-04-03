@@ -40,7 +40,12 @@ return {
 
 		require("obsidian").setup({
 			picker = {
-				mappings = {
+				name = "telescope.nvim",
+				note_mappings = {
+					["<C-l>"] = "vsplit",
+					["<C-c>"] = "new",
+				},
+				tag_mappings = {
 					["<C-l>"] = "vsplit",
 					["<C-c>"] = "new",
 				},
