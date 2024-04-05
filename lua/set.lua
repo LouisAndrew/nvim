@@ -99,7 +99,7 @@ end, {})
 
 local split_by_space = function(s)
 	local words = {}
-	for word in s:gmatch("%w+") do
+	for word in s:gmatch("[%a%-_]+") do
 		table.insert(words, word)
 	end
 	return words
@@ -116,7 +116,18 @@ vim.api.nvim_create_user_command("PasteImgClipboard", function(args)
 
 	local dest = dir .. "/" .. filename
 	vim.cmd("!" .. pngpastePath .. " " .. dest)
-	utils.insert("![](" .. dest .. ".png)", true)
+	utils.insert("![" .. dest .. "](" .. dest .. ".png)", true)
+end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("PasteImgClipboardObsidian", function(args)
+	local words = split_by_space(args["args"] or "")
+	local dir = words[2] or "~/dev/documents/assets/imgs"
+
+	local now = os.date("%d.%m.%Y")
+	local filename = words[1] or now
+
+	local dest = dir .. "/" .. filename
+	vim.cmd("!" .. pngpastePath .. " " .. dest)
 	utils.insert(" ![[" .. filename .. ".png]]", true)
 end, { nargs = "?" })
 

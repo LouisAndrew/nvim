@@ -104,7 +104,7 @@ end
 
 lspconfig.volar.setup({
 	root_dir = lspconfig.util.root_pattern("*.vue"),
-	filetypes = { "vue", "typescript", "javascript" },
+	filetypes = { "vue" },
 	on_new_config = function(new_config, new_root_dir)
 		local path = get_typescript_server_path(new_root_dir)
 		vim.g.TS_PATH = path
@@ -144,30 +144,6 @@ require("typescript-tools").setup({
 		"typescript",
 	},
 
-	root_dir = function(filename, bufnr)
-		local has_vue = lsputils.root_pattern("*.vue")(filename, bufnr)
-		vim.g.VUE_PROJECT = has_vue ~= nil and "true" or "false"
-		if vim.g.VUE_PROJECT == "true" then
-			return false
-		end
-
-		return lsputils.root_pattern("package.json")(filename, bufnr)
-	end,
-
-	on_attach = function(ts_client)
-		if vim.g.VUE_PROJECT then
-			ts_client.stop()
-			return
-		end
-
-		-- local clients = vim.lsp.get_active_clients()
-		-- for _, client in ipairs(clients) do
-		-- 	if client.name == "volar" then
-		-- 		ts_client.stop()
-		-- 		return
-		-- 	end
-		-- end
-	end,
 	handlers = {},
 
 	settings = {

@@ -78,6 +78,7 @@ local M = {
 		["<leader>tl"] = { "<cmd>:vsp<cr>" },
 
 		["Q"] = { "@qj", "Fast macro, always save on Q" },
+		["go"] = { "gx" },
 	},
 
 	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },

@@ -34,7 +34,12 @@ end
 local insert = function(text, append)
 	local content = text
 	if append then
-		content = vim.api.nvim_get_current_line() .. " " .. text
+		local current_line = vim.api.nvim_get_current_line()
+		if current_line == "" then
+			content = text
+		else
+			content = current_line .. " " .. text
+		end
 	end
 
 	vim.api.nvim_set_current_line(content)

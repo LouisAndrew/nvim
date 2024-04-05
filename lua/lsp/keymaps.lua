@@ -3,6 +3,7 @@ return {
 		local opts = { buffer = bufnr, remap = false }
 
 		vim.keymap.set("n", "<leader>iO", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
 		vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
