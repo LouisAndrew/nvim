@@ -44,6 +44,7 @@ Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
 Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
+Group.new("UfoFoldVirtualText", colors.mfed_bg_accent:light():light():light(), colors.mfed_bg_accent)
 Group.new("FoldColumn", colors.mfed_bg_accent_light:light():light():light(), nil)
 Group.new("MatchParen", nil, colors.noir_7)
 
