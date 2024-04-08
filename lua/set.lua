@@ -34,9 +34,6 @@ opt.iskeyword:append("-")
 opt.cursorline = true
 opt.cursorlineopt = "number"
 local block = "n-c:block-Cursor,i-ci:ver10-iCursor,v:hor100-vCursor,o:hor50-pCursor,r:hor100-rCursor"
--- opt.guicursor=i:ver100-iCursor
--- " set guicursor+=n-v-c:blinkon0
--- " set guicursor+=i:blinkwait10
 
 opt.guicursor = block
 -- " Disable swapfile and save undo {{{=====
@@ -80,22 +77,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = global_group,
 	callback = function()
-		-- @TODO
 		vim.cmd("syntax match TODO /@TODO/ containedin=@comment,@comment.documentation")
 	end,
 })
-
-vim.api.nvim_create_user_command("LspVolarEnableTS", function()
-	vim.g.PREVENT_CLASH_TS_VUE = "false"
-	vim.cmd("LspRestart")
-	vim.cmd("LspStart tsserver")
-end, {})
-
-vim.api.nvim_create_user_command("LspVolarDisableTS", function()
-	vim.g.PREVENT_CLASH_TS_VUE = "true"
-	vim.cmd("LspRestart")
-	-- vim.cmd("LspStop tsserver")
-end, {})
 
 local split_by_space = function(s)
 	local words = {}
