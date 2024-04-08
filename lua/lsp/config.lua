@@ -105,53 +105,47 @@ end
 lspconfig.volar.setup({
 	root_dir = lspconfig.util.root_pattern("*.vue"),
 	filetypes = { "vue" },
-	on_new_config = function(new_config, new_root_dir)
-		local path = get_typescript_server_path(new_root_dir)
-		vim.g.TS_PATH = path
-		new_config.init_options.typescript.tsdk = path
-	end,
-	on_attach = function()
-		vim.g.VUE_PROJECT = "true"
-	end,
 	init_options = {
 		vue = {
-			hybridMode = false,
+			hybridMode = true,
+			-- hybridMode = false
 		},
 	},
 })
---
--- local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
--- local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
---
--- lspconfig.tsserver.setup({
--- 	filetypes = { "vue" },
--- 	init_options = {
--- 		plugins = {
--- 			{
--- 				name = "@vue/typescript-plugin",
--- 				location = vue_ts_plugin_path,
--- 				languages = { "vue", "typescript" },
--- 			},
--- 		},
--- 	},
--- })
 
-vim.g.VUE_PROJECT = "true"
-local lsputils = require("lspconfig.util")
-require("typescript-tools").setup({
-	filetypes = {
-		"javascript",
-		"typescript",
-	},
+local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
+local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
 
-	handlers = {},
-
-	settings = {
-		tsserver_plugins = {
-			"@vue/typescript-plugin",
-		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+lspconfig.tsserver.setup({
+	filetypes = { "vue", "typescript", "javascript" },
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_ts_plugin_path,
+				languages = { "vue", "typescript" },
+			},
+		},
 	},
 })
+
+-- vim.g.VUE_PROJECT = "true"
+-- local lsputils = require("lspconfig.util")
+-- require("typescript-tools").setup({
+-- 	filetypes = {
+-- 		"javascript",
+-- 		"typescript",
+-- 		"vue",
+-- 	},
+--
+-- 	handlers = {},
+--
+-- 	settings = {
+-- 		tsserver_plugins = {
+-- 			"@vue/typescript-plugin",
+-- 		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+-- 	},
+-- })
 
 require("lspconfig").jsonls.setup({
 	settings = {
