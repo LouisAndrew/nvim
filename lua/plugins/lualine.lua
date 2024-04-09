@@ -338,8 +338,10 @@ return {
 					table.insert(client_names, client.name .. count)
 				end
 
-				if #client_names > 0 then
+				if #client_names == 1 then
 					return "|    " .. table.concat(client_names, ", ")
+				elseif #client_names > 0 then
+					return "|    " .. #client_names .. " LSPs"
 				else
 					return msg
 				end

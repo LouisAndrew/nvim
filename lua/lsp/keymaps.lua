@@ -6,8 +6,15 @@ return {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "<leader>ij", "<cmd>Lspsaga hover_doc<CR>", opts)
 		vim.keymap.set("n", "<leader>ii", vim.lsp.buf.hover, opts)
+
 		vim.keymap.set("n", "<leader>io", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-		vim.keymap.set("n", "<leader>if", "<cmd>Lspsaga finder<CR>", opts) -- show definition, references
+		vim.keymap.set("n", "<leader>if", function()
+			local winid = require("ufo").peekFoldedLinesUnderCursor()
+			if not winid then
+				vim.lsp.buf.hover()
+			end
+		end, opts)
+
 		vim.keymap.set("n", "<leader>is", vim.lsp.buf.workspace_symbol, opts)
 		vim.keymap.set("n", "<leader>it", "<cmd>Lspsaga outline<CR>", opts)
 		vim.keymap.set(

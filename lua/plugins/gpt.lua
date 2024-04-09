@@ -14,7 +14,24 @@ return {
 		},
 	},
 	config = function()
-		require("chatgpt").setup()
+		require("chatgpt").setup({
+			popup_window = {
+				border = {
+					style = "single",
+				},
+				win_options = {
+					winhighlight = "Normal:ChatGPTNormal",
+				},
+			},
+			popup_input = {
+				border = {
+					style = "single",
+				},
+				win_options = {
+					winhighlight = "Normal:ChatGPTNormal",
+				},
+			},
+		})
 	end,
 	dependencies = {
 		"MunifTanjim/nui.nvim",

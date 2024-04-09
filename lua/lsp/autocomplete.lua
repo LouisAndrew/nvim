@@ -29,11 +29,6 @@ cmp.setup({
 	sources = {
 		{
 			name = "nvim_lsp",
-			entry_filter = function(entry)
-				-- Disable snippets from LSP
-				local kind = entry:get_kind()
-				return cmp.lsp.CompletionItemKind.Snippet ~= kind and cmp.lsp.CompletionItemKind.Text ~= kind
-			end,
 		},
 		{ name = "nvim_lua" },
 		{ name = "path" },

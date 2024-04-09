@@ -43,8 +43,13 @@ Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
-Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
-Group.new("UfoFoldVirtualText", colors.mfed_bg_accent:light():light():light(), colors.mfed_bg_accent)
+-- Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
+Group.new("Folded", colors.dimmed_white, colors.nb_background)
+Group.new("UfoFoldVirtualText", colors.mfed_navy)
+-- Group.new("UfoFoldVirtualText", colors.dimmed_white:dark())
+Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
+--
+-- Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light())
 Group.new("FoldColumn", colors.mfed_bg_accent_light:light():light():light(), nil)
 Group.new("MatchParen", nil, colors.noir_7)
 
@@ -457,6 +462,14 @@ local navic_config = {
 	{ "NavicSeparator", colors.noir_2 },
 }
 
+local gpt_config = {
+	{
+		"ChatGPTNormal",
+		colors.dimmed_white,
+		colors.bg_shade,
+	},
+}
+
 local luasnip_config = {
 	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
 	-- { "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
@@ -482,6 +495,7 @@ local hl_group_configs = {
 	notify_config,
 	noice_config,
 	navic_config,
+	gpt_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

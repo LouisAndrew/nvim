@@ -30,6 +30,7 @@ conform.setup({
 local lsp_fallback_format_ft = {
 	"json",
 	"css",
+	"docker",
 }
 
 vim.g.ENABLE_AUTOFORMAT = "true"

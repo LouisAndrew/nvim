@@ -159,6 +159,35 @@ require("lspconfig").jsonls.setup({
 	},
 })
 
+local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
+emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.emmet_ls.setup({
+	capabilities = emmet_capabilities,
+	filetypes = {
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"svelte",
+		"pug",
+		"typescriptreact",
+		"vue",
+	},
+	init_options = {
+		html = {
+			options = {
+				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+				["bem.enabled"] = true,
+			},
+		},
+	},
+})
+
 require("lspconfig").yamlls.setup({
 	settings = {
 		yaml = {
