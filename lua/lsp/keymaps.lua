@@ -58,15 +58,14 @@ return {
 				severity = vim.diagnostic.severity.ERROR,
 			})
 		end)
-		-- vim.keymap.set("n", "<leader>ia", "<cmd>Lspsaga code_action<CR>", opts)
 		vim.keymap.set("n", "<leader>ia", vim.lsp.buf.code_action, opts)
 
-		vim.keymap.set("n", "<leader>ip", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<leader>ir", "<cmd>Telescope lsp_references<cr>", opts)
+		vim.keymap.set({ "n", "v" }, "<leader>ip", vim.lsp.buf.references, opts)
+		vim.keymap.set({ "n", "v" }, "<leader>ir", "<cmd>Telescope lsp_references<cr>", opts)
 		vim.keymap.set("n", "<leader>in", vim.lsp.buf.rename, opts) -- smart rename
 
 		vim.keymap.set("n", "<leader>rr", "<cmd>LspRestart<CR>", opts)
-		vim.keymap.set("n", "<leader>iw", function()
+		vim.keymap.set({ "n", "v" }, "<leader>iw", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts)
 

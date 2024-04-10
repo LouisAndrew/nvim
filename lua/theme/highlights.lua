@@ -30,6 +30,7 @@ Group.new("CursorColumn", nil, colors.noir_9)
 Group.new("CursorLine", nil, colors.noir_9)
 Group.new("CursorLineNr", colors.noir_6, colors.noir_9)
 
+Group.new("Cursor", nil, colors.yellow_fg)
 Group.new("iCursor", nil, colors.add_fg)
 Group.new("vCursor", nil, colors.indigo_fg)
 Group.new("oCursor", nil, colors.remove_fg)
@@ -43,10 +44,10 @@ Group.new("DiffDelete", colors.secondary, colors.noir_8)
 Group.new("DiffText", colors.noir_0, colors.noir_7)
 Group.new("ErrorMsg", colors.noir_1, colors.primary)
 
--- Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
-Group.new("Folded", colors.dimmed_white, colors.nb_background)
-Group.new("UfoFoldVirtualText", colors.mfed_navy)
--- Group.new("UfoFoldVirtualText", colors.dimmed_white:dark())
+Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
+-- Group.new("Folded", colors.dimmed_white, colors.visual)
+-- Group.new("Folded", colors.dimmed_white, colors.nb_background)
+Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light():light())
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
 -- Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light())
@@ -519,3 +520,5 @@ end
 
 Group.new("VertSplit", colors.debug, colors.debug)
 Group.new("WinSeparator", colors.mfed_bg_accent)
+Group.new("BqfPreviewFloat", nil, colors.bg_shade)
+Group.new("QuickFixLine", colors.white, nil, styles.bold)

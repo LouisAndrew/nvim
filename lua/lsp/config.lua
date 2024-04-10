@@ -141,17 +141,15 @@ require("typescript-tools").setup({
 		"typescript",
 		"vue",
 	},
-
 	on_attach = function(client, bufnr)
+		client.server_capabilities.semanticTokensProvider = false
 		if vim.bo.filetype == "vue" then
-			client.server_capabilities.semanticTokensProvider = false
 			return
 		end
 
 		navic.attach(client, bufnr)
 	end,
 	handlers = {},
-
 	settings = {
 		separate_diagnostic_server = true,
 		tsserver_plugins = {

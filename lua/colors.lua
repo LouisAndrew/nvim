@@ -9,6 +9,7 @@ local white = "#ffffff"
 local navy = "#678CB1"
 
 local background = "#131313"
+local f = "#202020"
 -- local bg_shade = "#0f0f0f"
 
 local bg_shade = "#0c0c0c"
@@ -84,5 +85,6 @@ return {
 		-- 15% of visual in `modes.lua`
 		visual = "#242536",
 		-- visual = "#2e1065",
+		f = f,
 	},
 }

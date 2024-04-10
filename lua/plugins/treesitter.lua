@@ -22,6 +22,7 @@ return {
 						"NvimTree",
 						"DiffviewFiles",
 						"DiffviewFileHistory",
+						"qf",
 					},
 				})
 			end,

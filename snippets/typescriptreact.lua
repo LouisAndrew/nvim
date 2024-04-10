@@ -7,11 +7,13 @@ local i = ls.insert_node
 
 return {
 	s("imd", fmt('import {{ {} }} from "{}"', { i(2), i(1) })),
+
 	s(
 		"imp",
-		fmt('import {actual} from "{from}"', {
+		fmt('import {justincase}{actual} from "{from}"', {
 			actual = f(utils.extract_component_name, { 1 }),
 			from = i(1),
+			justincase = i(2),
 		})
 	),
 }
