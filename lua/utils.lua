@@ -30,6 +30,11 @@ local nvim_config_path = function()
 	return vim.fn.stdpath("config")
 end
 
+local pascal_case = function(str)
+	local pascalStr = str:gsub("[-_]%l", string.upper):gsub("[-_]", "")
+	return pascalStr:gsub("^%l", string.upper)
+end
+
 --- @param text string
 local insert = function(text, append)
 	local content = text
@@ -45,6 +50,28 @@ local insert = function(text, append)
 	vim.api.nvim_set_current_line(content)
 end
 
+local function extract_component_name(
+	args, -- text from i(2) in this example i.e. { { "456" } }
+	_, -- parent snippet or parent node
+	_ -- custom arguments
+)
+	local import_content = args[1][1]
+	local component_name = string.gsub(import_content, ".+/(.*)$", "%1")
+
+	if component_name == "" then
+		return "snip"
+	end
+
+	local str = component_name:match("(.+)%..+$") or component_name
+	return pascal_case(str)
+end
+
+local merge = function(first_table, second_table)
+	for k, v in pairs(second_table) do
+		first_table[k] = v
+	end
+end
+
 return {
 	has_value = has_value,
 	dump = dump,
@@ -55,4 +82,7 @@ return {
 		falsy = 0,
 		emptyString = "",
 	},
+	pascal_case = pascal_case,
+	extract_component_name = extract_component_name,
+	merge = merge,
 }

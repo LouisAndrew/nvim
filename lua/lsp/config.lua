@@ -21,6 +21,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		and utils.has_value({
 			"tsserver",
 			"graphql",
+			"typescript-tools",
 		}, client.name) ~= true
 	then
 		navic.attach(client, bufnr)
@@ -113,39 +114,47 @@ lspconfig.volar.setup({
 	},
 })
 
-local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
-local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
-
-lspconfig.tsserver.setup({
-	filetypes = { "vue", "typescript", "javascript" },
-	init_options = {
-		plugins = {
-			{
-				name = "@vue/typescript-plugin",
-				location = vue_ts_plugin_path,
-				languages = { "vue", "typescript" },
-			},
-		},
-	},
-})
+-- local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
+-- local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
+--
+-- lspconfig.tsserver.setup({
+-- 	filetypes = { "vue", "typescript", "javascript" },
+-- 	init_options = {
+-- 		plugins = {
+-- 			{
+-- 				name = "@vue/typescript-plugin",
+-- 				location = vue_ts_plugin_path,
+-- 				languages = { "vue", "typescript" },
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 -- vim.g.VUE_PROJECT = "true"
 -- local lsputils = require("lspconfig.util")
--- require("typescript-tools").setup({
--- 	filetypes = {
--- 		"javascript",
--- 		"typescript",
--- 		"vue",
--- 	},
---
--- 	handlers = {},
---
--- 	settings = {
--- 		tsserver_plugins = {
--- 			"@vue/typescript-plugin",
--- 		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
--- 	},
--- })
+require("typescript-tools").setup({
+	filetypes = {
+		"javascript",
+		"typescript",
+		"vue",
+	},
+
+	on_attach = function(client, bufnr)
+		if vim.bo.filetype == "vue" then
+			client.server_capabilities.semanticTokensProvider = false
+			return
+		end
+
+		navic.attach(client, bufnr)
+	end,
+	handlers = {},
+
+	settings = {
+		tsserver_plugins = {
+			"@vue/typescript-plugin",
+		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+	},
+})
 
 require("lspconfig").jsonls.setup({
 	settings = {
@@ -254,10 +263,10 @@ saga.setup({
 local icons = require("theme.icons")
 
 local signs = {
-	{ name = "DiagnosticSignError", text = icons.Error },
-	{ name = "DiagnosticSignWarn", text = icons.Warn },
-	{ name = "DiagnosticSignHint", text = icons.Hint },
-	{ name = "DiagnosticSignInfo", text = icons.Info },
+	{ name = "DiagnosticSignError", text = icons.Square },
+	{ name = "DiagnosticSignWarn", text = icons.Square },
+	{ name = "DiagnosticSignHint", text = icons.Square },
+	{ name = "DiagnosticSignInfo", text = icons.Square },
 }
 
 for _, sign in ipairs(signs) do

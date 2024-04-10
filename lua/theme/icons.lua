@@ -44,4 +44,5 @@ return {
 	FolderOpened = "",
 	ArrowOpened = "",
 	ArrowClosed = "",
+	Square = "",
 }

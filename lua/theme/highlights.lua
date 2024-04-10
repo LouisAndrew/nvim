@@ -470,6 +470,13 @@ local gpt_config = {
 	},
 }
 
+local diagflow_config = {
+	-- { "DiagnosticFloatingError", colors.diagnostic_error, colors.bg_shade },
+	-- { "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.bg_shade },
+	-- { "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
+	-- { "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
+}
+
 local luasnip_config = {
 	-- { "LuaSnipInsertActive", minimal_fedu.palette.blue_fg },
 	-- { "LuaSnipChoiceActive", minimal_fedu.palette.indigo_fg },
@@ -496,6 +503,7 @@ local hl_group_configs = {
 	noice_config,
 	navic_config,
 	gpt_config,
+	diagflow_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

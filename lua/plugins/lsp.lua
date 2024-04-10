@@ -96,12 +96,14 @@ return {
 				end,
 				toggle_event = { "InsertEnter", "InsertLeave" },
 				update_event = { "DiagnosticChanged", "BufReadPost" },
-				max_width = vim.o.columns / 3, -- The maximum width of the diagnostic messages
+				max_width = 32, -- The maximum width of the diagnostic messages
 				gap_size = 0,
 				padding_top = -1,
 				scope = "line",
+				inline_padding_left = 2,
 				text_align = "right",
-				placement = "top",
+				show_sign = false,
+				placement = "inline",
 			},
 		},
 		{
