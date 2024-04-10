@@ -85,33 +85,8 @@ return {
 				},
 			},
 		},
-		{
-			"dgagn/diagflow.nvim",
-			event = "LspAttach",
-			opts = {
-				format = function(diag)
-					local source = diag.source
-					local msg = diag.message
-					return string.format("(%s) %s", source, msg)
-				end,
-				toggle_event = { "InsertEnter", "InsertLeave" },
-				update_event = { "DiagnosticChanged", "BufReadPost" },
-				max_width = 32, -- The maximum width of the diagnostic messages
-				gap_size = 0,
-				padding_top = -1,
-				scope = "line",
-				inline_padding_left = 2,
-				text_align = "right",
-				show_sign = false,
-				placement = "inline",
-			},
-		},
-		{
-			"b0o/SchemaStore.nvim",
-		},
-		{
-			"pmizio/typescript-tools.nvim",
-		},
+		"b0o/SchemaStore.nvim",
+		"pmizio/typescript-tools.nvim",
 	},
 	config = function()
 		require("lsp")

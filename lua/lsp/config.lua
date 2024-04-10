@@ -13,6 +13,9 @@ vim.diagnostic.config({
 	severity_sort = true,
 	update_in_insert = false,
 	underline = true,
+	float = {
+		border = "none",
+	},
 })
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -150,6 +153,7 @@ require("typescript-tools").setup({
 	handlers = {},
 
 	settings = {
+		separate_diagnostic_server = true,
 		tsserver_plugins = {
 			"@vue/typescript-plugin",
 		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
@@ -190,7 +194,6 @@ lspconfig.emmet_ls.setup({
 	init_options = {
 		html = {
 			options = {
-				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
 				["bem.enabled"] = true,
 			},
 		},

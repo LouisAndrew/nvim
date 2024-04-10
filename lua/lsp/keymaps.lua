@@ -1,3 +1,11 @@
+local diag_float_config = {
+	severity_sort = true,
+	source = "if_many",
+	prefix = " ",
+	suffix = " ",
+	header = "",
+}
+
 return {
 	generate_keymaps = function(bufnr)
 		local opts = { buffer = bufnr, remap = false }
@@ -23,44 +31,41 @@ return {
 			vim.lsp.buf.signature_help,
 			{ silent = true, noremap = true, desc = "toggle signature" }
 		)
-		vim.keymap.set("n", "<leader>id", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-		vim.keymap.set("n", "<leader>iD", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
-		vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-		vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+		vim.keymap.set("n", "<space>id", function()
+			vim.diagnostic.open_float(diag_float_config)
+		end, { noremap = true, silent = true })
+
+		vim.keymap.set("n", "[d", function()
+			vim.diagnostic.goto_prev({
+				float = diag_float_config,
+			})
+		end, opts) -- jump to previous diagnostic in buffer
+		vim.keymap.set("n", "]d", function()
+			vim.diagnostic.goto_next({
+				float = diag_float_config,
+			})
+		end, opts)
+
 		vim.keymap.set("n", "[e", function()
-			require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+			vim.diagnostic.goto_prev({
+				float = diag_float_config,
+				severity = vim.diagnostic.severity.ERROR,
+			})
 		end)
 		vim.keymap.set("n", "]e", function()
-			require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+			vim.diagnostic.goto_next({
+				float = diag_float_config,
+				severity = vim.diagnostic.severity.ERROR,
+			})
 		end)
-		vim.keymap.set("n", "<leader>ia", "<cmd>Lspsaga code_action<CR>", opts)
+		-- vim.keymap.set("n", "<leader>ia", "<cmd>Lspsaga code_action<CR>", opts)
+		vim.keymap.set("n", "<leader>ia", vim.lsp.buf.code_action, opts)
+
+		vim.keymap.set("n", "<leader>ip", vim.lsp.buf.references, opts)
 		vim.keymap.set("n", "<leader>ir", "<cmd>Telescope lsp_references<cr>", opts)
-		vim.keymap.set("n", "<leader>in", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
+		vim.keymap.set("n", "<leader>in", vim.lsp.buf.rename, opts) -- smart rename
 
 		vim.keymap.set("n", "<leader>rr", "<cmd>LspRestart<CR>", opts)
-		-- vim.keymap.set("n", "<leader>rr", function()
-		-- 	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-		-- 	local clients = vim.lsp.get_active_clients()
-		--
-		-- 	local to_be_restarted = {}
-		-- 	for _, client in ipairs(clients) do
-		-- 		local filetypes = client.config.filetypes
-		-- 		if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
-		-- 			client.stop()
-		-- 			to_be_restarted[#to_be_restarted + 1] = client.name
-		-- 		end
-		-- 	end
-		--
-		-- 	vim.defer_fn(function()
-		-- 		for _, name in ipairs(to_be_restarted) do
-		-- 			vim.cmd("LspStart " .. name)
-		-- 		end
-		-- 	end, 500)
-		-- end, opts) -- smart rename
-		--
-		vim.keymap.set("n", "<leader>ie", function()
-			vim.lsp.diagnostic.get_line_diagnostics()
-		end, opts)
 		vim.keymap.set("n", "<leader>iw", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts)
