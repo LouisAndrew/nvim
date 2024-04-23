@@ -112,12 +112,11 @@ lspconfig.volar.setup({
 	init_options = {
 		vue = {
 			hybridMode = true,
-			-- hybridMode = false
 		},
 	},
 })
 
--- local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
+local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
 -- local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
 --
 -- lspconfig.tsserver.setup({
@@ -130,6 +129,9 @@ lspconfig.volar.setup({
 -- 				languages = { "vue", "typescript" },
 -- 			},
 -- 		},
+-- 		tsserver = {
+-- 			tsdk = pnpm_global .. "node_modules/typescript/lib",
+-- 		},
 -- 	},
 -- })
 
@@ -139,6 +141,7 @@ require("typescript-tools").setup({
 	filetypes = {
 		"javascript",
 		"typescript",
+		"typescriptreact",
 		"vue",
 	},
 	on_attach = function(client, bufnr)

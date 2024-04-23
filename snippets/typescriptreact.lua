@@ -16,4 +16,6 @@ return {
 			justincase = i(2),
 		})
 	),
+
+	s("clg", fmt("console.log({})", { i(1) })),
 }

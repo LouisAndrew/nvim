@@ -86,7 +86,7 @@ return {
 			},
 		},
 		"b0o/SchemaStore.nvim",
-		"pmizio/typescript-tools.nvim",
+		"LouisAndrew/typescript-tools.nvim",
 	},
 	config = function()
 		require("lsp")
