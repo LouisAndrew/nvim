@@ -8,7 +8,13 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		-- LSP Support
 		"neovim/nvim-lspconfig",
-		"github/copilot.vim",
+		{
+			"supermaven-inc/supermaven-nvim",
+			config = function()
+				require("supermaven-nvim").setup({})
+			end,
+		},
+		-- "github/copilot.vim",
 		-- Autocompletion
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",

@@ -67,6 +67,9 @@ return {
 				map("n", "<leader>hI", function()
 					gs.diffthis("~")
 				end)
+				map("n", "<leader>hd", function()
+					gs.diffthis("~")
+				end)
 				map("n", "<leader>td", gs.toggle_deleted)
 
 				-- Text object

@@ -7,6 +7,7 @@ vim.o.foldcolumn = "0"
 local ftMap = {
 	yaml = { "treesitter", "indent" },
 	json = { "treesitter", "indent" },
+	lua = { "treesitter", "indent" },
 }
 
 local handler = function(virtText, lnum, endLnum, width, truncate)

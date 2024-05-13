@@ -63,8 +63,8 @@ local M = {
 		["<C-k>"] = { "<C-w>k" },
 		["<C-8>"] = { "zh" },
 		["<C-9>"] = { "zl" },
-		["˙"] = { "<C-w><" },
-		["¬"] = { "<C-w>>" },
+		["˙"] = { "<C-w>>" },
+		["¬"] = { "<C-w><" },
 		["˚"] = { "<C-w>+" },
 		["∆"] = { "<C-w>-" },
 		-- ["<C-f>"] = { "<C-w>>" },
@@ -79,6 +79,9 @@ local M = {
 
 		["Q"] = { "@qj", "Fast macro, always save on Q" },
 		["go"] = { "gx" },
+
+		["<leader>t["] = { "<cmd>:tabprev<cr>" }, -- adjacent
+		["<leader>t]"] = { "<cmd>:tabnext<cr>" }, -- spec file
 	},
 
 	t = { ["<C-x>"] = { termcodes("<C-\\><C-N>"), "escape terminal " } },
