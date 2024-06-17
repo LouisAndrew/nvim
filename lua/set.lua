@@ -116,3 +116,12 @@ vim.api.nvim_create_user_command("PasteImgClipboardObsidian", function(args)
 end, { nargs = "?" })
 
 vim.api.nvim_create_user_command("Test", 'echo "It works!"', {})
+
+-- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
+vim.filetype.add({
+	extension = {
+		pcss = "scss",
+	},
+	filename = {},
+	pattern = {},
+})
