@@ -92,7 +92,8 @@ return {
 			},
 		},
 		"b0o/SchemaStore.nvim",
-		"LouisAndrew/typescript-tools.nvim",
+		"yioneko/nvim-vtsls",
+		-- "LouisAndrew/typescript-tools.nvim",
 	},
 	config = function()
 		require("lsp")

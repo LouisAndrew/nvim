@@ -22,9 +22,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	if
 		client.server_capabilities["documentSymbolProvider"]
 		and utils.has_value({
-			"tsserver",
 			"graphql",
-			"typescript-tools",
+			"vtsls",
 		}, client.name) ~= true
 	then
 		navic.attach(client, bufnr)
@@ -85,27 +84,6 @@ lspconfig.tailwindcss.setup({
 	filetypes = { "html", "css", "scss", "typescriptreact", "svelte", "vue", "javascriptreact", "astro" },
 })
 
-local util = require("lspconfig.util")
--- Get TS version for volar, use installed version if not found
-local function get_typescript_server_path(root_dir)
-	-- Highly dependent on nvm and node version
-	local global_ts = "/Users/louis.andrew/.nvm/versions/node/v20.10.0/lib/node_modules/typescript/lib"
-	-- Alternative location if installed as root:
-	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
-	local found_ts = ""
-	local function check_dir(path)
-		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
-		if util.path.exists(found_ts) then
-			return path
-		end
-	end
-	if util.search_ancestors(root_dir, check_dir) then
-		return found_ts
-	else
-		return global_ts
-	end
-end
-
 lspconfig.volar.setup({
 	root_dir = lspconfig.util.root_pattern("*.vue"),
 	filetypes = { "vue" },
@@ -116,48 +94,30 @@ lspconfig.volar.setup({
 	},
 })
 
-local pnpm_global = os.getenv("HOME") .. "/pnpm_global/5"
--- local vue_ts_plugin_path = pnpm_global .. "/node_modules/@vue/typescript-plugin"
---
--- lspconfig.tsserver.setup({
--- 	filetypes = { "vue", "typescript", "javascript" },
--- 	init_options = {
--- 		plugins = {
--- 			{
--- 				name = "@vue/typescript-plugin",
--- 				location = vue_ts_plugin_path,
--- 				languages = { "vue", "typescript" },
--- 			},
--- 		},
--- 		tsserver = {
--- 			tsdk = pnpm_global .. "node_modules/typescript/lib",
--- 		},
--- 	},
--- })
-
--- vim.g.VUE_PROJECT = "true"
--- local lsputils = require("lspconfig.util")
-require("typescript-tools").setup({
-	filetypes = {
-		"javascript",
-		"typescript",
-		"typescriptreact",
-		"vue",
-	},
+lspconfig.vtsls.setup({
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 	on_attach = function(client, bufnr)
-		client.server_capabilities.semanticTokensProvider = false
 		if vim.bo.filetype == "vue" then
 			return
 		end
 
 		navic.attach(client, bufnr)
 	end,
-	handlers = {},
 	settings = {
-		separate_diagnostic_server = true,
-		tsserver_plugins = {
-			"@vue/typescript-plugin",
-		}, -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+		vtsls = {
+			tsserver = {
+				globalPlugins = {
+					{
+						name = "@vue/typescript-plugin",
+						location = require("mason-registry").get_package("vue-language-server"):get_install_path()
+							.. "/node_modules/@vue/language-server",
+						languages = { "vue" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
+					},
+				},
+			},
+		},
 	},
 })
 
