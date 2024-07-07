@@ -228,13 +228,7 @@ return {
 				info = icons.Info,
 				hint = icons.Hint,
 			},
-			diagnostics_color = {
-				color_error = { fg = minimal_fedu.misc.remove_fg },
-				color_warn = { fg = "#ffad67" },
-				color_info = { fg = minimal_fedu.misc.add_fg },
-				color_hint = { fg = minimal_fedu.noir_9 },
-			},
-			padding = { left = 1 },
+			padding = { left = 1, right = 1 },
 		})
 
 		ins_left({

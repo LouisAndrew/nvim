@@ -17,12 +17,6 @@ return {
 			event = "VeryLazy",
 			opts = {},
 		},
-		-- {
-		-- 	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		-- 	config = function()
-		-- 		require("lsp_lines").setup()
-		-- 	end,
-		-- },
 		{
 			"stevearc/conform.nvim",
 			dependencies = { "mason.nvim" },
@@ -87,7 +81,6 @@ return {
 		},
 		"b0o/SchemaStore.nvim",
 		"yioneko/nvim-vtsls",
-		-- "LouisAndrew/typescript-tools.nvim",
 	},
 	config = function()
 		require("lsp")

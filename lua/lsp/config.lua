@@ -250,10 +250,10 @@ saga.setup({
 local icons = require("theme.icons")
 
 local signs = {
-	{ name = "DiagnosticSignError", text = icons.Square },
-	{ name = "DiagnosticSignWarn", text = icons.Square },
-	{ name = "DiagnosticSignHint", text = icons.Square },
-	{ name = "DiagnosticSignInfo", text = icons.Square },
+	{ name = "DiagnosticSignError", text = icons.ArrowClosed },
+	{ name = "DiagnosticSignWarn", text = icons.ArrowClosed },
+	{ name = "DiagnosticSignHint", text = icons.ArrowClosed },
+	{ name = "DiagnosticSignInfo", text = icons.ArrowClosed },
 }
 
 for _, sign in ipairs(signs) do

@@ -152,7 +152,7 @@ Group.new("DiagnosticError", colors.diagnostic_error)
 Group.new("DiagnosticWarn", colors.diagnostic_warning)
 Group.new("DiagnosticInfo", colors.diagnostic_info)
 Group.new("DiagnosticHint", colors.diagnostic_hint)
-Group.new("DiagnosticSignError", colors.diagnostic_error)
+Group.new("DiagnosticSignError", colors.diagnostic_error, colors.remove)
 Group.new("DiagnosticSignWarn", colors.diagnostic_warning)
 Group.new("DiagnosticSignInfo", colors.diagnostic_info)
 Group.new("DiagnosticSignHint", colors.diagnostic_hint)
@@ -472,10 +472,11 @@ local gpt_config = {
 }
 
 local diagflow_config = {
-	-- { "DiagnosticFloatingError", colors.diagnostic_error, colors.bg_shade },
-	-- { "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.bg_shade },
-	-- { "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
-	-- { "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
+	{ "DiagnosticFloatingError", colors.diagnostic_error, colors.remove },
+	{ "DiagnosticFloatingWarn", colors.diagnostic_warning, colors.yellow:dark() },
+	{ "DiagnosticFloatingWarnLighter", colors.diagnostic_warning, colors.yellow },
+	{ "DiagnosticFloatingInfo", colors.diagnostic_info, colors.bg_shade },
+	{ "DiagnosticFloatingHint", colors.diagnostic_hint, colors.bg_shade },
 }
 
 local luasnip_config = {

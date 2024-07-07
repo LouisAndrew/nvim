@@ -1,8 +1,8 @@
 local diag_float_config = {
 	severity_sort = true,
-	source = "if_many",
-	prefix = " ",
-	suffix = " ",
+	source = true,
+	prefix = "",
+	suffix = "",
 	header = "",
 }
 

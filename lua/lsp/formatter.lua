@@ -30,6 +30,7 @@ conform.setup({
 local lsp_fallback_format_ft = {
 	"json",
 	"css",
+	"scss",
 	"docker",
 }
 
@@ -37,10 +38,12 @@ vim.g.ENABLE_AUTOFORMAT = "true"
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
-		local file = args.file
-		local extension = vim.fn.fnamemodify(file, ":e")
-		if utils.has_value(lsp_fallback_format_ft, extension) and vim.g.ENABLE_AUTOFORMAT == "true" then
-			vim.lsp.buf.format()
+		if vim.g.ENABLE_AUTOFORMAT == "true" then
+			local file = args.file
+			local extension = vim.fn.fnamemodify(file, ":e")
+			if utils.has_value(lsp_fallback_format_ft, extension) and vim.g.ENABLE_AUTOFORMAT == "true" then
+				vim.lsp.buf.format()
+			end
 		end
 	end,
 })
