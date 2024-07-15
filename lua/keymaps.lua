@@ -3,6 +3,11 @@ local function termcodes(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+
 local M = {
 	i = {
 		-- go to  beginning and end
@@ -57,17 +62,24 @@ local M = {
 		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
 		["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-		["<C-h>"] = { "<C-w>h" },
-		["<C-l>"] = { "<C-w>l" },
-		["<C-j>"] = { "<C-w>j" },
-		["<C-k>"] = { "<C-w>k" },
+
+		-- ALT+H
+		["˙"] = { require("smart-splits").resize_left },
+		-- ALT+J
+		["¬"] = { require("smart-splits").resize_down },
+		-- ALT+K
+		["˚"] = { require("smart-splits").resize_up },
+		-- ALT+L
+		["∆"] = { require("smart-splits").resize_right },
+
+		["<C-h>"] = { require("smart-splits").move_cursor_left },
+		["<C-j>"] = { require("smart-splits").move_cursor_down },
+		["<C-k>"] = { require("smart-splits").move_cursor_up },
+		["<C-l>"] = { require("smart-splits").move_cursor_right },
+
 		["<C-8>"] = { "zh" },
 		["<C-9>"] = { "zl" },
-		["˙"] = { "<C-w>>" },
-		["¬"] = { "<C-w><" },
-		["˚"] = { "<C-w>+" },
-		["∆"] = { "<C-w>-" },
-		-- ["<C-f>"] = { "<C-w>>" },
+
 		["<leader>'"] = { "gt" },
 		["<leader>;"] = { "gT" },
 

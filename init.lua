@@ -20,7 +20,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" } })
-require("keymap")
+require("keymaps")
 require("ui")
 
 vim.keymap.set("n", "<M-k>", "<C-w>+")
+
+vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
+vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
+vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
+vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
