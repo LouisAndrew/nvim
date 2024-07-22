@@ -3,12 +3,15 @@ return {
 	lazy = true,
 	ft = "markdown",
 	keys = {
+
 		{ "<leader>lo", "<cmd>:ObsidianOpen<cr>" },
 		{ "<leader>lf", "<cmd>:ObsidianQuickSwitch<cr>" },
 		{ "<leader>ls", "<cmd>:ObsidianSearch<cr>" },
 		{ "<leader>lp", "<cmd>:ObsidianPasteImg<cr>" },
 		{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
 		{ "<leader>ln", ":ObsidianNew notes/" },
+		{ "<leader>lg", ":ObsidianLinkNew ", mode = "v" },
+		{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",

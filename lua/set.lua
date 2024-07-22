@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("syntax match MDReminder /@REMINDER/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{4}/")
 		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{2}\\.\\d\\{2}/")
-		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/")
+		vim.cmd("syntax match MDDate /@\\d\\{2}\\.\\d\\{4}/ ")
 		vim.cmd("syntax match Bold /\\*\\*.*\\*\\*/")
 
 		local o = vim.opt
