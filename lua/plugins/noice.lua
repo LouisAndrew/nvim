@@ -25,8 +25,8 @@ return {
 						opts = {
 							win_options = {
 								winhighlight = {
-									Normal = "NoiceCmdlineSearch",
-									FloatBorder = "NoiceCmdlineSearchBorder",
+									Normal = "NoiceCmdline",
+									FloatBorder = "NoiceCmdline",
 								},
 							},
 						},
@@ -40,8 +40,8 @@ return {
 						opts = {
 							win_options = {
 								winhighlight = {
-									Normal = "NoiceCmdlineSearch",
-									FloatBorder = "NoiceCmdlineSearchBorder",
+									Normal = "NoiceCmdline",
+									FloatBorder = "NoiceCmdline",
 								},
 							},
 						},
@@ -54,8 +54,8 @@ return {
 						opts = {
 							win_options = {
 								winhighlight = {
-									Normal = "NoiceCmdlineScript",
-									FloatBorder = "NoiceCmdlineScriptBorder",
+									Normal = "NoiceCmdline",
+									FloatBorder = "NoiceCmdline",
 								},
 							},
 						},
@@ -68,8 +68,8 @@ return {
 						opts = {
 							win_options = {
 								winhighlight = {
-									Normal = "NoiceCmdlineScript",
-									FloatBorder = "NoiceCmdlineScriptBorder",
+									Normal = "NoiceCmdline",
+									FloatBorder = "NoiceCmdline",
 								},
 							},
 						},

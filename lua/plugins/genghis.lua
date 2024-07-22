@@ -49,9 +49,7 @@ return {
 		keymap("n", "<leader>mf", genghis.moveAndRenameFile)
 		keymap("n", "<leader>nf", genghis.createNewFile)
 
-		keymap("n", "<leader>df", function()
-			genghis.trashFile({ trashLocation = ".Trash" })
-		end)
+		keymap("n", "<leader>df", genghis.trashFile)
 
 		keymap("x", "<leader>x", genghis.moveSelectionToNewFile)
 	end,
