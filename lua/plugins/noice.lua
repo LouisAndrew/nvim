@@ -7,6 +7,7 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
+	version = "4.4.7",
 	config = function()
 		local noice = require("noice")
 		noice.setup({

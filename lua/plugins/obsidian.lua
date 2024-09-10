@@ -11,6 +11,7 @@ return {
 		{ "<leader>ll", "<cmd>:ObsidianBacklinks<cr>" },
 		{ "<leader>ln", ":ObsidianNew notes/" },
 		{ "<leader>lg", ":ObsidianLinkNew ", mode = "v" },
+		{ "<leader>lw", "<cmd>:ObsidianWorkspace<cr>" },
 		{ "<leader>lx", "<cmd>:ObsidianToggleCheckbox<cr>" },
 	},
 	dependencies = {
@@ -74,6 +75,11 @@ return {
 				},
 			},
 			workspaces = {
+				{
+					name = "icloud",
+					path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault",
+				},
+				-- keeping this for backup for now
 				{
 					name = "personal",
 					path = "~/dev/documents",
