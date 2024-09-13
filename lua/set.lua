@@ -125,3 +125,5 @@ vim.filetype.add({
 	filename = {},
 	pattern = {},
 })
+
+vim.treesitter.language.register("markdown", "codecompanion")

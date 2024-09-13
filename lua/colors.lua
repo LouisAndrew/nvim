@@ -63,7 +63,7 @@ return {
 		blue = "#172554",
 		blue_fg = "#93c5fd",
 		indigo = "#1e1b4b",
-		-- indigo_fg = "#a5b4fc",
+		indigo_fg_light = "#a5b4fc",
 		indigo_fg = "#818cf8",
 		yellow = yellow,
 		yellow_fg = yellow_fg,

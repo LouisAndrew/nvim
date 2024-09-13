@@ -9,7 +9,6 @@ Group.new("IncSearch", colors.mfed_2, colors.mfed_8)
 Group.new("CurSearch", colors.mfed_9, colors.yellow_fg)
 
 Group.new("Visual", nil, colors.visual)
--- Group.new("Visual", nil, colors.indigo:dark())
 Group.new("SignColumn", nil, colors.nb_background)
 Group.new("LineNr", colors.mfed_7, nil)
 Group.new("EndOfBuffer", colors.mfed_8, nil)
@@ -45,12 +44,10 @@ Group.new("DiffText", colors.mfed_0, colors.noir_7)
 Group.new("ErrorMsg", colors.mfed_1, colors.primary)
 
 Group.new("Folded", colors.dimmed_white, colors.mfed_bg_accent)
--- Group.new("Folded", colors.dimmed_white, colors.visual)
--- Group.new("Folded", colors.dimmed_white, colors.nb_background)
+
 Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light():light())
 Group.new("UfoFoldPeekNormal", nil, colors.bg_shade)
 --
--- Group.new("UfoFoldVirtualText", colors.mfed_bg_accent_light:light():light():light())
 Group.new("FoldColumn", colors.mfed_bg_accent_light:light():light():light(), nil)
 Group.new("MatchParen", nil, colors.mfed_7)
 
@@ -142,7 +139,6 @@ Group.new("@markup.heading", colors.mfed_2, nil, styles.bold)
 Group.new("@markup.italic", nil, nil, styles.italic)
 Group.new("@markup.list", colors.mfed_2, nil)
 Group.new("@markup.raw", colors.mfed_num, nil)
-Group.new("@markup.raw.block", nil, colors.bg_shade)
 Group.new("@keyword.conditional.ternary", colors.mfed_6, nil)
 Group.new("@punctuation.special", colors.mfed_3)
 Group.new("@comment", colors.mfed_7)
@@ -278,6 +274,7 @@ Group.new("SagaBeacon", colors.primary)
 Group.new("ObsidianRefText", colors.mfed_cyan)
 Group.new("ObsidianHighlightText", colors.debug)
 Group.new("ObsidianExtLinkIcon", colors.mfed_navy)
+Group.new("ObsTag", colors.magenta_fg:light(), nil, styles.bold)
 
 -- CMP
 Group.new("CmpItemAbbrDeprecated", colors.mfed_dim, nil)
@@ -319,7 +316,8 @@ Group.new("NvimTreeSpecialFile", colors.mfed_2, nil)
 
 Group.new("MDDone", colors.add_fg, colors.add, styles.bold)
 Group.new("MDReminder", colors.yellow_fg, colors.yellow, styles.bold)
-Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
+-- Group.new("MDDate", colors.indigo_fg, colors.indigo, styles.bold)
+Group.new("MDDate", colors.indigo_fg, nil, styles.bold)
 Group.new("TODO", colors.remove_fg, colors.remove, styles.bold)
 Group.new("Bold", nil, nil, styles.bold)
 Group.new("Todo", colors.remove_fg, colors.remove, styles.bold)
@@ -379,6 +377,12 @@ local set_hl = function(group, M)
 
 	Group.new(group, M.fg, bg, guicg)
 end
+
+local md_config = {
+	{ "RenderMarkdownCodeInline", nil, colors.background },
+	{ "RenderMarkdownCode", nil, colors.bg_shade },
+	{ "RenderMarkdownLink", colors.mfed_navy, nil },
+}
 
 local dap_config = {
 	{ "DapUIScope", colors.mfed_navy },
@@ -505,6 +509,7 @@ local hl_group_configs = {
 	navic_config,
 	gpt_config,
 	diagflow_config,
+	md_config,
 }
 
 for _, config in ipairs(hl_group_configs) do

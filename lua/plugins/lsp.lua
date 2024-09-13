@@ -8,7 +8,6 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		-- LSP Support
 		"neovim/nvim-lspconfig",
-		"github/copilot.vim",
 		-- Autocompletion
 		"nvimdev/lspsaga.nvim",
 		"nvimtools/none-ls.nvim",

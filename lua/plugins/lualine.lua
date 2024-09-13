@@ -261,7 +261,7 @@ return {
 
 			mode = 0,
 
-			max_length = vim.o.columns * 4 / 5, -- Maximum width of buffers component,
+			max_length = vim.o.columns * 3 / 5, -- Maximum width of buffers component,
 			-- it can also be a function that returns
 			-- the value of `max_length` dynamically.
 			filetype_names = {
