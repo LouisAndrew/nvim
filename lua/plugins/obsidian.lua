@@ -140,6 +140,17 @@ return {
 				icons = { "-", "+", "◇" },
 				right_pad = 1,
 			},
+			checkbox = {
+				enabled = true,
+				unchecked = {
+					icon = " ",
+					highlight = "ObsidianTodo",
+				},
+				checked = {
+					icon = " ",
+					highlight = "ObsidianDone",
+				},
+			},
 			link = {
 				enabled = true,
 				image = " ",

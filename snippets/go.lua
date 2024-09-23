@@ -34,13 +34,50 @@ return {
 		"tr",
 		fmt(
 			[[
-  t.Run("{name}", func(t *testing.T) {{
-    {}
+  t.Run("{name}", func (t *testing.T) {{
+    got := {got}
+    want := {want}
+
+    if {test} {{
+      t.Errorf("got %v want %v", got, want)
+    }}
   }})
   ]],
 			{
 				name = i(1),
-				i(2),
+				got = i(2),
+				want = i(3),
+				test = c(4, {
+					t("got != want"),
+					t("!reflect.DeepEqual(got, want)"),
+				}),
+			}
+		)
+	),
+	s(
+		"gtr",
+		fmt(
+			[[
+  func Test{functionName}(t *testing.T) {{
+    t.Run("{name}", func (t *testing.T) {{
+      got := {got}
+      want := {want}
+
+      if {test} {{
+        t.Errorf("got %v want %v", got, want)
+      }}
+    }})
+  }}
+  ]],
+			{
+				functionName = i(1),
+				name = i(2),
+				got = i(3),
+				want = i(4),
+				test = c(5, {
+					t("got != want"),
+					t("!reflect.DeepEqual(got, want)"),
+				}),
 			}
 		)
 	),

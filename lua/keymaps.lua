@@ -8,6 +8,22 @@ vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
 vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
 vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
 
+local function create_spec()
+	local ft_specfile = {
+		["typescript"] = ".spec.ts",
+		["javascript"] = ".spec.js",
+		["typescriptreact"] = ".spec.tsx",
+		["javascriptreact"] = ".spec.jsx",
+		["go"] = "_test.go",
+	}
+
+	local ft = vim.bo.filetype
+	local specfile = ft_specfile[ft]
+	if specfile then
+		vim.cmd("e %:r" .. specfile)
+	end
+end
+
 local M = {
 	i = {
 		-- go to  beginning and end
@@ -27,7 +43,7 @@ local M = {
 		["<ESC>"] = { "<cmd> noh <CR>", "no highlight" },
 		["<leader>pv"] = { vim.cmd.Ex },
 		["<leader>tn"] = { ":e %:h" }, -- adjacent
-		["<leader>tt"] = { ":e %:r.spec.ts" }, -- spec file
+		["<leader>tt"] = { create_spec },
 		["<leader>s"] = { "<cmd>:w<cr>" },
 
 		["<leader>tw"] = { "<cmd>:tabclose<cr>" },

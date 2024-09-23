@@ -1,44 +1,10 @@
+local config = require("config")
 local opt = vim.opt
-vim.o.statuscolumn =
-	'%s%=%{v:relnum?v:relnum:v:lnum} %#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
 
-opt.nu = true
-opt.rnu = true
-opt.numberwidth = 1
-
--- indents etc
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.autoindent = true
-opt.wrap = false
-opt.laststatus = 3
-
-opt.smartindent = true
-
--- search
-opt.ignorecase = true
-opt.smartcase = true
-
--- backspace
-opt.backspace = "indent,eol,start"
-
--- split
-opt.splitright = true
-opt.splitbelow = true
-
-opt.background = "dark" -- set this to dark or light
-
+for key, value in pairs(config) do
+	opt[key] = value
+end
 opt.iskeyword:append("-")
-opt.cursorline = true
-opt.cursorlineopt = "number"
-local block = "n-c:block-Cursor,i-ci:ver10-iCursor,v:hor100-vCursor,o:hor50-pCursor,r:hor100-rCursor"
-
-opt.guicursor = block
--- " Disable swapfile and save undo {{{=====
--- opt.noswapfile = true -- " Fuck you swapfiles
-opt.undofile = true
 vim.cmd("set noswapfile")
 
 vim.keymap.set("n", "<leader>pd", function()
@@ -67,10 +33,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 		local o = vim.opt
 		o.conceallevel = 2
-		-- o.conceallevel = 0
 		o.tabstop = 2
 		o.softtabstop = 2
 		o.shiftwidth = 2
+	end,
+})
+
+local has_value = require("utils").has_value
+-- Disable diff and numlines for certain filetypes
+local no_statuscol_filetypes = {
+	"DiffviewFiles",
+	"DiffviewFileHistory",
+}
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if has_value(no_statuscol_filetypes, vim.bo.filetype) then
+			vim.wo.statuscolumn = ""
+		end
 	end,
 })
 
@@ -114,8 +94,6 @@ vim.api.nvim_create_user_command("PasteImgClipboardObsidian", function(args)
 	vim.cmd("!" .. pngpastePath .. " " .. dest)
 	utils.insert(" ![[" .. filename .. ".png]]", true)
 end, { nargs = "?" })
-
-vim.api.nvim_create_user_command("Test", 'echo "It works!"', {})
 
 -- https://neovim.io/doc/user/lua.html#vim.filetype.add%28%29
 vim.filetype.add({

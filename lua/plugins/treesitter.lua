@@ -91,10 +91,13 @@ return {
 					a = { "@assignment.lhs" },
 					i = { "@assignment.rhs" },
 				}),
+				a = ai.gen_spec.argument({ brackets = { "%b()" } }),
 
 				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
 				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+				-- @TODO find out more use cases
 				t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+				-- <html></html>
 
 				x = ai.gen_spec.treesitter({
 					a = { "@call.outer" },
